@@ -40,6 +40,7 @@ public class GM : MonoBehaviour {
     private int attempts = 0;                                       //Entero que controla el número de intentos.
     private int totalAttempts = 15;                                 
     private int mistakes = 0;                                       //Entero que controla el número de errores del usuario.
+    public GameObject pointerPos;
 
     FileStream fs;
 
@@ -109,7 +110,6 @@ public class GM : MonoBehaviour {
             //Se comprueba si en el punto del mouse al hacer click hay colisión con algún objeto. Se devuelven todos los objetos en result.
             Vector3 inputPos = Input.mousePosition;
             selected = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(inputPos));
-            
 
             if (selected.Length > 0)
             {
@@ -120,6 +120,8 @@ public class GM : MonoBehaviour {
                 textBx.gameObject.SetActive(true);
                 textBx.Select();
                 textBx.ActivateInputField();
+                pointerPos.SetActive(true);
+                pointerPos.transform.position = inputPos;
             }            
 
             string log = "Se ha pinchado en: ";
@@ -186,6 +188,7 @@ public class GM : MonoBehaviour {
             ChangeColor(name, correctColor);
             StartCoroutine(ChangeColor(name, normalColor, 2f));
             selected = null;
+            pointerPos.SetActive(false);
             // Tracking
             //Dictionary<String, bool> simpleVarDictionary = new Dictionary<string, bool>();
             //foreach (KeyValuePair<string, int> attachStat in simpleDictionary)
