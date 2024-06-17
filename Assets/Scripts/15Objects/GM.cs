@@ -6,11 +6,12 @@ using System;
 using System.IO;
 using System.Text;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 
 public class GM : MonoBehaviour {
 
     public Text feedbackResponse;
+    public GameObject incorrectText;
     private GameState15O gameS;
     private Collider2D[] selected;
     public Color correctColor;
@@ -244,6 +245,8 @@ public class GM : MonoBehaviour {
             else log = "\t✘ Ha respondido con error: " + word;
             feedbackResponse.gameObject.SetActive(true);
             feedbackResponse.text = "Has respondido " + word;
+            IncorrectFeedback();
+            Invoke("IncorrectFeedback", 2f);
 
             // Tracking
             Dictionary<String, bool> simpleVarDictionary = new Dictionary<string, bool>();
@@ -424,4 +427,8 @@ public class GM : MonoBehaviour {
         }
     }
 
+    private void IncorrectFeedback()
+    {
+        incorrectText.SetActive(!incorrectText.activeSelf);
+    }
 }
