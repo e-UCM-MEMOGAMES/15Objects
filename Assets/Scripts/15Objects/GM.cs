@@ -7,6 +7,8 @@ using System.IO;
 using System.Text;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 public class GM : MonoBehaviour {
 
@@ -32,16 +34,22 @@ public class GM : MonoBehaviour {
     public InputField textBx;                                       //Game object que contiene el inputField
     public GameObject A, B;
 
-    private SortedDictionary<string, int> diccionary;               //Diccionario que contendrá las palabras y sinónimos de los objetos seleccionados.
-    private SortedDictionary<string, int> answered;                 //Diccionario que contiene las palabras que se han respondido.
-    private SortedDictionary<string, int> simpleDictionary;         //Diccionario que contiene las palabras que se han respondido en su version simplificada.
-    private SortedDictionary<int, string> reverseDictionary;        //Diccionario que contiene las IDs con sus palabras correspondientes
+    private Dictionary<string, int> diccionary;               //Diccionario que contendrá las palabras y sinónimos de los objetos seleccionados.
+    private Dictionary<string, int> answered;                 //Diccionario que contiene las palabras que se han respondido.
+    private Dictionary<string, int> simpleDictionary;         //Diccionario que contiene las palabras que se han respondido en su version simplificada.
+    private Dictionary<int, string> reverseDictionary;        //Diccionario que contiene las IDs con sus palabras correspondientes
 
     private GameObject levelSelectorPanel;
+    private GameObject gamemodePanel;
     private int attempts = 0;                                       //Entero que controla el número de intentos.
     private int totalAttempts = 15;                                 
     private int mistakes = 0;                                       //Entero que controla el número de errores del usuario.
     public GameObject pointerPos;
+    private int gamemode;
+    public GameObject[] selectorOptions;
+    private List<string> selectedList;
+    private int selectedIndex = 0;
+    private int selectedPageIndex = 0;
 
     FileStream fs;
 
@@ -52,11 +60,14 @@ public class GM : MonoBehaviour {
         correctColor = new Color(0, 255, 0);
         normalColor = new Color(255, 255, 255);
         levelSelectorPanel = GameObject.FindGameObjectWithTag("LevelSelector");
-        levelSelectorPanel.SetActive(true);
-        diccionary = new SortedDictionary<string, int>();
-        answered = new SortedDictionary<string, int>();
-        simpleDictionary = new SortedDictionary<string, int>();
-        reverseDictionary = new SortedDictionary<int, string>();
+        levelSelectorPanel.SetActive(false);
+        gamemodePanel = GameObject.FindGameObjectWithTag("PlaystyleSelector");
+        gamemodePanel.SetActive(true);
+        diccionary = new Dictionary<string, int>();
+        answered = new Dictionary<string, int>();
+        simpleDictionary = new Dictionary<string, int>();
+        reverseDictionary = new Dictionary<int, string>();
+        selectedList = new List<string>();
         lista.SetActive(false);
         finalPanel.SetActive(false);
         textBx.gameObject.SetActive(false);
@@ -79,7 +90,7 @@ public class GM : MonoBehaviour {
                 fs.Close();
             }
            
-            System.IO.StreamReader file = new System.IO.StreamReader(path);
+            StreamReader file = new StreamReader(path);
             string option = file.ReadLine();
             Debug.Log(option);
             file.Close();
@@ -105,7 +116,7 @@ public class GM : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && (A.activeSelf || B.activeSelf))
         {
             contNoAnswer++;
             //Se comprueba si en el punto del mouse al hacer click hay colisión con algún objeto. Se devuelven todos los objetos en result.
@@ -118,9 +129,18 @@ public class GM : MonoBehaviour {
                 simpleDictionary.Clear();
                 diccionary.Clear();
                 reverseDictionary.Clear();
-                textBx.gameObject.SetActive(true);
-                textBx.Select();
-                textBx.ActivateInputField();
+                if(gamemode == 1)
+                {
+                    textBx.gameObject.SetActive(true);
+                    textBx.Select();
+                    textBx.ActivateInputField();
+                }
+                else
+                {
+                    selectedIndex = 0;
+                    selectedPageIndex = 0;
+                    selectedList.Clear();
+                }
                 pointerPos.SetActive(true);
                 pointerPos.transform.position = inputPos;
             }            
@@ -133,6 +153,7 @@ public class GM : MonoBehaviour {
                 log += c.name + " ";
                 Debug.Log("manpinchao " + c.name);
                 string[] aux = c.GetComponent<Objeto>().dameDic(out id);       //El método dameDic devuelve una vector de palabras y un identificador que nos servirá para comprobar si se había respondido ya esa palabra.
+                string[] aux2 = c.GetComponent<Objeto>().dameFill();       //El método dameDic devuelve una vector de palabras y un identificador que nos servirá para comprobar si se había respondido ya esa palabra.
                 reverseDictionary.Add(id, c.name);
                 simpleDictionary.Add(c.name, id);
                 if (!answered.ContainsValue(id))                                        //Si no se había respondido ya añadimos las palabras de cada objeto al diccionario.
@@ -140,9 +161,35 @@ public class GM : MonoBehaviour {
                     for (int w = 0; w < aux.Length; w++)
                     {
                         diccionary.Add(aux[w], id);
+                        selectedList.Add(aux[w]);
+                    }
+                    foreach(string f in aux2)
+                    {
+                        selectedList.Add(f);
                     }
                 }
+            }
 
+            if(selected.Length > 0 && gamemode == 0)
+            {
+                RandomizeList(selectedList);
+                while(selectedIndex < selectorOptions.Length && selectedIndex < selectedList.Count)
+                {
+                    GameObject go = selectorOptions[selectedIndex].gameObject;
+                    TextMeshProUGUI t = go.GetComponentInChildren<TextMeshProUGUI>();
+                    go.SetActive(true);
+                    Button but = go.GetComponent<Button>();
+                    if(but != null)
+                    {
+                        but.onClick.RemoveAllListeners();
+                        int ind = selectedPageIndex * selectorOptions.Length + selectedIndex;
+                        Debug.Log(selectedIndex);
+                        but.onClick.AddListener(delegate { OnFieldEnter(selectedList[ind]); });    
+                        if(t != null)
+                            t.text = selectedList[ind];
+                    }
+                    selectedIndex++;
+                }
             }
             log += "\n";
             Byte[] info = new UTF8Encoding(true).GetBytes(log);
@@ -291,7 +338,7 @@ public class GM : MonoBehaviour {
             log = "\tHa cambiado de objeto";
 
             // Tracking object changed without answer
-            Dictionary<String, bool> simpleVarDictionary = new Dictionary<string, bool>();
+            Dictionary<string, bool> simpleVarDictionary = new Dictionary<string, bool>();
             foreach (KeyValuePair<string, int> attachStat in simpleDictionary)
             {
                 simpleVarDictionary.Add(attachStat.Key, false);
@@ -333,10 +380,12 @@ public class GM : MonoBehaviour {
         Byte[] info = new UTF8Encoding(true).GetBytes(log);
         fs.Write(info, 0, info.Length);
 
-        diccionary.Clear();                                                    //Limpiamod el diccionario.
+        diccionary.Clear();                                                    //Limpiamos el diccionario.
         simpleDictionary.Clear();
         reverseDictionary.Clear();
         textBx.gameObject.SetActive(false);
+        foreach(GameObject go in selectorOptions)
+            go.SetActive(false); 
         attempts++;
 
         if (hayCont) cont.text = "Has respondido " + attempts.ToString() + " objetos.\nTe quedan " + (totalAttempts - attempts).ToString();
@@ -430,5 +479,24 @@ public class GM : MonoBehaviour {
     private void IncorrectFeedback()
     {
         incorrectText.SetActive(!incorrectText.activeSelf);
+    }
+
+    public void SelectGamemode(int m)
+    {
+        gamemode = m;
+        gamemodePanel.SetActive(false);
+        levelSelectorPanel.SetActive(true);
+    }
+
+    private void RandomizeList(List<string> l) {
+        int n = l.Count;
+        var rng = new System.Random();
+        while (n > 1)
+        {
+            int k = rng.Next(n--);
+            string temp = l[n];
+            l[n] = l[k];
+            l[k] = temp;
+        }
     }
 }

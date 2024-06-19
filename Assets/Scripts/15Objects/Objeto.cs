@@ -6,6 +6,7 @@ using UnityEngine;
 public class Objeto : MonoBehaviour
 {
     public string[] words;
+    public string[] fillers;
 
     void Start()
     {
@@ -18,6 +19,12 @@ public class Objeto : MonoBehaviour
         for (int i = 0; i < this.name.Length; i++) id += (int)this.name[i];
         return words;
     }
+
+    public string[] dameFill()
+    {
+        return fillers;
+    }
+
     void Update()
     {
        
