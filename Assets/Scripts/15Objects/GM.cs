@@ -19,8 +19,6 @@ public class GM : MonoBehaviour {
     public Color correctColor;
     public Color normalColor;
 
-    public Text noAnswer;
-    int contNoAnswer = 0;
     //Lista y Contador
     private String level = "A";
     private bool isRandom = false;
@@ -47,6 +45,8 @@ public class GM : MonoBehaviour {
     public GameObject pointerPos;
     private int gamemode;
     public GameObject[] selectorOptions;
+    public GameObject leftButton;
+    public GameObject rightButton;
     private List<string> selectedList;
     private int selectedIndex = 0;
     private int selectedPageIndex = 0;
@@ -54,24 +54,7 @@ public class GM : MonoBehaviour {
     FileStream fs;
 
     void Start () {
-
-        this.gameS = GameObject.FindObjectOfType<GameState15O>();
-
-        correctColor = new Color(0, 255, 0);
-        normalColor = new Color(255, 255, 255);
-        levelSelectorPanel = GameObject.FindGameObjectWithTag("LevelSelector");
-        levelSelectorPanel.SetActive(false);
-        gamemodePanel = GameObject.FindGameObjectWithTag("PlaystyleSelector");
-        gamemodePanel.SetActive(true);
-        diccionary = new Dictionary<string, int>();
-        answered = new Dictionary<string, int>();
-        simpleDictionary = new Dictionary<string, int>();
-        reverseDictionary = new Dictionary<int, string>();
-        selectedList = new List<string>();
-        lista.SetActive(false);
-        finalPanel.SetActive(false);
-        textBx.gameObject.SetActive(false);
-        A.SetActive(false); B.SetActive(false);
+        Initialize();
 
         string path;
         if (gameS.fileConfig)
@@ -92,7 +75,6 @@ public class GM : MonoBehaviour {
            
             StreamReader file = new StreamReader(path);
             string option = file.ReadLine();
-            Debug.Log(option);
             file.Close();
             SetLevel(option);
             gameS.fileConfig = false;
@@ -118,14 +100,12 @@ public class GM : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(0) && (A.activeSelf || B.activeSelf))
         {
-            contNoAnswer++;
             //Se comprueba si en el punto del mouse al hacer click hay colisión con algún objeto. Se devuelven todos los objetos en result.
             Vector3 inputPos = Input.mousePosition;
             selected = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(inputPos));
 
             if (selected.Length > 0)
             {
-                contNoAnswer = 0;
                 simpleDictionary.Clear();
                 diccionary.Clear();
                 reverseDictionary.Clear();
@@ -173,33 +153,11 @@ public class GM : MonoBehaviour {
             if(selected.Length > 0 && gamemode == 0)
             {
                 RandomizeList(selectedList);
-                while(selectedIndex < selectorOptions.Length && selectedIndex < selectedList.Count)
-                {
-                    GameObject go = selectorOptions[selectedIndex].gameObject;
-                    TextMeshProUGUI t = go.GetComponentInChildren<TextMeshProUGUI>();
-                    go.SetActive(true);
-                    Button but = go.GetComponent<Button>();
-                    if(but != null)
-                    {
-                        but.onClick.RemoveAllListeners();
-                        int ind = selectedPageIndex * selectorOptions.Length + selectedIndex;
-                        Debug.Log(selectedIndex);
-                        but.onClick.AddListener(delegate { OnFieldEnter(selectedList[ind]); });    
-                        if(t != null)
-                            t.text = selectedList[ind];
-                    }
-                    selectedIndex++;
-                }
+                ShowOptions();
             }
             log += "\n";
             Byte[] info = new UTF8Encoding(true).GetBytes(log);
             if (selected.Length > 0) fs.Write(info, 0, info.Length);
-        }
-
-        if (contNoAnswer == 2)
-        {
-            noAnswer.gameObject.SetActive(true);
-            contNoAnswer = 0;
         }
 
         if (attempts == totalAttempts)
@@ -405,7 +363,6 @@ public class GM : MonoBehaviour {
 
     public void SetLevel(string level)
     {
-        contNoAnswer = 0;
         if(level == "rand")
         {
             isRandom = true;
@@ -454,8 +411,7 @@ public class GM : MonoBehaviour {
         yield return new WaitForSeconds(delayTime);
         GameObject c = GameObject.Find(char.ToUpper(obj[0]) + obj.Substring(1));
         SpriteRenderer sr;
-        Debug.Log(obj);
-        Debug.Log(c);
+
         if(c != null)
         {
             sr = c.gameObject.GetComponent<SpriteRenderer>();
@@ -467,8 +423,7 @@ public class GM : MonoBehaviour {
     {
         GameObject c = GameObject.Find(char.ToUpper(obj[0]) + obj.Substring(1));
         SpriteRenderer sr;
-        Debug.Log(obj);
-        Debug.Log(c);
+
         if (c != null)
         {
             sr = c.gameObject.GetComponent<SpriteRenderer>();
@@ -488,6 +443,26 @@ public class GM : MonoBehaviour {
         levelSelectorPanel.SetActive(true);
     }
 
+    private void Initialize()
+    {
+        this.gameS = GameObject.FindObjectOfType<GameState15O>();
+
+        correctColor = new Color(0, 255, 0);
+        normalColor = new Color(255, 255, 255);
+        levelSelectorPanel = GameObject.FindGameObjectWithTag("LevelSelector");
+        levelSelectorPanel.SetActive(false);
+        gamemodePanel = GameObject.FindGameObjectWithTag("PlaystyleSelector");
+        gamemodePanel.SetActive(true);
+        diccionary = new Dictionary<string, int>();
+        answered = new Dictionary<string, int>();
+        simpleDictionary = new Dictionary<string, int>();
+        reverseDictionary = new Dictionary<int, string>();
+        selectedList = new List<string>();
+        lista.SetActive(false);
+        finalPanel.SetActive(false);
+        textBx.gameObject.SetActive(false);
+        A.SetActive(false); B.SetActive(false);
+    }
     private void RandomizeList(List<string> l) {
         int n = l.Count;
         var rng = new System.Random();
@@ -498,5 +473,49 @@ public class GM : MonoBehaviour {
             l[n] = l[k];
             l[k] = temp;
         }
+    }
+
+    public void NavigateOptions(int p)
+    {
+        selectedPageIndex += p;
+        ShowOptions();
+        //if (selectedPageIndex < 0) selectedPageIndex = 1;
+        //else if (selectedPageIndex > selectedList.Count / selectorOptions.Length) 
+        //    selectedPageIndex = selectedList.Count / selectorOptions.Length;
+    }
+
+    private void ShowOptions()
+    {
+        leftButton.SetActive(false);
+        rightButton.SetActive(false);
+        selectedIndex = 0;
+        foreach(GameObject go in selectorOptions)
+            go.SetActive(false);
+        //selectedList.Clear();
+        int ind;
+        while (selectedIndex < selectorOptions.Length && selectedIndex < selectedList.Count)
+        {
+            GameObject go = selectorOptions[selectedIndex].gameObject;
+            TextMeshProUGUI t = go.GetComponentInChildren<TextMeshProUGUI>();
+            go.SetActive(true);
+            Button but = go.GetComponent<Button>();
+            if (but != null)
+            {
+                ind = selectedPageIndex * selectorOptions.Length + selectedIndex;
+                Debug.Log(ind);
+                but.onClick.RemoveAllListeners();
+                but.onClick.AddListener(delegate { OnFieldEnter(selectedList[ind]); });
+                if (t != null)
+                    t.text = selectedList[ind];
+            }
+            selectedIndex++;
+        }
+
+        if (selectedIndex == selectorOptions.Length && 
+            selectedList.Count - (selectedPageIndex * selectorOptions.Length + selectedIndex) > 0)
+            rightButton.SetActive(true);
+
+        if(selectedPageIndex > 0)
+            leftButton.SetActive(true);
     }
 }
