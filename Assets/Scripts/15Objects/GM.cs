@@ -8,7 +8,9 @@ using System.Text;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UIElements;
+using Xasu.HighLevel;
 using Button = UnityEngine.UI.Button;
+using Xasu;
 
 public class GM : MonoBehaviour {
 
@@ -169,6 +171,8 @@ public class GM : MonoBehaviour {
             // Completed the 15 Objects level
             bool failed = (float)mistakes > ((float)totalAttempts / 2.0f);
             float score = 1.0f - ((float)mistakes / (float)totalAttempts);
+
+            CompletableTracker.Instance.Completed(level, CompletableTracker.CompletableType.Level);
             //Tracker.T.Completable.Completed(level, CompletableTracker.Completable.Level, !failed, score);
         }
     }
@@ -196,51 +200,51 @@ public class GM : MonoBehaviour {
             selected = null;
             pointerPos.SetActive(false);
             // Tracking
-            //Dictionary<String, bool> simpleVarDictionary = new Dictionary<string, bool>();
-            //foreach (KeyValuePair<string, int> attachStat in simpleDictionary)
-            //{
-            //    int simpleValue = -1;
-            //    simpleDictionary.TryGetValue(attachStat.Key, out simpleValue);
-            //    if (simpleValue == value)
-            //    {
-            //        simpleVarDictionary.Add(attachStat.Key, true);
-            //    }
-            //    else
-            //    {
-            //        simpleVarDictionary.Add(attachStat.Key, false);
-            //    }
+            Dictionary<String, bool> simpleVarDictionary = new Dictionary<string, bool>();
+            foreach (KeyValuePair<string, int> attachStat in simpleDictionary)
+            {
+                int simpleValue = -1;
+                simpleDictionary.TryGetValue(attachStat.Key, out simpleValue);
+                if (simpleValue == value)
+                {
+                    simpleVarDictionary.Add(attachStat.Key, true);
+                }
+                else
+                {
+                    simpleVarDictionary.Add(attachStat.Key, false);
+                }
 
-            //    // Mappings por si hacen falta en el analysis
-            //    String varKey = "mappings_" + attachStat.Key;
-            //    String varValue = " ";
-            //    foreach (KeyValuePair<string, int> dicKeyValues in diccionary)
-            //    {
-            //        if (dicKeyValues.Value == attachStat.Value)
-            //        {
-            //            varValue += dicKeyValues.Key + ",";
-            //        }
-            //    }
-            //    if (varValue.EndsWith(","))
-            //    {
-            //        varValue = varValue.Substring(0, varValue.Length - 1);
-            //    }
-            //    if (varKey != null && varValue != null)
-            //        Tracker.T.setVar(varKey, varValue);
-            //}
-            //if (simpleVarDictionary != null)
-            //    Tracker.T.setVar("targets", simpleVarDictionary);
+                // Mappings por si hacen falta en el analysis
+                String varKey = "mappings_" + attachStat.Key;
+                String varValue = " ";
+                foreach (KeyValuePair<string, int> dicKeyValues in diccionary)
+                {
+                    if (dicKeyValues.Value == attachStat.Value)
+                    {
+                        varValue += dicKeyValues.Key + ",";
+                    }
+                }
+                if (varValue.EndsWith(","))
+                {
+                    varValue = varValue.Substring(0, varValue.Length - 1);
+                }
+                //if (varKey != null && varValue != null)
+                //    Tracker.T.setVar(varKey, varValue);
+            }
+            if (simpleVarDictionary != null)
+                Tracker.T.setVar("targets", simpleVarDictionary);
 
-            //foreach (KeyValuePair<string, int> attachStat in diccionary)
-            //{
-            //    if (attachStat.Key != null)
-            //        Tracker.T.setVar(attachStat.Key, attachStat.Value);
-            //}
-            //// No hubo cambio de objeto
-            //Tracker.T.setVar("object-changed", 0);
-            //// Respuesta correcta
-            //Tracker.T.setVar("correct", 1);
-            //Tracker.T.setSuccess(true);
-            //Tracker.T.Alternative.Selected(level, word);
+            foreach (KeyValuePair<string, int> attachStat in diccionary)
+            {
+                if (attachStat.Key != null)
+                    Tracker.T.setVar(attachStat.Key, attachStat.Value);
+            }
+            // No hubo cambio de objeto
+            Tracker.T.setVar("object-changed", 0);
+            // Respuesta correcta
+            Tracker.T.setVar("correct", 1);
+            Tracker.T.setSuccess(true);
+            Tracker.T.Alternative.Selected(level, word);
         }
         else if (word != "")
         {

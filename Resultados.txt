@@ -1,9 +1,0 @@
-Se ha pinchado en: Bombilla 
-	✔ Ha respondido correctamente con: bombilla
-Se ha pinchado en: Bombilla 
-Se ha pinchado en: Lapiz Bombilla 
-	✘ Ha respondido con error: rotulador
-Se ha pinchado en: Lapiz Bombilla 
-	✔ Ha respondido correctamente con: lapiz
-Se ha pinchado en: CepilloDientes 
-	✔ Ha respondido correctamente con: cepillo de dientes
