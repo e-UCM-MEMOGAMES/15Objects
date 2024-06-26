@@ -213,38 +213,21 @@ public class GM : MonoBehaviour {
                 {
                     simpleVarDictionary.Add(attachStat.Key, false);
                 }
-
-                // Mappings por si hacen falta en el analysis
-                String varKey = "mappings_" + attachStat.Key;
-                String varValue = " ";
-                foreach (KeyValuePair<string, int> dicKeyValues in diccionary)
-                {
-                    if (dicKeyValues.Value == attachStat.Value)
-                    {
-                        varValue += dicKeyValues.Key + ",";
-                    }
-                }
-                if (varValue.EndsWith(","))
-                {
-                    varValue = varValue.Substring(0, varValue.Length - 1);
-                }
-                //if (varKey != null && varValue != null)
-                //    Tracker.T.setVar(varKey, varValue);
             }
-            if (simpleVarDictionary != null)
-                Tracker.T.setVar("targets", simpleVarDictionary);
+            //if (simpleVarDictionary != null)
+            //    Tracker.T.setVar("targets", simpleVarDictionary);
 
-            foreach (KeyValuePair<string, int> attachStat in diccionary)
-            {
-                if (attachStat.Key != null)
-                    Tracker.T.setVar(attachStat.Key, attachStat.Value);
-            }
-            // No hubo cambio de objeto
-            Tracker.T.setVar("object-changed", 0);
-            // Respuesta correcta
-            Tracker.T.setVar("correct", 1);
-            Tracker.T.setSuccess(true);
-            Tracker.T.Alternative.Selected(level, word);
+            //foreach (KeyValuePair<string, int> attachStat in diccionary)
+            //{
+            //    if (attachStat.Key != null)
+            //        Tracker.T.setVar(attachStat.Key, attachStat.Value);
+            //}
+            //// No hubo cambio de objeto
+            //Tracker.T.setVar("object-changed", 0);
+            //// Respuesta correcta
+            //Tracker.T.setVar("correct", 1);
+            //Tracker.T.setSuccess(true);
+            AlternativeTracker.Instance.Selected(level, word);
         }
         else if (word != "")
         {
@@ -293,6 +276,7 @@ public class GM : MonoBehaviour {
             //// Respuesta incorrecta
             //Tracker.T.setVar("correct", 0);
             //Tracker.T.setSuccess(false);
+            AlternativeTracker.Instance.Selected(level, word);
             //Tracker.T.Alternative.Selected(level, word);
         }
         else
@@ -335,6 +319,7 @@ public class GM : MonoBehaviour {
             //// Respuesta desconocida
             //Tracker.T.setVar("correct", -1);
             //Tracker.T.setSuccess(false);
+            AlternativeTracker.Instance.Selected(level, "empty");
             //Tracker.T.Alternative.Selected(level, "empty");
         }
         log += "\n";
@@ -359,8 +344,9 @@ public class GM : MonoBehaviour {
         textBx.Select();
         textBx.text = "";
 
-        //// Progreso del nivel actual
-        //float progress = (float)attempts / (float)totalAttempts;
+        // Progreso del nivel actual
+        float progress = (float)attempts / (float)totalAttempts;
+        CompletableTracker.Instance.Progressed(level, CompletableTracker.CompletableType.Level, progress);
         //Tracker.T.Completable.Progressed(level, CompletableTracker.Completable.Level, progress);
     }
 
@@ -387,6 +373,7 @@ public class GM : MonoBehaviour {
         levelSelectorPanel.SetActive(false);
 
         // Started the 15 Objects level
+        CompletableTracker.Instance.Initialized(level, CompletableTracker.CompletableType.Level);
         //Tracker.T.Completable.Initialized(level, CompletableTracker.Completable.Level);
     }
 
@@ -483,9 +470,6 @@ public class GM : MonoBehaviour {
     {
         selectedPageIndex += p;
         ShowOptions();
-        //if (selectedPageIndex < 0) selectedPageIndex = 1;
-        //else if (selectedPageIndex > selectedList.Count / selectorOptions.Length) 
-        //    selectedPageIndex = selectedList.Count / selectorOptions.Length;
     }
 
     private void ShowOptions()
@@ -495,7 +479,6 @@ public class GM : MonoBehaviour {
         selectedIndex = 0;
         foreach(GameObject go in selectorOptions)
             go.SetActive(false);
-        //selectedList.Clear();
         int ind;
         while (selectedIndex < selectorOptions.Length && selectedIndex < selectedList.Count)
         {
