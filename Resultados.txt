@@ -1,0 +1,11 @@
+Se ha pinchado en: Bombilla 
+Se ha pinchado en: Bombilla 
+Se ha pinchado en: Violin Destornillador Bombilla 
+	✔ Ha respondido correctamente con: destornillador
+Se ha pinchado en: Violin Bombilla 
+	✘ Ha respondido con error: lampara
+Se ha pinchado en: Violin 
+Se ha pinchado en: Escoba 
+Se ha pinchado en: Escoba Bombilla 
+Se ha pinchado en: Sello Bombilla 
+	✔ Ha respondido correctamente con: espejo
