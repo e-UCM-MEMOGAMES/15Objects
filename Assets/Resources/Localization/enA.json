@@ -1,0 +1,19 @@
+{
+    "items": [
+        { "item":"Ring", "words":["ring","accesory"],"fillers":["frisbee","pendant"]},
+        { "item":"Lightbulb", "words":["lightbulb"],"fillers":["lantern","lamp"]},
+        { "item":"Toothbrush", "words":["toothbrush"],"fillers":["cutter","knife"]},
+        { "item":"Croissant", "words":["bread", "croissant"],"fillers":["headband","clip"]},
+        { "item":"Spoon", "words":["spoon","silverware"],"fillers":["baton","maze"]},
+        { "item":"Screwdriver", "words":["screwdriver","tool"],"fillers":["bat","paddle"]},
+        { "item":"Broom", "words":["broom","brush"],"fillers":["mop","duster","toothbrush"]},
+        { "item":"Arrow", "words":["arrow"],"fillers":["spear","harpoon"]},
+        { "item":"Pencil", "words":["pencil"],"fillers":["pen","marker"]},
+        { "item":"Toothpaste", "words":["toothpaste"],"fillers":["mint","teeth"]},
+        { "item":"Pipe", "words":["pipe"],"fillers":["hammer","flute"]},
+        { "item":"Pistol", "words":["pistol","firearm"],"fillers":["rocket launcher","machine gun"]},
+        { "item":"Clock", "words":["clock","timer","stopwatch"],"fillers":["thermometer","tray"]},
+        { "item":"Stamp", "words":["stamp","painting","mirror"],"fillers":["letter","message"]},
+        { "item":"Violin", "words":["violin","instrument"],"fillers":["guitar","ukelele"]}
+    ]
+}

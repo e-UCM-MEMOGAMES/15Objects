@@ -1,33 +1,39 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 [RequireComponent(typeof(Collider2D))]
 public class Objeto : MonoBehaviour
 {
-    public string[] words;
-    public string[] fillers;
+    List<string> words;
+    List <string> fillers;
 
-    void Start()
+    public void InitLists()
     {
-       
+        words = new List<string>();
+        fillers = new List<string>();
     }
 
-    public string[]  dameDic(out int id)
+    public List<string> dameDic(out int id)
     {
         id = 0;
         for (int i = 0; i < this.name.Length; i++) id += (int)this.name[i];
         return words;
     }
 
-    public string[] dameFill()
+    public List<string> dameFill()
     {
         return fillers;
     }
 
-    void Update()
+    public void addWord(string word)
     {
-       
+        words.Add(word);
     }
-
+    public void addFiller(string word)
+    {
+        fillers.Add(word);
+    }
 }

@@ -14,7 +14,6 @@ using Xasu;
 using System.Linq;
 
 public class GM : MonoBehaviour {
-
     public Text feedbackResponse;
     public GameObject incorrectText;
     private GameState15O gameS;
@@ -56,6 +55,22 @@ public class GM : MonoBehaviour {
 
     FileStream fs;
 
+    public static GM Instance { get; private set; }
+
+    private void Awake()
+    {
+        // If there is an instance, and it's not me, delete myself.
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     void Start () {
         Initialize();
 
@@ -79,7 +94,7 @@ public class GM : MonoBehaviour {
             StreamReader file = new StreamReader(path);
             string option = file.ReadLine();
             file.Close();
-            SetLevel(option);
+            //SetLevel(option);
             gameS.fileConfig = false;
         }
 
@@ -135,13 +150,13 @@ public class GM : MonoBehaviour {
                 int id;
                 log += c.name + " ";
                 Debug.Log("manpinchao " + c.name);
-                string[] aux = c.GetComponent<Objeto>().dameDic(out id);       //El método dameDic devuelve una vector de palabras y un identificador que nos servirá para comprobar si se había respondido ya esa palabra.
-                string[] aux2 = c.GetComponent<Objeto>().dameFill();       //El método dameDic devuelve una vector de palabras y un identificador que nos servirá para comprobar si se había respondido ya esa palabra.
+                List<string> aux = c.GetComponent<Objeto>().dameDic(out id);       //El método dameDic devuelve una vector de palabras y un identificador que nos servirá para comprobar si se había respondido ya esa palabra.
+                List<string> aux2 = c.GetComponent<Objeto>().dameFill();       //El método dameDic devuelve una vector de palabras y un identificador que nos servirá para comprobar si se había respondido ya esa palabra.
                 reverseDictionary.Add(id, c.name);
                 simpleDictionary.Add(c.name, id);
                 if (!answered.ContainsValue(id))                                        //Si no se había respondido ya añadimos las palabras de cada objeto al diccionario.
                 {
-                    for (int w = 0; w < aux.Length; w++)
+                    for (int w = 0; w < aux.Count; w++)
                     {
                         diccionary.Add(aux[w], id);
                         selectedList.Add(aux[w]);
@@ -173,7 +188,7 @@ public class GM : MonoBehaviour {
             bool failed = (float)mistakes > ((float)totalAttempts / 2.0f);
             float score = 1.0f - ((float)mistakes / (float)totalAttempts);
 
-            CompletableTracker.Instance.Completed(level, CompletableTracker.CompletableType.Level);
+            //CompletableTracker.Instance.Completed(level, CompletableTracker.CompletableType.Level);
             //Tracker.T.Completable.Completed(level, CompletableTracker.Completable.Level, !failed, score);
         }
     }
@@ -228,7 +243,7 @@ public class GM : MonoBehaviour {
             //// Respuesta correcta
             //Tracker.T.setVar("correct", 1);
             //Tracker.T.setSuccess(true);
-            AlternativeTracker.Instance.Selected(level, word);
+            //AlternativeTracker.Instance.Selected(level, word);
         }
         else if (word != "")
         {
@@ -277,7 +292,7 @@ public class GM : MonoBehaviour {
             //// Respuesta incorrecta
             //Tracker.T.setVar("correct", 0);
             //Tracker.T.setSuccess(false);
-            AlternativeTracker.Instance.Selected(level, word);
+            //AlternativeTracker.Instance.Selected(level, word);
             //Tracker.T.Alternative.Selected(level, word);
         }
         else
@@ -320,7 +335,7 @@ public class GM : MonoBehaviour {
             //// Respuesta desconocida
             //Tracker.T.setVar("correct", -1);
             //Tracker.T.setSuccess(false);
-            AlternativeTracker.Instance.Selected(level, "empty");
+            //AlternativeTracker.Instance.Selected(level, "empty");
             //Tracker.T.Alternative.Selected(level, "empty");
         }
         log += "\n";
@@ -347,7 +362,7 @@ public class GM : MonoBehaviour {
 
         // Progreso del nivel actual
         float progress = (float)attempts / (float)totalAttempts;
-        CompletableTracker.Instance.Progressed(level, CompletableTracker.CompletableType.Level, progress);
+        //CompletableTracker.Instance.Progressed(level, CompletableTracker.CompletableType.Level, progress);
         //Tracker.T.Completable.Progressed(level, CompletableTracker.Completable.Level, progress);
     }
 
@@ -371,10 +386,11 @@ public class GM : MonoBehaviour {
         } 
 
         this.level = level;
+        LevelManager.Instance.initItems();
         levelSelectorPanel.SetActive(false);
 
         // Started the 15 Objects level
-        CompletableTracker.Instance.Initialized(level, CompletableTracker.CompletableType.Level);
+        //CompletableTracker.Instance.Initialized(level, CompletableTracker.CompletableType.Level);
         //Tracker.T.Completable.Initialized(level, CompletableTracker.Completable.Level);
     }
 
@@ -508,5 +524,11 @@ public class GM : MonoBehaviour {
 
         if(selectedPageIndex > 0)
             leftButton.SetActive(true);
+    }
+
+    public string Level
+    {
+        get { return level; }
+        set { level = value; }
     }
 }

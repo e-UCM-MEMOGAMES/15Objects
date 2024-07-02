@@ -26,13 +26,13 @@ public class InteractedTracker : MonoBehaviour {
             int i = result.Length;
             if (i == 0)
             {
-                AlternativeTracker.Instance.Selected("Pointer", "empty");
+                //AlternativeTracker.Instance.Selected("Pointer", "empty");
                 //Tracker.T.setVar("empty", 1);
             }
             else
             {
-                foreach (Collider2D item in result)
-                    if (item.name != null) GameObjectTracker.Instance.Interacted(item.name);
+                //foreach (Collider2D item in result)
+                    //if (item.name != null) GameObjectTracker.Instance.Interacted(item.name);
             }
 
             //Return the current Active Scene in order to get the current Scene's name
@@ -52,7 +52,7 @@ public class InteractedTracker : MonoBehaviour {
                     name += "-B";
                 }
             }
-            GameObjectTracker.Instance.Interacted(name);
+            //GameObjectTracker.Instance.Interacted(name);
             //Tracker.T.GameObject.Interacted(name);
         }
     }

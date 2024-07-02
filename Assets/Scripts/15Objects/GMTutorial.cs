@@ -92,12 +92,12 @@ public class GMTutorial : MonoBehaviour
             i--;
             int id;
             
-            string[] aux = result[i].GetComponent<Objeto>().dameDic(out id);       //El método dameDic devuelve una vector de palabras y un identificador que nos servirá para comprobar si se había respondido ya esa palabra.
+            List<string> aux = result[i].GetComponent<Objeto>().dameDic(out id);       //El método dameDic devuelve una vector de palabras y un identificador que nos servirá para comprobar si se había respondido ya esa palabra.
             reverseDictionary.Add(id, result[i].name);
 
             if (!answered.ContainsValue(id))                                        //Si no se había respondido ya añadimos las palabras de cada objeto al diccionario.
             {
-                for (int w = 0; w < aux.Length; w++)
+                for (int w = 0; w < aux.Count; w++)
                 {
                     diccionary.Add(aux[w], id);
                 }
@@ -138,11 +138,11 @@ public class GMTutorial : MonoBehaviour
                     textBx.ActivateInputField();
 
                     int id;
-                    string[] aux = result[i].GetComponent<Objeto>().dameDic(out id);
+                    List<string> aux = result[i].GetComponent<Objeto>().dameDic(out id);
                     reverseDictionary.Add(id, result[i].name);
                     if (!answered.ContainsValue(id))
                     {
-                        for (int w = 0; w < aux.Length; w++)
+                        for (int w = 0; w < aux.Count; w++)
                         {
                             diccionary.Add(aux[w], id);
                         }
