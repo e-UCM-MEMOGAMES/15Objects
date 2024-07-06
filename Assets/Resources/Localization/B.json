@@ -1,0 +1,169 @@
+{
+    "items": [
+      {
+        "item": "Compass",
+        "words": {
+          "en": [ "compass" ],
+          "es": [ "compas" ]
+        },
+        "fillers": {
+          "en": [ "set square", "cartabon" ],
+          "es": [ "escuadra", "cartabon" ]
+        }
+      },
+      {
+        "item": "Vase",
+        "words": {
+          "en": [ "vase", "flower pot", "urn", "pottery" ],
+          "es": [ "jarron", "jarra", "florero" ]
+        },
+        "fillers": {
+          "en": [ "fountain", "jar" ],
+          "es": [ "fuente", "cuenco" ]
+        }
+      },
+      {
+        "item": "Cup",
+        "words": {
+          "en": [ "cup", "ribbon" ],
+          "es": [ "copa", "diabolo", "lazo" ]
+        },
+        "fillers": {
+          "en": [ "glass", "glasses" ],
+          "es": [ "vaso", "gafas" ]
+        }
+      },
+      {
+        "item": "Mirror",
+        "words": {
+          "en": [ "mirror" ],
+          "es": [ "espejo" ]
+        },
+        "fillers": {
+          "en": [ "racket", "paddle" ],
+          "es": [ "raqueta", "monoculo" ]
+        }
+      },
+      {
+        "item": "Key",
+        "words": {
+          "en": [ "key" ],
+          "es": [ "llave" ]
+        },
+        "fillers": {
+          "en": [ "bat", "hammer" ],
+          "es": [ "bate", "martillo" ]
+        }
+      },
+      {
+        "item": "Melon",
+        "words": {
+          "en": [ "melon", "ball" ],
+          "es": [ "melon", "pelota", "balon" ]
+        },
+        "fillers": {
+          "en": [ "grape", "peanut" ],
+          "es": [ "uva", "cacahuete" ]
+        }
+      },
+      {
+        "item": "Binoculars",
+        "words": {
+          "en": [ "binoculars" ],
+          "es": [ "prismaticos", "lentes" ]
+        },
+        "fillers": {
+          "en": [ "telescope", "magnifying glass" ],
+          "es": [ "telescopio", "lupa" ]
+        }
+      },
+      {
+        "item": "Corkscrew",
+        "words": {
+          "en": [ "corcscrew" ],
+          "es": [ "sacacorchos", "saca corchos" ]
+        },
+        "fillers": {
+          "en": [ "hammer", "snake" ],
+          "es": [ "martillo", "serpiente" ]
+        }
+      },
+      {
+        "item": "Saw",
+        "words": {
+          "en": [ "saw", "tool" ],
+          "es": [ "serrucho", "sierra", "serucho", "herramienta" ]
+        },
+        "fillers": {
+          "en": [ "plank", "ruler" ],
+          "es": [ "tabla", "regla" ]
+        }
+      },
+      {
+        "item": "Mug",
+        "words": {
+          "en": [ "phone", "telephone" ],
+          "es": [ "taza", "vaso" ]
+        },
+        "fillers": {
+          "en": [ "cell phone", "mobile" ],
+          "es": [ "cubo", "cafe" ]
+        }
+      },
+      {
+        "item": "Phone",
+        "words": {
+          "en": [ "phone", "telephone" ],
+          "es": [ "telefono", "fijo", "telefono fijo" ]
+        },
+        "fillers": {
+          "en": [ "cell phone", "mobile" ],
+          "es": [ "celular", "movil" ]
+        }
+      },
+      {
+        "item": "Trumpet",
+        "words": {
+          "en": [ "trumpet", "instrument" ],
+          "es": [ "trompeta", "instrumento" ]
+        },
+        "fillers": {
+          "en": [ "violin", "drum" ],
+          "es": [ "violin", "tambor" ]
+        }
+      },
+      {
+        "item": "Candle",
+        "words": {
+          "en": [ "candle" ],
+          "es": [ "vela" ]
+        },
+        "fillers": {
+          "en": [ "fire", "wax" ],
+          "es": [ "fuego", "cera" ]
+        }
+      },
+      {
+        "item": "Comb",
+        "words": {
+          "en": [ "comb" ],
+          "es": [ "peine" ]
+        },
+        "fillers": {
+          "en": [ "rake", "centipede" ],
+          "es": [ "rastrillo", "cienpies" ]
+        }
+      },
+      {
+        "item": "Syringe",
+        "words": {
+          "en": [ "syringe", "vaccine" ],
+          "es": [ "jeringuilla", "vacuna" ]
+        },
+        "fillers": {
+          "en": [ "needle", "pill" ],
+          "es": [ "aguja", "pildora" ]
+        }
+      }
+    ]
+}

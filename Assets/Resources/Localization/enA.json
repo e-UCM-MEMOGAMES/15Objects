@@ -1,6 +1,6 @@
 {
     "items": [
-        { "item":"Ring", "words":["ring","accesory"],"fillers":["frisbee","pendant"]},
+        { "item":"Ring" },
         { "item":"Lightbulb", "words":["lightbulb"],"fillers":["lantern","lamp"]},
         { "item":"Toothbrush", "words":["toothbrush"],"fillers":["cutter","knife"]},
         { "item":"Croissant", "words":["bread", "croissant"],"fillers":["headband","clip"]},

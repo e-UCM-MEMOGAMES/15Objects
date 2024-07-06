@@ -1,5 +1,7 @@
+using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 
@@ -10,7 +12,6 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         // If there is an instance, and it's not me, delete myself.
-
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -33,16 +34,18 @@ public class LevelManager : MonoBehaviour
         public string[] fillers;
     }
 
-    LevelInfo info;
+    JObject jobj;
+    IList<JToken> info;
 
     public void initItems()
     {
         string currLoc = "Localization/";
-        currLoc = string.Concat(currLoc, LocalizationSettings.SelectedLocale.Identifier.Code);
+        //currLoc = string.Concat(currLoc, LocalizationSettings.SelectedLocale.Identifier.Code);
         currLoc = string.Concat(currLoc, GM.Instance.Level);
         TextAsset jsonFile = (TextAsset)Resources.Load(currLoc, typeof(TextAsset));
         Debug.Log(jsonFile);
-        info = JsonUtility.FromJson<LevelInfo>(jsonFile.text);
+        jobj = JObject.Parse(jsonFile.text);
+        info = jobj["items"].Children().ToList();
         
         ReadItems();
     }
@@ -50,19 +53,21 @@ public class LevelManager : MonoBehaviour
     void ReadItems()
     {
         //objetos de escena
-        foreach(ObjectInfo obj in info.items)
+        foreach(JToken obj in info)
         {
-            Objeto aux = GameObject.Find(obj.item).GetComponent<Objeto>();
-            
-            if(aux == null) continue;
+            Objeto aux = GameObject.Find(obj.Value<string>("item")).GetComponent<Objeto>();
+            string currLangID = LocalizationSettings.SelectedLocale.Identifier.Code;
+
+
+            if (aux == null) continue;
 
             aux.InitLists();
-            foreach (string word in obj.words)            
+            foreach (string word in obj["words"][currLangID])
                 aux.addWord(word);
-            
-            foreach (string word in obj.fillers)
+
+            foreach (string word in obj["fillers"][currLangID])
                 aux.addFiller(word);
-            
+
             int a;
             foreach (string word in aux.dameDic(out a))
                 Debug.Log("Word:" + word);
