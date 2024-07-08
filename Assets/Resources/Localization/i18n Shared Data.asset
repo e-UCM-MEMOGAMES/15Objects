@@ -295,6 +295,10 @@ MonoBehaviour:
     m_Key: 15Objects/B/Phone 1
     m_Metadata:
       m_Items: []
+  - m_Id: 2199885630861312
+    m_Key: 15Objects/Canvas (1)/PlaystyleSelector/Write/InputField (1)/Text
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

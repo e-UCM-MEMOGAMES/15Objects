@@ -62,6 +62,10 @@ MonoBehaviour:
     m_Localized: regadera
     m_Metadata:
       m_Items: []
+  - m_Id: 2199885630861312
+    m_Localized: Text...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
