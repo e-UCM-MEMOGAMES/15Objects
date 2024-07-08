@@ -201,7 +201,7 @@ public class GM : MonoBehaviour {
         if (diccionary.ContainsKey(word.ToLower()))
         //Si la palabra se encuentra en el diccionario la añadimos al diccionario de respondidos
         {
-
+            Debug.Log(word);
             int value = -1;
             diccionary.TryGetValue(word.ToLower(), out value);
             answered.Add(word, value);
@@ -449,6 +449,11 @@ public class GM : MonoBehaviour {
         gamemode = m;
         gamemodePanel.SetActive(false);
         levelSelectorPanel.SetActive(true);
+    }
+
+    public void GoToSelectGamemode()
+    {
+        gamemodePanel.SetActive(true);
     }
 
     private void Initialize()

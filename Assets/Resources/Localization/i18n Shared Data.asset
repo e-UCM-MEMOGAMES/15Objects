@@ -299,6 +299,46 @@ MonoBehaviour:
     m_Key: 15Objects/Canvas (1)/PlaystyleSelector/Write/InputField (1)/Text
     m_Metadata:
       m_Items: []
+  - m_Id: 2291937320300544
+    m_Key: Settings/Canvas/Slider/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2291955167064064
+    m_Key: Settings/Canvas/Slider (1)/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2291986414628864
+    m_Key: Settings/Canvas/Dropdown/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2293337647411200
+    m_Key: Settings/Canvas/Dropdown/Text (TMP) 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2293938930249728
+    m_Key: Settings/Canvas/Slider/Text (TMP) 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2293959977267200
+    m_Key: Settings/Canvas/Slider (1)/Text (TMP) 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2293997616951296
+    m_Key: Settings/Canvas/Dropdown/Text (TMP) 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2295252322021376
+    m_Key: Settings/Canvas/Slider/Text (TMP) 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2295310815784960
+    m_Key: Settings/Canvas/Slider (1)/Text (TMP) 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2295336770138112
+    m_Key: Settings/Canvas/Dropdown/Text (TMP) 3
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

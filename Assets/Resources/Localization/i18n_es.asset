@@ -66,6 +66,46 @@ MonoBehaviour:
     m_Localized: Texto...
     m_Metadata:
       m_Items: []
+  - m_Id: 2291937320300544
+    m_Localized: Musica
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2291955167064064
+    m_Localized: Sonidos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2291986414628864
+    m_Localized: Idioma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2293337647411200
+    m_Localized: Idioma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2293938930249728
+    m_Localized: Musica
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2293959977267200
+    m_Localized: Sonidos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2293997616951296
+    m_Localized: Idioma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2295252322021376
+    m_Localized: Musica
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2295310815784960
+    m_Localized: Sonidos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2295336770138112
+    m_Localized: Idioma
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
