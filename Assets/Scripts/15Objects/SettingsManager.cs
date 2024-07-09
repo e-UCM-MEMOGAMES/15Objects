@@ -8,7 +8,7 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
-public class LanguageDropdown : MonoBehaviour
+public class SettingsManager : MonoBehaviour
 {
     List<Locale> lcs;
     [SerializeField]
