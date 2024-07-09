@@ -188,7 +188,7 @@ public class GM : MonoBehaviour {
             bool failed = (float)mistakes > ((float)totalAttempts / 2.0f);
             float score = 1.0f - ((float)mistakes / (float)totalAttempts);
 
-            //CompletableTracker.Instance.Completed(level, CompletableTracker.CompletableType.Level);
+            CompletableTracker.Instance.Completed(level, CompletableTracker.CompletableType.Level);
             //Tracker.T.Completable.Completed(level, CompletableTracker.Completable.Level, !failed, score);
         }
     }
@@ -243,7 +243,7 @@ public class GM : MonoBehaviour {
             //// Respuesta correcta
             //Tracker.T.setVar("correct", 1);
             //Tracker.T.setSuccess(true);
-            //AlternativeTracker.Instance.Selected(level, word);
+            AlternativeTracker.Instance.Selected(level, word);
         }
         else if (word != "")
         {
@@ -292,7 +292,7 @@ public class GM : MonoBehaviour {
             //// Respuesta incorrecta
             //Tracker.T.setVar("correct", 0);
             //Tracker.T.setSuccess(false);
-            //AlternativeTracker.Instance.Selected(level, word);
+            AlternativeTracker.Instance.Selected(level, word);
             //Tracker.T.Alternative.Selected(level, word);
         }
         else
@@ -335,7 +335,7 @@ public class GM : MonoBehaviour {
             //// Respuesta desconocida
             //Tracker.T.setVar("correct", -1);
             //Tracker.T.setSuccess(false);
-            //AlternativeTracker.Instance.Selected(level, "empty");
+            AlternativeTracker.Instance.Selected(level, "empty");
             //Tracker.T.Alternative.Selected(level, "empty");
         }
         log += "\n";
@@ -362,7 +362,7 @@ public class GM : MonoBehaviour {
 
         // Progreso del nivel actual
         float progress = (float)attempts / (float)totalAttempts;
-        //CompletableTracker.Instance.Progressed(level, CompletableTracker.CompletableType.Level, progress);
+        CompletableTracker.Instance.Progressed(level, CompletableTracker.CompletableType.Level, progress);
         //Tracker.T.Completable.Progressed(level, CompletableTracker.Completable.Level, progress);
     }
 
@@ -390,7 +390,7 @@ public class GM : MonoBehaviour {
         levelSelectorPanel.SetActive(false);
 
         // Started the 15 Objects level
-        //CompletableTracker.Instance.Initialized(level, CompletableTracker.CompletableType.Level);
+        CompletableTracker.Instance.Initialized(level, CompletableTracker.CompletableType.Level);
         //Tracker.T.Completable.Initialized(level, CompletableTracker.Completable.Level);
     }
 

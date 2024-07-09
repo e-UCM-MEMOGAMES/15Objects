@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -21,5 +22,16 @@ public class InitTracker : MonoBehaviour
         {
             await Task.Yield();
         }
+    }
+    private async Task OnApplicationQuitAsync()
+    {
+        var progress = new Progress<float>();
+        progress.ProgressChanged += (_, p) =>
+        {
+            Debug.Log("Finalization progress: " + p);
+        };
+        await XasuTracker.Instance.Finalize(progress);
+        Debug.Log("Tracker finalized");
+        Application.Quit();
     }
 }
