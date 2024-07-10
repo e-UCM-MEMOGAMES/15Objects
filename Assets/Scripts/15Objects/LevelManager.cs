@@ -55,6 +55,7 @@ public class LevelManager : MonoBehaviour
         //objetos de escena
         foreach(JToken obj in info)
         {
+            Debug.Log(GameObject.Find(obj.Value<string>("item")));
             Objeto aux = GameObject.Find(obj.Value<string>("item")).GetComponent<Objeto>();
             string currLangID = LocalizationSettings.SelectedLocale.Identifier.Code;
 

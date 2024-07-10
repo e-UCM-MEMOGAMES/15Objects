@@ -907,7 +907,7 @@ MonoBehaviour:
         m_VariantData:
         - localeIdentifier:
             m_Code: es
-          value: -0.5
+          value: 248
         - localeIdentifier:
             m_Code: en
           value: 252
@@ -918,7 +918,7 @@ MonoBehaviour:
         m_VariantData:
         - localeIdentifier:
             m_Code: es
-          value: -0.39004517
+          value: -209.3
         - localeIdentifier:
             m_Code: en
           value: -209.5
@@ -1790,7 +1790,7 @@ MonoBehaviour:
         m_VariantData:
         - localeIdentifier:
             m_Code: es
-          value: -3.0000916
+          value: 248.5
         - localeIdentifier:
             m_Code: en
           value: 248.4999
@@ -1801,7 +1801,7 @@ MonoBehaviour:
         m_VariantData:
         - localeIdentifier:
             m_Code: es
-          value: 0.41999817
+          value: -48.7
         - localeIdentifier:
             m_Code: en
           value: -51.579987

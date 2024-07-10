@@ -20,8 +20,11 @@ public class InteractedTracker : MonoBehaviour {
             int i = result.Length;
             if (i == 0)
             {
-                AlternativeTracker.Instance.Selected("Pointer", "empty");
-                //Tracker.T.setVar("empty", 1);
+                Dictionary<string, object> extensions = new Dictionary<string, object>
+                {
+                    { Application.identifier + "://" + "empty", 1 }
+                };
+                AlternativeTracker.Instance.Selected("Pointer", "empty").WithResultExtensions(extensions);
             }
             else
             {
@@ -47,7 +50,6 @@ public class InteractedTracker : MonoBehaviour {
                 }
             }
             GameObjectTracker.Instance.Interacted(name);
-            //Tracker.T.GameObject.Interacted(name);
         }
     }
 

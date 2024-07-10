@@ -106,6 +106,18 @@ MonoBehaviour:
     m_Localized: Language
     m_Metadata:
       m_Items: []
+  - m_Id: 2906503372795904
+    m_Localized: 'You answered '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2906601775362048
+    m_Localized: ' items.\nItems remaining: '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2907351033245696
+    m_Localized: 'You answered 0 items\nItems remaining: 15'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -10,8 +10,6 @@ using TMPro;
 using UnityEngine.UIElements;
 using Xasu.HighLevel;
 using Button = UnityEngine.UI.Button;
-using Xasu;
-using System.Linq;
 
 public class GM : MonoBehaviour {
     public Text feedbackResponse;
@@ -49,6 +47,7 @@ public class GM : MonoBehaviour {
     public GameObject[] selectorOptions;
     public GameObject leftButton;
     public GameObject rightButton;
+    public string[] notifications;
     private List<string> selectedList;
     private int selectedIndex = 0;
     private int selectedPageIndex = 0;
@@ -201,20 +200,18 @@ public class GM : MonoBehaviour {
         if (diccionary.ContainsKey(word.ToLower()))
         //Si la palabra se encuentra en el diccionario la añadimos al diccionario de respondidos
         {
-            Debug.Log(word);
             int value = -1;
             diccionary.TryGetValue(word.ToLower(), out value);
             answered.Add(word, value);
             log = "\t✔ Ha respondido correctamente con: " + word;
-            Debug.Log("Acertaste");
+            feedbackResponse.text = notifications[0] + word;
             feedbackResponse.gameObject.SetActive(true);
             string name;
             reverseDictionary.TryGetValue(value, out name);
-            feedbackResponse.text = "Has respondido " + word;
+            //Feedback de respuesta
             ChangeColor(name, correctColor);
             StartCoroutine(ChangeColor(name, normalColor, 2f));
             selected = null;
-            pointerPos.SetActive(false);
             // Tracking
             Dictionary<String, bool> simpleVarDictionary = new Dictionary<string, bool>();
             foreach (KeyValuePair<string, int> attachStat in simpleDictionary)
@@ -230,20 +227,20 @@ public class GM : MonoBehaviour {
                     simpleVarDictionary.Add(attachStat.Key, false);
                 }
             }
-            //if (simpleVarDictionary != null)
-            //    Tracker.T.setVar("targets", simpleVarDictionary);
+            Dictionary<string, object> extensions = new Dictionary<string, object>();
+            if (simpleVarDictionary != null)
+                extensions.Add(Application.identifier + "://" + "targets", simpleVarDictionary);
 
-            //foreach (KeyValuePair<string, int> attachStat in diccionary)
-            //{
-            //    if (attachStat.Key != null)
-            //        Tracker.T.setVar(attachStat.Key, attachStat.Value);
-            //}
-            //// No hubo cambio de objeto
-            //Tracker.T.setVar("object-changed", 0);
-            //// Respuesta correcta
-            //Tracker.T.setVar("correct", 1);
-            //Tracker.T.setSuccess(true);
-            AlternativeTracker.Instance.Selected(level, word);
+            foreach (KeyValuePair<string, int> attachStat in diccionary)
+            {
+                if (attachStat.Key != null)
+                    extensions.Add(Application.identifier + "://" + attachStat.Key, attachStat.Value);
+            }
+            // No hubo cambio de objeto
+            extensions.Add(Application.identifier + "://" + "object-changed", 0);
+            // Respuesta correcta
+            extensions.Add(Application.identifier + "://" + "correct", 1);
+            AlternativeTracker.Instance.Selected(level, word).WithSuccess(true).WithResultExtensions(extensions);
         }
         else if (word != "")
         {
@@ -251,12 +248,13 @@ public class GM : MonoBehaviour {
             Debug.Log("Fallaste");
             if (answered.ContainsKey(word.ToLower())) log = "\t✘ Ha respondido una palabra repetida: " + word;
             else log = "\t✘ Ha respondido con error: " + word;
+            feedbackResponse.text = notifications[0] + word;
             feedbackResponse.gameObject.SetActive(true);
-            feedbackResponse.text = "Has respondido " + word;
             IncorrectFeedback();
-            Invoke("IncorrectFeedback", 2f);
+            Invoke("IncorrectFeedback", 1.5f);
 
             // Tracking
+            Dictionary<string, object> extensions = new Dictionary<string, object>();
             Dictionary<String, bool> simpleVarDictionary = new Dictionary<string, bool>();
             foreach (KeyValuePair<string, int> attachStat in simpleDictionary)
             {
@@ -276,30 +274,29 @@ public class GM : MonoBehaviour {
                 {
                     varValue = varValue.Substring(0, varValue.Length - 1);
                 }
-                //if (varKey != null && varValue != null)
-                //    Tracker.T.setVar(varKey, varValue);
+                if (varKey != null && varValue != null)
+                    extensions.Add(Application.identifier + "://" + varKey, varValue);
             }
-            //if (simpleVarDictionary != null)
-            //    Tracker.T.setVar("targets", simpleVarDictionary);
+            if (simpleVarDictionary != null)
+                extensions.Add(Application.identifier + "://" + "targets", simpleVarDictionary);
 
-            //foreach (KeyValuePair<string, int> attachStat in diccionary)
-            //{
-            //    if (attachStat.Key != null)
-            //        Tracker.T.setVar(attachStat.Key, attachStat.Value);
-            //}
-            //// No hubo cambio de objeto
-            //Tracker.T.setVar("object-changed", 0);
-            //// Respuesta incorrecta
-            //Tracker.T.setVar("correct", 0);
-            //Tracker.T.setSuccess(false);
-            AlternativeTracker.Instance.Selected(level, word);
-            //Tracker.T.Alternative.Selected(level, word);
+            foreach (KeyValuePair<string, int> attachStat in diccionary)
+            {
+                if (attachStat.Key != null)
+                    extensions.Add(Application.identifier + "://" + attachStat.Key, attachStat.Value);
+            }
+            // No hubo cambio de objeto
+            extensions.Add(Application.identifier + "://" + "object-changed", 0);
+            // Respuesta incorrecta
+            extensions.Add(Application.identifier + "://" + "correct", 0);
+            AlternativeTracker.Instance.Selected(level, word).WithSuccess(false).WithResultExtensions(extensions);
         }
         else
         {
             log = "\tHa cambiado de objeto";
 
             // Tracking object changed without answer
+            Dictionary<string, object> extensions = new Dictionary<string, object>();
             Dictionary<string, bool> simpleVarDictionary = new Dictionary<string, bool>();
             foreach (KeyValuePair<string, int> attachStat in simpleDictionary)
             {
@@ -319,24 +316,22 @@ public class GM : MonoBehaviour {
                 {
                     varValue = varValue.Substring(0, varValue.Length - 1);
                 }
-                //if (varKey != null && varValue != null)
-                //    Tracker.T.setVar(varKey, varValue);
+                if (varKey != null && varValue != null)
+                    extensions.Add(Application.identifier + "://" + varKey, varValue);
             }
-            //if (simpleVarDictionary != null)
-            //    Tracker.T.setVar("targets", simpleVarDictionary);
+            if (simpleVarDictionary != null)
+                extensions.Add(Application.identifier + "://" + "targets", simpleVarDictionary);
 
-            //foreach (KeyValuePair<string, int> attachStat in diccionary)
-            //{
-            //    if (attachStat.Key != null)
-            //        Tracker.T.setVar(attachStat.Key, attachStat.Value);
-            //}
-            //// Hubo cambio de objeto
-            //Tracker.T.setVar("object-changed", 1);
-            //// Respuesta desconocida
-            //Tracker.T.setVar("correct", -1);
-            //Tracker.T.setSuccess(false);
-            AlternativeTracker.Instance.Selected(level, "empty");
-            //Tracker.T.Alternative.Selected(level, "empty");
+            foreach (KeyValuePair<string, int> attachStat in diccionary)
+            {
+                if (attachStat.Key != null)
+                    extensions.Add(Application.identifier + "://" + attachStat.Key, attachStat.Value);
+            }
+            // Hubo cambio de objeto
+            extensions.Add(Application.identifier + "://" + "object-changed", 1);
+            // Respuesta desconocida
+            extensions.Add(Application.identifier + "://" + "correct", -1);
+            AlternativeTracker.Instance.Selected(level, "empty").WithSuccess(false).WithResultExtensions(extensions);
         }
         log += "\n";
 
@@ -347,15 +342,15 @@ public class GM : MonoBehaviour {
         simpleDictionary.Clear();
         reverseDictionary.Clear();
         textBx.gameObject.SetActive(false);
-        foreach(GameObject go in selectorOptions)
-            go.SetActive(false); 
+        pointerPos.SetActive(false);
+        foreach (GameObject go in selectorOptions)
+            go.SetActive(false);
+        
         attempts++;
 
-        if (hayCont) cont.text = "Has respondido " + attempts.ToString() + " objetos.\nTe quedan " + (totalAttempts - attempts).ToString();
+        if (hayCont) cont.text = notifications[0] + attempts.ToString() + notifications[1] + (totalAttempts - attempts).ToString();
         if (hayLista)
-        {
             listaText.text += "\n- " + word;
-        }
 
         textBx.Select();
         textBx.text = "";
@@ -363,7 +358,6 @@ public class GM : MonoBehaviour {
         // Progreso del nivel actual
         float progress = (float)attempts / (float)totalAttempts;
         CompletableTracker.Instance.Progressed(level, CompletableTracker.CompletableType.Level, progress);
-        //Tracker.T.Completable.Progressed(level, CompletableTracker.Completable.Level, progress);
     }
 
 
@@ -391,7 +385,6 @@ public class GM : MonoBehaviour {
 
         // Started the 15 Objects level
         CompletableTracker.Instance.Initialized(level, CompletableTracker.CompletableType.Level);
-        //Tracker.T.Completable.Initialized(level, CompletableTracker.Completable.Level);
     }
 
     public void Limpiatexto (Text txt)
@@ -406,7 +399,7 @@ public class GM : MonoBehaviour {
     public void HayCont(bool hay)
     {
         hayCont = hay;
-        cont.text = "Has respondido 0 objetos\nTe quedan 15";
+        cont.text = notifications[2];
         SwActive(cont.gameObject);
     }
     public void SwActive(GameObject ob)
@@ -516,7 +509,9 @@ public class GM : MonoBehaviour {
                 but.onClick.RemoveAllListeners();
                 //NO BORRAR ESTE INT, EL LAMBDA NECESITA LA VARIABLE
                 int tempInt = ind;
-                but.onClick.AddListener(delegate { OnFieldEnter(selectedList[tempInt]); });
+                but.onClick.AddListener(delegate { 
+                    OnFieldEnter(selectedList[tempInt]);
+                });
                 if (t != null)
                     t.text = selectedList[ind];
             }

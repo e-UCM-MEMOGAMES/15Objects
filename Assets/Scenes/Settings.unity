@@ -2291,7 +2291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropdown: {fileID: 1977709438}
-  mixer: {fileID: 0}
+  mixer: {fileID: 24100000, guid: 3e764f641fbfa594ab75fa68f0542d98, type: 2}
   musicSlider: {fileID: 1669900511}
   soundSlider: {fileID: 993455989}
 --- !u!4 &1419758400
