@@ -34,6 +34,8 @@ public class GMTutorial : MonoBehaviour
         reverseDictionary = new SortedDictionary<int, string>();
         correctColor = new Color(0, 255, 0);
         normalColor = new Color(255, 255, 255);
+        GM.Instance.Level = "Tutorial";
+        LevelManager.Instance.initItems();
     }
 
    
@@ -95,7 +97,7 @@ public class GMTutorial : MonoBehaviour
             List<string> aux = result[i].GetComponent<Objeto>().dameDic(out id);       //El método dameDic devuelve una vector de palabras y un identificador que nos servirá para comprobar si se había respondido ya esa palabra.
             reverseDictionary.Add(id, result[i].name);
 
-            if (!answered.ContainsValue(id))                                        //Si no se había respondido ya añadimos las palabras de cada objeto al diccionario.
+            if (!answered.ContainsValue(id) && aux != null)                                        //Si no se había respondido ya añadimos las palabras de cada objeto al diccionario.
             {
                 for (int w = 0; w < aux.Count; w++)
                 {
@@ -125,7 +127,7 @@ public class GMTutorial : MonoBehaviour
             while (i > 0)
             {
                 i--;
-                if (result[i].name == "Botella")
+                if (result[i].name == "Bottle")
                 {
                     info.gameObject.SetActive(true);
                     error = false;
@@ -146,8 +148,6 @@ public class GMTutorial : MonoBehaviour
                         {
                             diccionary.Add(aux[w], id);
                         }
-
-
                     }
 
                 }

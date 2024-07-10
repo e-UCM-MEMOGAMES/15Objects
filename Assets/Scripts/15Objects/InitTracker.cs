@@ -10,19 +10,19 @@ public class InitTracker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Initialize();
-
+        Init();
     }
-    async void Initialize()
+
+    private async void Init()
     {
         await XasuTracker.Instance.Init();
         await Task.Yield();
-
         while (XasuTracker.Instance.Status.State == TrackerState.Uninitialized)
         {
             await Task.Yield();
         }
     }
+
     private async Task OnApplicationQuitAsync()
     {
         var progress = new Progress<float>();

@@ -1,0 +1,59 @@
+{
+  "items": [
+    {
+      "item": "Bottle",
+      "words": {
+        "en": [ "bottle" ],
+        "es": [ "botella" ]
+      },
+      "fillers": {
+        "en": [ "cup", "can" ],
+        "es": [ "bote", "vaso" ]
+      }
+    },
+    {
+      "item": "Teapot",
+      "words": {
+        "en": [ "teapot" ],
+        "es": [ "tetera" ]
+      },
+      "fillers": {
+        "en": [ "sprinkler", "watering can" ],
+        "es": [ "regadera", "aspersor" ]
+      }
+    },
+    {
+      "item": "Plate",
+      "words": {
+        "en": [ "plate" ],
+        "es": [ "plato" ]
+      },
+      "fillers": {
+        "en": [ "bowl", "food" ],
+        "es": [ "cuenco", "comida" ]
+      }
+    },
+    {
+      "item": "Fork",
+      "words": {
+        "en": [ "fork" ],
+        "es": [ "tenedor" ]
+      },
+      "fillers": {
+        "en": [ "broom", "spoon" ],
+        "es": [ "cepillo", "cuchara" ]
+      }
+    },
+    {
+      "item": "Glass",
+      "words": {
+        "en": [ "glass", "cup" ],
+        "es": [ "vaso" ]
+      },
+      "fillers": {
+        "en": [ "mug", "water" ],
+        "es": [ "taza", "agua" ]
+      }
+    }
+  ]
+}

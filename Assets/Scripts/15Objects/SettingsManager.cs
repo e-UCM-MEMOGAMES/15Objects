@@ -29,6 +29,11 @@ public class SettingsManager : MonoBehaviour
         dropdown.value = -1;
         dropdown.value = lcs.IndexOf(LocalizationSettings.SelectedLocale);
 
+        if (PlayerPrefs.HasKey("musicVolume") || PlayerPrefs.HasKey("soundVolume"))
+            Load();
+
+        ChangeMusicVolume();
+        ChangeSoundVolume();
     }
 
     public void OnDropDownChanged(TMP_Dropdown dropDown)
