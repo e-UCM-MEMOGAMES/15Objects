@@ -139,8 +139,10 @@ public class GM : MonoBehaviour {
                     selectedList.Clear();
                 }
                 pointerPos.SetActive(true);
+                AudioManager.Instance.Play(GameSound.Point);
+
                 pointerPos.transform.position = inputPos;
-            }            
+            }
 
             string log = "Se ha pinchado en: ";
 
@@ -204,6 +206,8 @@ public class GM : MonoBehaviour {
             diccionary.TryGetValue(word.ToLower(), out value);
             answered.Add(word, value);
             log = "\t✔ Ha respondido correctamente con: " + word;
+            AudioManager.Instance.Play(GameSound.Success);
+
             feedbackResponse.text = notifications[0] + word;
             feedbackResponse.gameObject.SetActive(true);
             string name;
@@ -251,6 +255,7 @@ public class GM : MonoBehaviour {
             feedbackResponse.text = notifications[0] + word;
             feedbackResponse.gameObject.SetActive(true);
             IncorrectFeedback();
+            AudioManager.Instance.Play(GameSound.Failed);
             Invoke("IncorrectFeedback", 1.5f);
 
             // Tracking
@@ -512,6 +517,7 @@ public class GM : MonoBehaviour {
                 but.onClick.AddListener(delegate { 
                     OnFieldEnter(selectedList[tempInt]);
                 });
+
                 if (t != null)
                     t.text = selectedList[ind];
             }

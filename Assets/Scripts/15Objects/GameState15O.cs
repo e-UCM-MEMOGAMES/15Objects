@@ -23,8 +23,8 @@ public class GameState15O : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-		
-	}
+        AudioManager.Instance.Play(GameSound.MenuBGM);
+    }
 	
 	// Update is called once per frame
 	void Update () {

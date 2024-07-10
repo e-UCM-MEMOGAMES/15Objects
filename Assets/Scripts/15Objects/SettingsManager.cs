@@ -13,12 +13,7 @@ public class SettingsManager : MonoBehaviour
     List<Locale> lcs;
     [SerializeField]
     TMPro.TMP_Dropdown dropdown;
-    [SerializeField]
-    AudioMixer mixer;
-    [SerializeField]
-    Slider musicSlider;
-    [SerializeField]
-    Slider soundSlider;
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,11 +29,6 @@ public class SettingsManager : MonoBehaviour
         dropdown.value = -1;
         dropdown.value = lcs.IndexOf(LocalizationSettings.SelectedLocale);
 
-        if (PlayerPrefs.HasKey("musicVolume"))
-            Load();
-
-        ChangeMusicVolume();
-        ChangeSoundVolume();
     }
 
     public void OnDropDownChanged(TMP_Dropdown dropDown)
@@ -47,20 +37,6 @@ public class SettingsManager : MonoBehaviour
         LocalizationSettings.SelectedLocale = lcs[dropDown.value];
     }
 
-    public void ChangeMusicVolume()
-    {
-        mixer.SetFloat("Music", Mathf.Log10(musicSlider.value) * 20);
-        PlayerPrefs.SetFloat("musicVolume", musicSlider.value);
-    }
-    public void ChangeSoundVolume()
-    {
-        mixer.SetFloat("SFX", Mathf.Log10(soundSlider.value) * 20);
-        PlayerPrefs.SetFloat("soundVolume", soundSlider.value);
-    }
 
-    private void Load()
-    {
-        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
-        soundSlider.value = PlayerPrefs.GetFloat("soundVolume");
-    }
+  
 }
