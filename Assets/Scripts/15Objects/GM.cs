@@ -10,6 +10,8 @@ using TMPro;
 using UnityEngine.UIElements;
 using Xasu.HighLevel;
 using Button = UnityEngine.UI.Button;
+using Xasu;
+using System.Threading;
 
 public class GM : MonoBehaviour {
     public Text feedbackResponse;
@@ -99,16 +101,35 @@ public class GM : MonoBehaviour {
 
         path = @".\Resultados.txt";
 
-        if (File.Exists(path))
+        bool closed = false;
+        int attempts = 0, maxTries = 10;
+
+        while (!closed)
         {
-            // Note that no lock is put on the
-            // file and the possibility exists
-            // that another process could do
-            // something with it between
-            // the calls to Exists and Delete.
-            File.Delete(path);
+            try
+            {
+                if (File.Exists(path))
+                {
+                    // Note that no lock is put on the
+                    // file and the possibility exists
+                    // that another process could do
+                    // something with it between
+                    // the calls to Exists and Delete.
+                    File.Delete(path);
+                }
+                fs = File.Create(path);
+                closed = true;
+            }
+            catch (IOException ex)
+            {
+                if(++attempts > maxTries)
+                {
+                    Console.WriteLine($"Failed to handle the file after {maxTries} attempts: {ex.Message}");
+                    throw;
+                }
+                Thread.Sleep(100);
+            }
         }
-        fs = File.Create(path);
 
     }
 	
@@ -189,8 +210,10 @@ public class GM : MonoBehaviour {
             bool failed = (float)mistakes > ((float)totalAttempts / 2.0f);
             float score = 1.0f - ((float)mistakes / (float)totalAttempts);
 
-            CompletableTracker.Instance.Completed(level, CompletableTracker.CompletableType.Level);
-            //Tracker.T.Completable.Completed(level, CompletableTracker.Completable.Level, !failed, score);
+            if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
+                CompletableTracker.Instance.Completed(level, CompletableTracker.CompletableType.Level).
+                    WithResultExtensions(new Dictionary<string, object> { { "https://" + "result", !failed }, 
+                        { "https://" + "score", score } });
         }
     }
 
@@ -233,18 +256,19 @@ public class GM : MonoBehaviour {
             }
             Dictionary<string, object> extensions = new Dictionary<string, object>();
             if (simpleVarDictionary != null)
-                extensions.Add(Application.identifier + "://" + "targets", simpleVarDictionary);
+                extensions.Add("https://" + "targets", simpleVarDictionary);
 
             foreach (KeyValuePair<string, int> attachStat in diccionary)
             {
                 if (attachStat.Key != null)
-                    extensions.Add(Application.identifier + "://" + attachStat.Key, attachStat.Value);
+                    extensions.Add("https://" + attachStat.Key, attachStat.Value);
             }
             // No hubo cambio de objeto
-            extensions.Add(Application.identifier + "://" + "object-changed", 0);
+            extensions.Add("https://" + "object-changed", 0);
             // Respuesta correcta
-            extensions.Add(Application.identifier + "://" + "correct", 1);
-            AlternativeTracker.Instance.Selected(level, word).WithSuccess(true).WithResultExtensions(extensions);
+            extensions.Add("https://" + "correct", 1);
+            if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
+                AlternativeTracker.Instance.Selected(level, word).WithSuccess(true).WithResultExtensions(extensions);
         }
         else if (word != "")
         {
@@ -280,21 +304,22 @@ public class GM : MonoBehaviour {
                     varValue = varValue.Substring(0, varValue.Length - 1);
                 }
                 if (varKey != null && varValue != null)
-                    extensions.Add(Application.identifier + "://" + varKey, varValue);
+                    extensions.Add("https://" + varKey, varValue);
             }
             if (simpleVarDictionary != null)
-                extensions.Add(Application.identifier + "://" + "targets", simpleVarDictionary);
+                extensions.Add("https://" + "targets", simpleVarDictionary);
 
             foreach (KeyValuePair<string, int> attachStat in diccionary)
             {
                 if (attachStat.Key != null)
-                    extensions.Add(Application.identifier + "://" + attachStat.Key, attachStat.Value);
+                    extensions.Add("https://" + attachStat.Key, attachStat.Value);
             }
             // No hubo cambio de objeto
-            extensions.Add(Application.identifier + "://" + "object-changed", 0);
+            extensions.Add("https://" + "object-changed", 0);
             // Respuesta incorrecta
-            extensions.Add(Application.identifier + "://" + "correct", 0);
-            AlternativeTracker.Instance.Selected(level, word).WithSuccess(false).WithResultExtensions(extensions);
+            extensions.Add("https://" + "correct", 0);
+            if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
+                AlternativeTracker.Instance.Selected(level, word).WithSuccess(false).WithResultExtensions(extensions);
         }
         else
         {
@@ -322,21 +347,22 @@ public class GM : MonoBehaviour {
                     varValue = varValue.Substring(0, varValue.Length - 1);
                 }
                 if (varKey != null && varValue != null)
-                    extensions.Add(Application.identifier + "://" + varKey, varValue);
+                    extensions.Add("https://" + varKey, varValue);
             }
             if (simpleVarDictionary != null)
-                extensions.Add(Application.identifier + "://" + "targets", simpleVarDictionary);
+                extensions.Add("https://" + "targets", simpleVarDictionary);
 
             foreach (KeyValuePair<string, int> attachStat in diccionary)
             {
                 if (attachStat.Key != null)
-                    extensions.Add(Application.identifier + "://" + attachStat.Key, attachStat.Value);
+                    extensions.Add("https://" + attachStat.Key, attachStat.Value);
             }
             // Hubo cambio de objeto
-            extensions.Add(Application.identifier + "://" + "object-changed", 1);
+            extensions.Add("https://" + "object-changed", 1);
             // Respuesta desconocida
-            extensions.Add(Application.identifier + "://" + "correct", -1);
-            AlternativeTracker.Instance.Selected(level, "empty").WithSuccess(false).WithResultExtensions(extensions);
+            extensions.Add("https://" + "correct", -1);
+            if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
+                AlternativeTracker.Instance.Selected(level, "empty").WithSuccess(false).WithResultExtensions(extensions);
         }
         log += "\n";
 
@@ -362,7 +388,8 @@ public class GM : MonoBehaviour {
 
         // Progreso del nivel actual
         float progress = (float)attempts / (float)totalAttempts;
-        CompletableTracker.Instance.Progressed(level, CompletableTracker.CompletableType.Level, progress);
+        if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
+            CompletableTracker.Instance.Progressed(level, CompletableTracker.CompletableType.Level, progress);
     }
 
 
@@ -389,7 +416,8 @@ public class GM : MonoBehaviour {
         levelSelectorPanel.SetActive(false);
 
         // Started the 15 Objects level
-        CompletableTracker.Instance.Initialized(level, CompletableTracker.CompletableType.Level);
+        if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
+            CompletableTracker.Instance.Initialized(level, CompletableTracker.CompletableType.Level);
     }
 
     public void Limpiatexto (Text txt)

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class SettingsManager : MonoBehaviour
 {
     List<Locale> lcs;
     [SerializeField]
-    TMPro.TMP_Dropdown dropdown;
+    TMP_Dropdown dropdown;
 
 
     // Start is called before the first frame update
@@ -24,24 +25,19 @@ public class SettingsManager : MonoBehaviour
             dropdown.options.Add(new TMP_Dropdown.OptionData() { text = lcs[i].LocaleName });
         }
 
-        Debug.Log(lcs.IndexOf(LocalizationSettings.SelectedLocale));
-
-        dropdown.value = -1;
-        dropdown.value = lcs.IndexOf(LocalizationSettings.SelectedLocale);
-
-        if (PlayerPrefs.HasKey("musicVolume") || PlayerPrefs.HasKey("soundVolume"))
-            Load();
-
-        ChangeMusicVolume();
-        ChangeSoundVolume();
+        if (PlayerPrefs.HasKey("language"))
+            dropdown.value = PlayerPrefs.GetInt("language");
+        else
+        {
+            int lid = lcs.IndexOf(LocalizationSettings.SelectedLocale);
+            dropdown.value = lid;
+            PlayerPrefs.SetInt("language", lid);
+        }
     }
 
     public void OnDropDownChanged(TMP_Dropdown dropDown)
     {
-        Debug.Log("DROP DOWN CHANGED -> " + dropDown.value);
         LocalizationSettings.SelectedLocale = lcs[dropDown.value];
+        PlayerPrefs.SetInt("language", dropDown.value);
     }
-
-
-  
 }

@@ -9,8 +9,9 @@ using Xasu.HighLevel;
 public class changeScene : MonoBehaviour {
     public void ChangeScene(string scene)
     {
-		AccessibleTracker.Instance.Accessed(scene, AccessibleTracker.AccessibleType.Screen);
-        if (scene != "exit")            
+        if (SceneManager.GetActiveScene().name != "Start" && XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
+            AccessibleTracker.Instance.Accessed(scene, AccessibleTracker.AccessibleType.Screen);
+        if (scene != "exit")
             SceneManager.LoadScene(scene);
         else
 #if UNITY_EDITOR

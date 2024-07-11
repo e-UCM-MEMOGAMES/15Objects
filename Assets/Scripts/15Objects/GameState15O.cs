@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
+using UnityEngine.UI;
 
 public class GameState15O : MonoBehaviour {
 
@@ -24,12 +26,10 @@ public class GameState15O : MonoBehaviour {
     // Use this for initialization
     void Start () {
         AudioManager.Instance.Play(GameSound.MenuBGM);
+
+        if (PlayerPrefs.HasKey("language"))
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("language")];
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public bool fileConfig
     {

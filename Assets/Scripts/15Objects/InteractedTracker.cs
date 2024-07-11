@@ -24,12 +24,14 @@ public class InteractedTracker : MonoBehaviour {
                 {
                     { Application.identifier + "://" + "empty", 1 }
                 };
-                AlternativeTracker.Instance.Selected("Pointer", "empty").WithResultExtensions(extensions);
+                if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
+                    AlternativeTracker.Instance.Selected("Pointer", "empty").WithResultExtensions(extensions);
             }
             else
             {
                 foreach (Collider2D item in result)
-                    if (item.name != null) GameObjectTracker.Instance.Interacted(item.name);
+                    if (item.name != null && XasuTracker.Instance.Status.State != TrackerState.Uninitialized) 
+                        GameObjectTracker.Instance.Interacted(item.name);
             }
 
             //Return the current Active Scene in order to get the current Scene's name
@@ -49,12 +51,16 @@ public class InteractedTracker : MonoBehaviour {
                     name += "-B";
                 }
             }
-            GameObjectTracker.Instance.Interacted(name);
+            if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
+                GameObjectTracker.Instance.Interacted(name);
         }
     }
 
     private async Task OnApplicationQuitAsync()
     {
+        if (XasuTracker.Instance.Status.State == TrackerState.Uninitialized)
+            return;
+
         var progress = new Progress<float>();
         progress.ProgressChanged += (_, p) =>
         {

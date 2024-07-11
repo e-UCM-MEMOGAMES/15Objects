@@ -17,7 +17,43 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: ab40ceded3cb6b0448f60b2b93a6aa5d, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 3420862603784192
+    m_Localized: 8d37f6448dcd2fd48b38ab8dd7d1e55d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3420864117927936
+    m_Localized: 8d37f6448dcd2fd48b38ab8dd7d1e55d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3420864134705152
+    m_Localized: 8d37f6448dcd2fd48b38ab8dd7d1e55d[Fredoka_Condensed-Bold SDF Material]
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3420864151482368
+    m_Localized: 8d37f6448dcd2fd48b38ab8dd7d1e55d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3420864159870976
+    m_Localized: 8d37f6448dcd2fd48b38ab8dd7d1e55d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3420864168259584
+    m_Localized: 8d37f6448dcd2fd48b38ab8dd7d1e55d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3420864176648192
+    m_Localized: 8d37f6448dcd2fd48b38ab8dd7d1e55d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3420864189231104
+    m_Localized: 8d37f6448dcd2fd48b38ab8dd7d1e55d[Fredoka_Condensed-Bold SDF Material]
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3433949805342720
+    m_Localized: 8d37f6448dcd2fd48b38ab8dd7d1e55d[Fredoka_Condensed-Bold SDF Material]
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

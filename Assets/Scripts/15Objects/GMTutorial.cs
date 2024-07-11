@@ -12,6 +12,7 @@ public class GMTutorial : MonoBehaviour
     public Color correctColor;
     public Color normalColor;
 
+    public GameObject pointerPos;
     public InputField textBx;                                       //Game object que contiene el inputField
     public GameObject[] tutorialPanels;                             //Array que contiene los paneles del tutorial
     public Text points;                                             //Texto para el panel final;
@@ -20,7 +21,7 @@ public class GMTutorial : MonoBehaviour
     private bool tutorial = true;                                   //Booleano que indica si ha terminado el tutorial o no
     private int contTutorial = 0;                                   //Contador de paneles mostrados del tutorial.
 
-    private SortedDictionary<string, int> diccionary;               //Diccionario que contendrá las palabras y sinónimos de los objetos seleccionados.
+    private SortedDictionary<string, int> dictionary;               //Diccionario que contendrá las palabras y sinónimos de los objetos seleccionados.
     private SortedDictionary<string, int> answered;                 //Diccionario que contiene las palabras que se han respondido.
     private SortedDictionary<int, string> reverseDictionary;        //Diccionario que contiene las IDs con sus palabras correspondientes
 
@@ -29,7 +30,7 @@ public class GMTutorial : MonoBehaviour
 
     void Start()
     {
-        diccionary = new SortedDictionary<string, int>();
+        dictionary = new SortedDictionary<string, int>();
         answered = new SortedDictionary<string, int>();
         reverseDictionary = new SortedDictionary<int, string>();
         correctColor = new Color(0, 255, 0);
@@ -65,6 +66,7 @@ public class GMTutorial : MonoBehaviour
 
         if (attempts == 5)
         {
+            info.text = "";
             finalPanel.SetActive(true);
             points.text = (attempts - mistakes).ToString() + "/5";
         }
@@ -77,13 +79,16 @@ public class GMTutorial : MonoBehaviour
     {
 
         //Se comprueba si en el punto del mouse al hacer click hay colisión con algún objeto. Se devuelven todos los objetos en result.
-        Collider2D[] result = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        Vector3 pointer = Input.mousePosition;
+        Collider2D[] result = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(pointer));
 
         int i = result.Length;
         if (i > 0)
         {
+            pointerPos.SetActive(true);
+            pointerPos.transform.position = pointer;
             contNoAnswer = 0;
-            diccionary.Clear();
+            dictionary.Clear();
             reverseDictionary.Clear();
             textBx.gameObject.SetActive(true);
             textBx.Select();
@@ -95,13 +100,16 @@ public class GMTutorial : MonoBehaviour
             int id;
             
             List<string> aux = result[i].GetComponent<Objeto>().dameDic(out id);       //El método dameDic devuelve una vector de palabras y un identificador que nos servirá para comprobar si se había respondido ya esa palabra.
-            reverseDictionary.Add(id, result[i].name);
+
+            if(!reverseDictionary.ContainsKey(id))
+                reverseDictionary.Add(id, result[i].name);
 
             if (!answered.ContainsValue(id) && aux != null)                                        //Si no se había respondido ya añadimos las palabras de cada objeto al diccionario.
             {
                 for (int w = 0; w < aux.Count; w++)
                 {
-                    diccionary.Add(aux[w], id);
+                    if (!dictionary.ContainsKey(aux[w]))
+                        dictionary.Add(aux[w], id);
                 }
 
 
@@ -118,7 +126,8 @@ public class GMTutorial : MonoBehaviour
         bool error = true;
         if (contTutorial != 0)
         {
-            Collider2D[] result = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            Vector3 pointer = Input.mousePosition;
+            Collider2D[] result = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(pointer));
             int i = result.Length;
             if(i > 0)
             {
@@ -126,6 +135,8 @@ public class GMTutorial : MonoBehaviour
             }
             while (i > 0)
             {
+                pointerPos.SetActive(true);
+                pointerPos.transform.position = pointer;
                 i--;
                 if (result[i].name == "Bottle")
                 {
@@ -146,7 +157,7 @@ public class GMTutorial : MonoBehaviour
                     {
                         for (int w = 0; w < aux.Count; w++)
                         {
-                            diccionary.Add(aux[w], id);
+                            dictionary.Add(aux[w], id);
                         }
                     }
 
@@ -173,10 +184,10 @@ public class GMTutorial : MonoBehaviour
     public void OnFieldEnter(string word)
     {
 
-        if (diccionary.ContainsKey(word.ToLower()))                             //Si la palabra se encuentra en el diccionario la añadimos al diccionario de respondidos
+        if (dictionary.ContainsKey(word.ToLower()))                             //Si la palabra se encuentra en el diccionario la añadimos al diccionario de respondidos
         {
             int value = -1;
-            diccionary.TryGetValue(word.ToLower(), out value);
+            dictionary.TryGetValue(word.ToLower(), out value);
             answered.Add(word, value);
             string name;
             reverseDictionary.TryGetValue(value, out name);
@@ -200,7 +211,9 @@ public class GMTutorial : MonoBehaviour
             tutorial = false;
         }
 
-        diccionary.Clear();                                                    //Limpiamod el diccionario.
+        pointerPos.SetActive(false);
+
+        dictionary.Clear();                                                    //Limpiamod el diccionario.
         textBx.gameObject.SetActive(false);
         attempts++;
 

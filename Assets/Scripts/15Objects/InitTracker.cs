@@ -4,22 +4,33 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using Xasu;
+using Xasu.Config;
 
 public class InitTracker : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    public void InitTrack()
     {
         Init();
     }
 
     private async void Init()
     {
-        await XasuTracker.Instance.Init();
-        await Task.Yield();
-        while (XasuTracker.Instance.Status.State == TrackerState.Uninitialized)
+        bool hasConfig = false;
+        try
         {
+            var trackerConfig = await TrackerConfigLoader.LoadLocalAsync();
+            hasConfig = true;
+        }
+        catch { Debug.Log("Tracker config not found."); }
+        if (hasConfig)
+        {
+            await XasuTracker.Instance.Init();
             await Task.Yield();
+            while (XasuTracker.Instance.Status.State == TrackerState.Uninitialized)
+            {
+                await Task.Yield();
+            }
         }
     }
 
