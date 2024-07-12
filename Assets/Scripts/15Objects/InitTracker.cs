@@ -8,12 +8,14 @@ using Xasu.Config;
 
 public class InitTracker : MonoBehaviour
 {
-    // Start is called before the first frame update
     public void InitTrack()
     {
         Init();
     }
 
+    /// <summary>
+    /// Inicia el tracker
+    /// </summary> 
     private async void Init()
     {
         bool hasConfig = false;
@@ -34,6 +36,9 @@ public class InitTracker : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Cierra el tracker cuando se cierra el juego
+    /// </summary> 
     private async Task OnApplicationQuitAsync()
     {
         var progress = new Progress<float>();

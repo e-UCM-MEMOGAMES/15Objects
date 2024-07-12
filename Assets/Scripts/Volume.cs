@@ -9,7 +9,6 @@ public class Volume : MonoBehaviour
     ChannelType channelType;
     AudioManager audioMng;
     Slider slider;
-    // Start is called before the first frame update
     void Start()
     {
         audioMng = AudioManager.Instance;

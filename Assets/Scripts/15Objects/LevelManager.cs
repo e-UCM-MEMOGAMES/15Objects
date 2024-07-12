@@ -21,22 +21,13 @@ public class LevelManager : MonoBehaviour
             Instance = this;
         }
     }
-    [System.Serializable]
-    public class LevelInfo
-    {
-        public ObjectInfo[] items;
-    }
-    [System.Serializable]
-    public class ObjectInfo
-    {
-        public string item;
-        public string[] words;
-        public string[] fillers;
-    }
 
     JObject jobj;
     IList<JToken> info;
 
+    /// <summary>
+    /// Lee la informacion del nivel de un json
+    /// </summary> 
     public void initItems()
     {
         string currLoc = "Localization/";
@@ -50,6 +41,9 @@ public class LevelManager : MonoBehaviour
         ReadItems();
     }
 
+    /// <summary>
+    /// Metodo auxilizar de InitItems, lee y alamcena la informacion de los objetos
+    /// </summary> 
     void ReadItems()
     {
         //objetos de escena

@@ -15,8 +15,6 @@ public class SettingsManager : MonoBehaviour
     [SerializeField]
     TMP_Dropdown dropdown;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         lcs = LocalizationSettings.AvailableLocales.Locales;

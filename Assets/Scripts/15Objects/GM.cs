@@ -14,42 +14,120 @@ using Xasu;
 using System.Threading;
 
 public class GM : MonoBehaviour {
+    /// <summary>
+    /// Texto que indica el objeto que se ha contestado
+    /// </summary> 
     public Text feedbackResponse;
+    /// <summary>
+    /// Textp que indica que se ha dado un respeusta incorrecta
+    /// </summary> 
     public GameObject incorrectText;
+    /// <summary>
+    /// Estado de juego
+    /// </summary> 
     private GameState15O gameS;
+    /// <summary>
+    /// Array que tiene los objetos sobre los que hace click el jugador
+    /// </summary> 
     private Collider2D[] selected;
+    /// <summary>
+    /// Color en el que se muestra el objeto cuando el jugador da una respuesta correcta
+    /// </summary> 
     public Color correctColor;
+    /// <summary>
+    /// Color normal de los objetos
+    /// </summary> 
     public Color normalColor;
 
-    //Lista y Contador
-    private String level = "A";
+    /// <summary>
+    /// Nivel que ha seleccionado el jugador
+    /// </summary> 
+    private string level = "A";
     public GameObject lista;
     public Text listaText;
     public Text cont;
     private bool hayLista = false, hayCont = false;
 
-    public Text points;                                             //Texto para el panel final;
-    public GameObject finalPanel;                                   //Panel final;
-    public InputField textBx;                                       //Game object que contiene el inputField
+    /// <summary>
+    /// Texto que muestra los puntos que ha conseguido el jugador
+    /// </summary> 
+    public Text points;
+    /// <summary>
+    /// Panel final;
+    /// </summary> 
+    public GameObject finalPanel;
+    /// <summary>
+    /// Game object que contiene el inputField
+    /// </summary> 
+    public InputField textBx;
+    /// <summary>
+    /// Objetos del juego
+    /// </summary> 
     public GameObject A, B;
 
-    private Dictionary<string, int> diccionary;               //Diccionario que contendrá las palabras y sinónimos de los objetos seleccionados.
-    private Dictionary<string, int> answered;                 //Diccionario que contiene las palabras que se han respondido.
-    private Dictionary<string, int> simpleDictionary;         //Diccionario que contiene las palabras que se han respondido en su version simplificada.
-    private Dictionary<int, string> reverseDictionary;        //Diccionario que contiene las IDs con sus palabras correspondientes
+    /// <summary>
+    /// Diccionario que contendrá las palabras y sinónimos de los objetos seleccionados.
+    /// </summary> 
+    private Dictionary<string, int> diccionary;
+    /// <summary>
+    /// Diccionario que contiene las palabras que se han respondido.
+    /// </summary> 
+    private Dictionary<string, int> answered;
+    /// <summary>
+    /// Diccionario que contiene las palabras que se han respondido en su version simplificada.
+    /// </summary> 
+    private Dictionary<string, int> simpleDictionary;
+    /// <summary>
+    /// Diccionario que contiene las IDs con sus palabras correspondientes
+    /// </summary> 
+    private Dictionary<int, string> reverseDictionary;
 
+    /// <summary>
+    /// Panel para seleccionar nivel
+    /// </summary> 
     private GameObject levelSelectorPanel;
+    /// <summary>
+    /// Panel para seleccionar modo de juego
+    /// </summary> 
     private GameObject gamemodePanel;
-    private int attempts = 0;                                       //Entero que controla el número de intentos.
-    private readonly int totalAttempts = 15;                                 
-    private int mistakes = 0;                                       //Entero que controla el número de errores del usuario.
+    /// <summary>
+    /// Entero que controla el número de intentos.
+    /// </summary> 
+    private int attempts = 0;                                       
+    /// <summary>
+    /// Indica el numero total de intentos para terminar el juego
+    /// </summary> 
+    private readonly int totalAttempts = 15;
+    /// <summary>
+    /// Entero que controla el número de errores del usuario.
+    /// </summary> 
+    private int mistakes = 0;                                       
+    /// <summary>
+    /// Imagen que indica la posicion en la que el jugador ha pinchado
+    /// </summary> 
     public GameObject pointerPos;
+    /// <summary>
+    /// Indica el modo de juego seleccionado
+    /// </summary> 
     private int gamemode;
+    /// <summary>
+    /// Array que tiene los botones para el modo de juego de seleccionar
+    /// </summary> 
     public GameObject[] selectorOptions;
+    /// <summary>
+    /// Botones para navegar las opciones cuando hay demasiadas
+    /// </summary> 
     public GameObject leftButton;
     public GameObject rightButton;
+    /// <summary>
+    /// Array con los textos del juego
+    /// </summary> 
     public string[] notifications;
+    /// <summary>
+    /// Lista con los objetos seleccionados
+    /// </summary> 
     private List<string> selectedList;
+
     private int selectedIndex = 0;
     private int selectedPageIndex = 0;
 
@@ -74,6 +152,7 @@ public class GM : MonoBehaviour {
     void Start () {
         Initialize();
 
+        // Para escribir los resultados en un archivo
         string path;
         if (gameS.fileConfig)
         {
@@ -204,6 +283,9 @@ public class GM : MonoBehaviour {
         
     }
 
+    /// <summary>
+    /// Termina la partida
+    /// </summary> 
     public void EndGame()
     {
         gameS.fileConfig = false;
@@ -396,7 +478,9 @@ public class GM : MonoBehaviour {
             CompletableTracker.Instance.Progressed(level, CompletableTracker.CompletableType.Level, progress);
     }
 
-
+    /// <summary>
+    /// Se llama cuando se selecciona un nivel
+    /// </summary> 
     public void SetLevel(string level)
     {
         if (level == "A")  A.SetActive(true);
@@ -435,6 +519,9 @@ public class GM : MonoBehaviour {
         ob.SetActive(!ob.activeInHierarchy);
     }
 
+    /// <summary>
+    /// Cambia el color del objeto pasado como parametro tras un delay
+    /// </summary>
     private IEnumerator ChangeColor(string obj, Color color, float delayTime)
     {
         yield return new WaitForSeconds(delayTime);
@@ -448,6 +535,9 @@ public class GM : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Cambia el color del objeto pasado como parametro
+    /// </summary> 
     private void ChangeColor(string obj, Color color)
     {
         GameObject c = GameObject.Find(char.ToUpper(obj[0]) + obj.Substring(1));
@@ -460,11 +550,17 @@ public class GM : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Muestra el texto que indica que la respuesta es incorrecta
+    /// </summary> 
     private void IncorrectFeedback()
     {
         incorrectText.SetActive(!incorrectText.activeSelf);
     }
 
+    /// <summary>
+    /// Se llama cuando se selecciona un modo de juego
+    /// </summary> 
     public void SelectGamemode(int m)
     {
         gamemode = m;
@@ -472,11 +568,17 @@ public class GM : MonoBehaviour {
         levelSelectorPanel.SetActive(true);
     }
 
+    /// <summary>
+    /// Para cambiar al panel de modo de juego
+    /// </summary> 
     public void GoToSelectGamemode()
     {
         gamemodePanel.SetActive(true);
     }
 
+    /// <summary>
+    /// Inicializa variables
+    /// </summary> 
     private void Initialize()
     {
         this.gameS = GameObject.FindObjectOfType<GameState15O>();
@@ -497,6 +599,9 @@ public class GM : MonoBehaviour {
         textBx.gameObject.SetActive(false);
         A.SetActive(false); B.SetActive(false);
     }
+    /// <summary>
+    /// 
+    /// </summary> Randomiza la lista que se pasa como parametro
     private void RandomizeList(List<string> l) {
         int n = l.Count;
         var rng = new System.Random();
@@ -509,12 +614,18 @@ public class GM : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Para cambiar las opciones en modo de juego para seleccionar
+    /// </summary> 
     public void NavigateOptions(int p)
     {
         selectedPageIndex += p;
         ShowOptions();
     }
 
+    /// <summary>
+    /// Muestra las opciones en modo de juego para seleccionar
+    /// </summary> 
     private void ShowOptions()
     {
         leftButton.SetActive(false);

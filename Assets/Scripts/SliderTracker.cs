@@ -9,7 +9,6 @@ public class SliderTracker : MonoBehaviour
     [SerializeField]
     string sliderName;
 
-    // Start is called before the first frame update
     void Start()
     {
         slider = GetComponent<Slider>();
@@ -18,6 +17,9 @@ public class SliderTracker : MonoBehaviour
         slider.interactable = true;
     }
 
+    /// <summary>
+    /// Se llama cuando se ha interactuado con el slider
+    /// </summary> 
     public async void Interacted(float value)
     {
         slider.interactable = false;

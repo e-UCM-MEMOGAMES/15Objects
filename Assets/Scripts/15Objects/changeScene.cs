@@ -7,6 +7,9 @@ using Xasu;
 using Xasu.HighLevel;
 
 public class changeScene : MonoBehaviour {
+    /// <summary>
+    /// Se cambia a la escena indicada por el parametro que se pasa
+    /// </summary> 
     public void ChangeScene(string scene)
     {
         if (SceneManager.GetActiveScene().name != "Start" && XasuTracker.Instance.Status.State != TrackerState.Uninitialized)

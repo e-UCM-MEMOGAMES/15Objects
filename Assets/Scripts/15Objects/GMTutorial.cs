@@ -5,28 +5,85 @@ using UnityEngine.UI;
 
 public class GMTutorial : MonoBehaviour
 {
+    /// <summary>
+    /// Panel que muestra el mensaje de error
+    /// </summary> 
     public GameObject errorPanel;
+    /// <summary>
+    /// Texto que muestra la respuesta del jugador
+    /// </summary> 
     public Text info;
+    /// <summary>
+    /// Texto de recordatorio de seleccionar un objeto
+    /// </summary> 
     public Text noAnswer;
+    /// <summary>
+    /// Guarda el numero de veces en las que se ha hecho click en algo que no es un objeto
+    /// </summary> 
     int contNoAnswer = 0;
+    /// <summary>
+    /// Color en el que se muestra el objeto cuando el jugador da una respuesta correcta
+    /// </summary> 
     public Color correctColor;
+    /// <summary>
+    /// Color normal de los objetos
+    /// </summary> 
     public Color normalColor;
 
+    /// <summary>
+    /// Imagen que indica la posicion en la que el jugador ha pinchado
+    /// </summary> 
     public GameObject pointerPos;
-    public InputField textBx;                                       //Game object que contiene el inputField
-    public GameObject[] tutorialPanels;                             //Array que contiene los paneles del tutorial
-    public Text points;                                             //Texto para el panel final;
-    public GameObject finalPanel;                                   //Panel final;
+    /// <summary>
+    /// Game object que contiene el inputField
+    /// </summary> 
+    public InputField textBx;
+    /// <summary>
+    /// Array que contiene los paneles del tutorial
+    /// </summary> 
+    public GameObject[] tutorialPanels;
+    /// <summary>
+    /// Texto para el panel final
+    /// </summary> 
+    public Text points;
+    /// <summary>
+    /// Panel final
+    /// </summary> 
+    public GameObject finalPanel;
 
-    private bool tutorial = true;                                   //Booleano que indica si ha terminado el tutorial o no
-    private int contTutorial = 0;                                   //Contador de paneles mostrados del tutorial.
+    /// <summary>
+    /// Booleano que indica si ha terminado el tutorial o no
+    /// </summary> 
+    private bool tutorial = true;
+    /// <summary>
+    /// Contador de paneles mostrados del tutorial
+    /// </summary> 
+    private int contTutorial = 0;
 
-    private SortedDictionary<string, int> dictionary;               //Diccionario que contendrá las palabras y sinónimos de los objetos seleccionados.
-    private SortedDictionary<string, int> answered;                 //Diccionario que contiene las palabras que se han respondido.
-    private SortedDictionary<int, string> reverseDictionary;        //Diccionario que contiene las IDs con sus palabras correspondientes
+    /// <summary>
+    /// Diccionario que contendrá las palabras y sinónimos de los objetos seleccionados
+    /// </summary> 
+    private SortedDictionary<string, int> dictionary;
+    /// <summary>
+    /// Diccionario que contiene las palabras que se han respondido
+    /// </summary> 
+    private SortedDictionary<string, int> answered;
+    /// <summary>
+    /// Diccionario que contiene las IDs con sus palabras correspondientes
+    /// </summary> 
+    private SortedDictionary<int, string> reverseDictionary;
 
-    private int attempts=0;                                           //Entero que controla el número de intentos.
-    private int mistakes = 0;                                       //Entero que controla el número de errores del usuario.
+    /// <summary>
+    /// Entero que controla el número de intentos
+    /// </summary> 
+    private int attempts=0;
+    /// <summary>
+    /// Entero que controla el número de errores del usuario
+    /// </summary> 
+    private int mistakes = 0;                                       
+    /// <summary>
+    /// Indica si se ha terminado el juego
+    /// </summary> 
     bool finished = false;
 
     void Start()
@@ -45,6 +102,7 @@ public class GMTutorial : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             contNoAnswer++;
+            //Mientras hayan paneles se avanza el tutoria;
             if(contTutorial == tutorialPanels.Length - 2)
             {
                 tutorialPanels[contTutorial].SetActive(false);
@@ -57,20 +115,23 @@ public class GMTutorial : MonoBehaviour
 
         }
 
+        //Si se hace click en algo que no es un objeto dos veces
         if(contNoAnswer == 2 && !finished)
         {
             noAnswer.gameObject.SetActive(true);
             contNoAnswer = 0;
         }
 
+        //Si se ha respondido a todo
         if (attempts == 5)
             EndGame();
 
         
     }
 
-    #region Updates
-
+    /// <summary>
+    /// Termina el juego
+    /// </summary> 
     public void EndGame()
     {
         finished = true;
@@ -79,7 +140,11 @@ public class GMTutorial : MonoBehaviour
         points.text = (attempts - mistakes).ToString() + "/5";
     }
 
-    //Este es el update que ejecuta la lógica normal del juego
+    #region Updates
+
+    /// <summary>
+    /// Update de la logica normal del juego
+    /// </summary> 
     void gameUpdate()
     {
         if(finished) return;
@@ -120,8 +185,10 @@ public class GMTutorial : MonoBehaviour
         }
     }
 
-    //Este update será el que se ejecuta en el momento de tutorial para mostrar los paneles adecuados
-    //Funciona como el anterior.
+    /// <summary>
+    /// Este update será el que se ejecuta en el momento de tutorial para mostrar los paneles adecuados
+    /// Funciona como el anterior.
+    /// </summary> 
     void tutorialUpdate()
     {
         if(finished) return;
@@ -219,12 +286,18 @@ public class GMTutorial : MonoBehaviour
         textBx.text = "";
     }
 
+    /// <summary>
+    /// Cambia el color del objeto pasado como parametro tras un delay
+    /// </summary>
     private IEnumerator ChangeColor(string obj, Color color, float delayTime)
     {
         yield return new WaitForSeconds(delayTime);
         ChangeColor(obj, color);
     }
 
+    /// <summary>
+    /// Cambia el color del objeto pasado como parametro
+    /// </summary> 
     private void ChangeColor(string obj, Color color)
     {
         Debug.Log(obj);
