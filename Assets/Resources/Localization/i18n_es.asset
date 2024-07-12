@@ -107,15 +107,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2906503372795904
-    m_Localized: '"Has respondido "'
+    m_Localized: 'Has respondido '
     m_Metadata:
       m_Items: []
   - m_Id: 2906601775362048
-    m_Localized: '" objetos.\nTe quedan "'
+    m_Localized: ' objetos.\nTe quedan '
     m_Metadata:
       m_Items: []
   - m_Id: 2907351033245696
-    m_Localized: '"Has respondido 0 objetos\nTe quedan 15"'
+    m_Localized: Has respondido 0 objetos\nTe quedan 15
     m_Metadata:
       m_Items: []
   references:

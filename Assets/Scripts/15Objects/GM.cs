@@ -23,7 +23,6 @@ public class GM : MonoBehaviour {
 
     //Lista y Contador
     private String level = "A";
-    private bool isRandom = false;
     public GameObject lista;
     public Text listaText;
     public Text cont;
@@ -42,7 +41,7 @@ public class GM : MonoBehaviour {
     private GameObject levelSelectorPanel;
     private GameObject gamemodePanel;
     private int attempts = 0;                                       //Entero que controla el número de intentos.
-    private int totalAttempts = 15;                                 
+    private readonly int totalAttempts = 15;                                 
     private int mistakes = 0;                                       //Entero que controla el número de errores del usuario.
     public GameObject pointerPos;
     private int gamemode;
@@ -93,9 +92,7 @@ public class GM : MonoBehaviour {
             }
            
             StreamReader file = new StreamReader(path);
-            string option = file.ReadLine();
             file.Close();
-            //SetLevel(option);
             gameS.fileConfig = false;
         }
 
@@ -104,6 +101,7 @@ public class GM : MonoBehaviour {
         bool closed = false;
         int attempts = 0, maxTries = 10;
 
+        //Mecanismo para que se reintente borrar el archivo si este ya existe
         while (!closed)
         {
             try
@@ -122,20 +120,21 @@ public class GM : MonoBehaviour {
             }
             catch (IOException ex)
             {
+                //error si se intenta demasiadas veces sin exito
                 if(++attempts > maxTries)
                 {
-                    Console.WriteLine($"Failed to handle the file after {maxTries} attempts: {ex.Message}");
+                    Debug.Log($"Failed to handle the file after {maxTries} attempts: {ex.Message}");
                     throw;
                 }
+                //demora antes de reintentarlo
                 Thread.Sleep(100);
             }
         }
 
     }
 	
-	// Update is called once per frame
 	void Update () {
-
+        //si se hace click y estamos jugando
         if (Input.GetMouseButtonDown(0) && (A.activeSelf || B.activeSelf))
         {
             //Se comprueba si en el punto del mouse al hacer click hay colisión con algún objeto. Se devuelven todos los objetos en result.
@@ -201,31 +200,34 @@ public class GM : MonoBehaviour {
         }
 
         if (attempts == totalAttempts)
-        {
-            gameS.fileConfig = false;
-            finalPanel.SetActive(true);
-            points.text = (attempts - mistakes).ToString() + "/" + totalAttempts;
-
-            // Completed the 15 Objects level
-            bool failed = (float)mistakes > ((float)totalAttempts / 2.0f);
-            float score = 1.0f - ((float)mistakes / (float)totalAttempts);
-
-            if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
-                CompletableTracker.Instance.Completed(level, CompletableTracker.CompletableType.Level).
-                    WithResultExtensions(new Dictionary<string, object> { { "https://" + "result", !failed }, 
-                        { "https://" + "score", score } });
-        }
+            EndGame();
+        
     }
 
+    public void EndGame()
+    {
+        gameS.fileConfig = false;
+        finalPanel.SetActive(true);
+        points.text = (attempts - mistakes).ToString() + "/" + totalAttempts;
+
+        // Completed the 15 Objects level
+        bool failed = (float)mistakes > ((float)totalAttempts / 2.0f);
+        float score = 1.0f - ((float)mistakes / (float)totalAttempts);
+
+        if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
+            CompletableTracker.Instance.Completed(level, CompletableTracker.CompletableType.Level).
+                WithResultExtensions(new Dictionary<string, object> { { "https://" + "result", !failed },
+                        { "https://" + "score", score } });
+    }
 
     //Este método es llamado cada vez que se pulsa enter en el inputField y recibe de parámetro la palabra introducida.
     public void OnFieldEnter(string word)
     {
-        string log = "";
+        string log;
         if (diccionary.ContainsKey(word.ToLower()))
         //Si la palabra se encuentra en el diccionario la añadimos al diccionario de respondidos
         {
-            int value = -1;
+            int value;
             diccionary.TryGetValue(word.ToLower(), out value);
             answered.Add(word, value);
             log = "\t✔ Ha respondido correctamente con: " + word;
@@ -240,10 +242,10 @@ public class GM : MonoBehaviour {
             StartCoroutine(ChangeColor(name, normalColor, 2f));
             selected = null;
             // Tracking
-            Dictionary<String, bool> simpleVarDictionary = new Dictionary<string, bool>();
+            Dictionary<string, bool> simpleVarDictionary = new Dictionary<string, bool>();
             foreach (KeyValuePair<string, int> attachStat in simpleDictionary)
             {
-                int simpleValue = -1;
+                int simpleValue;
                 simpleDictionary.TryGetValue(attachStat.Key, out simpleValue);
                 if (simpleValue == value)
                 {
@@ -374,6 +376,8 @@ public class GM : MonoBehaviour {
         reverseDictionary.Clear();
         textBx.gameObject.SetActive(false);
         pointerPos.SetActive(false);
+        rightButton.SetActive(false);
+        leftButton.SetActive(false);
         foreach (GameObject go in selectorOptions)
             go.SetActive(false);
         
@@ -395,15 +399,6 @@ public class GM : MonoBehaviour {
 
     public void SetLevel(string level)
     {
-        if(level == "rand")
-        {
-            isRandom = true;
-            if (UnityEngine.Random.Range(0.0f, 100.0f) < 50) level = "A";
-            else level = "B";
-        } else
-        {
-            isRandom = false;
-        }
         if (level == "A")  A.SetActive(true);
         else if (level == "B") B.SetActive(true);
         else {
@@ -448,7 +443,7 @@ public class GM : MonoBehaviour {
 
         if(c != null)
         {
-            sr = c.gameObject.GetComponent<SpriteRenderer>();
+            sr = c.GetComponent<SpriteRenderer>();
             if (sr != null) sr.color = color;
         }
     }
@@ -460,7 +455,7 @@ public class GM : MonoBehaviour {
 
         if (c != null)
         {
-            sr = c.gameObject.GetComponent<SpriteRenderer>();
+            sr = c.GetComponent<SpriteRenderer>();
             if (sr != null) sr.color = color;
         }
     }
@@ -532,7 +527,7 @@ public class GM : MonoBehaviour {
         while (selectedIndex < selectorOptions.Length &&
             (selectedPageIndex * selectorOptions.Length) + selectedIndex < selectedList.Count)
         {
-            GameObject go = selectorOptions[selectedIndex].gameObject;
+            GameObject go = selectorOptions[selectedIndex];
             TextMeshProUGUI t = go.GetComponentInChildren<TextMeshProUGUI>();
             go.SetActive(true);
             Button but = go.GetComponent<Button>();

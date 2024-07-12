@@ -27,6 +27,7 @@ public class GMTutorial : MonoBehaviour
 
     private int attempts=0;                                           //Entero que controla el número de intentos.
     private int mistakes = 0;                                       //Entero que controla el número de errores del usuario.
+    bool finished = false;
 
     void Start()
     {
@@ -38,8 +39,6 @@ public class GMTutorial : MonoBehaviour
         GM.Instance.Level = "Tutorial";
         LevelManager.Instance.initItems();
     }
-
-   
     
     void Update()
     {
@@ -58,26 +57,32 @@ public class GMTutorial : MonoBehaviour
 
         }
 
-        if(contNoAnswer == 2)
+        if(contNoAnswer == 2 && !finished)
         {
             noAnswer.gameObject.SetActive(true);
             contNoAnswer = 0;
         }
 
         if (attempts == 5)
-        {
-            info.text = "";
-            finalPanel.SetActive(true);
-            points.text = (attempts - mistakes).ToString() + "/5";
-        }
+            EndGame();
+
+        
     }
 
     #region Updates
 
+    public void EndGame()
+    {
+        finished = true;
+        info.text = "";
+        finalPanel.SetActive(true);
+        points.text = (attempts - mistakes).ToString() + "/5";
+    }
+
     //Este es el update que ejecuta la lógica normal del juego
     void gameUpdate()
     {
-
+        if(finished) return;
         //Se comprueba si en el punto del mouse al hacer click hay colisión con algún objeto. Se devuelven todos los objetos en result.
         Vector3 pointer = Input.mousePosition;
         Collider2D[] result = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(pointer));
@@ -111,18 +116,15 @@ public class GMTutorial : MonoBehaviour
                     if (!dictionary.ContainsKey(aux[w]))
                         dictionary.Add(aux[w], id);
                 }
-
-
             }
-
         }
-
     }
 
     //Este update será el que se ejecuta en el momento de tutorial para mostrar los paneles adecuados
     //Funciona como el anterior.
     void tutorialUpdate()
     {
+        if(finished) return;
         bool error = true;
         if (contTutorial != 0)
         {
@@ -165,11 +167,7 @@ public class GMTutorial : MonoBehaviour
                 
             }
             if (error)
-            {
-                
                 errorPanel.SetActive(true);
-                
-            }
         }
         else
         {
@@ -183,7 +181,7 @@ public class GMTutorial : MonoBehaviour
     //Este método es llamado cada vez que se pulsa enter en el inputField y recibe de parámetro la palabra introducida.
     public void OnFieldEnter(string word)
     {
-
+        if(finished) return;
         if (dictionary.ContainsKey(word.ToLower()))                             //Si la palabra se encuentra en el diccionario la añadimos al diccionario de respondidos
         {
             int value = -1;
