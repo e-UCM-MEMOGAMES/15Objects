@@ -351,6 +351,26 @@ MonoBehaviour:
     m_Key: 15Objects/GM 2
     m_Metadata:
       m_Items: []
+  - m_Id: 4032061385142272
+    m_Key: Credits/Canvas/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4032108558479360
+    m_Key: Credits/Canvas/Text (TMP) (1)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4032134693187584
+    m_Key: Credits/Canvas/Text (TMP) (2)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4032175684120576
+    m_Key: Credits/Canvas/Text (TMP) (3)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4032224476459008
+    m_Key: Credits/Canvas/Text (TMP) 1
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

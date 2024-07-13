@@ -118,6 +118,26 @@ MonoBehaviour:
     m_Localized: Has respondido 0 objetos\nTe quedan 15
     m_Metadata:
       m_Items: []
+  - m_Id: 4032061385142272
+    m_Localized: Director de proyecto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4032108558479360
+    m_Localized: Desarrolladores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4032134693187584
+    m_Localized: Psicologas expertas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4032175684120576
+    m_Localized: Colaboradores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4032224476459008
+    m_Localized: "Cr\xE9ditos"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
