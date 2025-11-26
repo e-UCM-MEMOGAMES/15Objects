@@ -1,19 +1,14 @@
 using System;
 using UnityEngine;
 using UnityEditor;
-using System.Collections;
 using System.Collections.Generic;
-using Random = UnityEngine.Random;
 
 
 public class AudioManager : SingletonMonoBehaviour<AudioManager>
 {
-
-
     [SerializeField]
     private AudioSource _musicSource,
                         _uiSoundSource;
-
 
     /// <summary>
     /// This nested class holds all data related to the playback of a single AudioClip. Instances of this class are exposed to the Inspector through the SoundManager class.
@@ -35,9 +30,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         public ChannelType channelType;
         public GameSound soundType;
         public AudioClip audioClip;
-
     }
-
 
 
     [SerializeField]
@@ -81,7 +74,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
             else
             {
                 _soundMap.Add(s.soundType, s);
-                Debug.Log(s.soundType);
+                //Debug.Log(s.soundType);
             }
         }
 
@@ -158,6 +151,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         PlayerPrefs.SetFloat("soundVolume", volume);
 
     }
+
     public float GetBGMVolume()
     {
         return _musicSource.volume;

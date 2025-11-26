@@ -1,39 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Localization.Settings;
-using UnityEngine.UI;
 
-public class GameState15O : MonoBehaviour {
-
-    public static GameState15O gameState;
-
+public class GameState15O : SingletonMonoBehaviour<GameState15O>
+{
     private bool _fileConfig;
+    public bool fileConfig
+    {
+        get { return _fileConfig; }
+        set { _fileConfig = value; }
+    }
 
     private void Awake()
     {
-        if (gameState == null)
-        {
-            gameState = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else if (gameState != this)
-        {
-            Destroy(gameObject);
-        }
-        this._fileConfig = false;
+        base.Awake();
+        _fileConfig = false;
     }
+
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         AudioManager.Instance.Play(GameSound.MenuBGM);
 
         if (PlayerPrefs.HasKey("language"))
+        {
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("language")];
-    }
-
-    public bool fileConfig
-    {
-        get { return this._fileConfig; }
-        set { this._fileConfig = value; }
+        }
     }
 }

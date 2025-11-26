@@ -1,27 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using Xasu;
 using Xasu.HighLevel;
 
-public class changeScene : MonoBehaviour {
+public class MenuButtons : MonoBehaviour {
     /// <summary>
     /// Se cambia a la escena indicada por el parametro que se pasa
     /// </summary> 
     public void ChangeScene(string scene)
     {
         if (SceneManager.GetActiveScene().name != "Start" && XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
+        {
             AccessibleTracker.Instance.Accessed(scene, AccessibleTracker.AccessibleType.Screen);
-        if (scene != "exit")
-            SceneManager.LoadScene(scene);
-        else
+        }
+        SceneManager.LoadScene(scene);
+    }
+
+    public void ExitGame()
+    {
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.ExitPlaymode();
+        Debug.Log("Game closed");
 #else
 		Application.Quit();
 #endif
     }
-
 }

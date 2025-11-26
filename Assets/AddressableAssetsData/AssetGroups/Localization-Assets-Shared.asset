@@ -17,6 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: f25623ee87271fb449cdbb24682dad63
   m_SerializeEntries:
+  - m_GUID: 7659a34f23228384bbc421c0a26bc621
+    m_Address: Assets/Resources/Localization/EnEsTable Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7d024a4ab9754a44fbe22f7ddb21008b
     m_Address: Assets/Resources/Localization/i18n Shared Data.asset
     m_ReadOnly: 1
@@ -27,8 +32,8 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7659a34f23228384bbc421c0a26bc621
-    m_Address: Assets/Resources/Localization/EnEsTable Shared Data.asset
+  - m_GUID: cc75070e2c4d9a44b99b2b543bd0689d
+    m_Address: Assets/Resources/Localization/New/UI Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

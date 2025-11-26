@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_es-ES
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es-ES
+  m_SharedData: {fileID: 11400000, guid: cc75070e2c4d9a44b99b2b543bd0689d, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 147602358272
+    m_Localized: SALIR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 127071240192
+    m_Localized: "CR\xC9DITOS"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 106183606272
+    m_Localized: AJUSTES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22519824384
+    m_Localized: JUGAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 619184734208
+    m_Localized: Director de proyecto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 595122012160
+    m_Localized: "Cr\xE9ditos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 645214584832
+    m_Localized: Desarrolladores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 664109924352
+    m_Localized: "Psic\xF3logas expertas"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 694631874560
+    m_Localized: Colaboradores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1913911853056
+    m_Localized: Idioma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1887970082816
+    m_Localized: Efectos de sonido
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1865044017152
+    m_Localized: "M\xFAsica"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1844697448448
+    m_Localized: Ajustes
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
