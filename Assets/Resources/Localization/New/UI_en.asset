@@ -70,6 +70,47 @@ MonoBehaviour:
     m_Localized: Language
     m_Metadata:
       m_Items: []
+  - m_Id: 249131318525952
+    m_Localized: Choose a gamemode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 251070064246784
+    m_Localized: Option 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 251094139551744
+    m_Localized: Option 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 252315885780992
+    m_Localized: Select
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256406745661440
+    m_Localized: Write
+    m_Metadata:
+      m_Items: []
+  - m_Id: 258639583395840
+    m_Localized: Select a level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 259663794683904
+    m_Localized: TUTORIAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400785512792064
+    m_Localized: You may select another item, or exit the level if you believe you
+      have finished
+    m_Metadata:
+      m_Items: []
+  - m_Id: 414105397559296
+    m_Localized: SCORE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 415180229902336
+    m_Localized: CONTINUE
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

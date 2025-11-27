@@ -7,11 +7,9 @@ using System.IO;
 using System.Text;
 using UnityEngine.SceneManagement;
 using TMPro;
-using UnityEngine.UIElements;
 using Xasu.HighLevel;
 using Button = UnityEngine.UI.Button;
 using Xasu;
-using System.Threading;
 
 public class GM : MonoBehaviour {
     /// <summary>
@@ -150,66 +148,13 @@ public class GM : MonoBehaviour {
     }
 
     void Start () {
-        Initialize();
-
-        // Para escribir los resultados en un archivo
-        string path;
-        if (gameS.fileConfig)
-        {
-            path = @".\configFile15O.txt";
-            if (!File.Exists(path))
-            {
-                // Note that no lock is put on the
-                // file and the possibility exists
-                // that another process could do
-                // something with it between
-                // the calls to Exists and Delete.
-                fs = File.Create(path);
-                Byte[] info = new UTF8Encoding(true).GetBytes("A");
-                fs.Write(info, 0, info.Length);
-                fs.Close();
-            }
-           
-            StreamReader file = new StreamReader(path);
-            file.Close();
-            gameS.fileConfig = false;
-        }
-
-        path = @".\Resultados.txt";
-
-        bool closed = false;
-        int attempts = 0, maxTries = 10;
-
-        //Mecanismo para que se reintente borrar el archivo si este ya existe
-        while (!closed)
-        {
-            try
-            {
-                if (File.Exists(path))
-                {
-                    // Note that no lock is put on the
-                    // file and the possibility exists
-                    // that another process could do
-                    // something with it between
-                    // the calls to Exists and Delete.
-                    File.Delete(path);
-                }
-                fs = File.Create(path);
-                closed = true;
-            }
-            catch (IOException ex)
-            {
-                //error si se intenta demasiadas veces sin exito
-                if(++attempts > maxTries)
-                {
-                    Debug.Log($"Failed to handle the file after {maxTries} attempts: {ex.Message}");
-                    throw;
-                }
-                //demora antes de reintentarlo
-                Thread.Sleep(100);
-            }
-        }
-
+        correctColor = new Color(0, 255, 0);
+        normalColor = new Color(255, 255, 255);
+        diccionary = new Dictionary<string, int>();
+        answered = new Dictionary<string, int>();
+        simpleDictionary = new Dictionary<string, int>();
+        reverseDictionary = new Dictionary<int, string>();
+        selectedList = new List<string>();
     }
 	
 	void Update () {
@@ -237,10 +182,6 @@ public class GM : MonoBehaviour {
                     selectedPageIndex = 0;
                     selectedList.Clear();
                 }
-                pointerPos.SetActive(true);
-                AudioManager.Instance.Play(GameSound.Point);
-
-                pointerPos.transform.position = inputPos;
             }
 
             string log = "Se ha pinchado en: ";
@@ -286,21 +227,7 @@ public class GM : MonoBehaviour {
     /// <summary>
     /// Termina la partida
     /// </summary> 
-    public void EndGame()
-    {
-        gameS.fileConfig = false;
-        finalPanel.SetActive(true);
-        points.text = (attempts - mistakes).ToString() + "/" + totalAttempts;
-
-        // Completed the 15 Objects level
-        bool failed = (float)mistakes > ((float)totalAttempts / 2.0f);
-        float score = 1.0f - ((float)mistakes / (float)totalAttempts);
-
-        if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
-            CompletableTracker.Instance.Completed(level, CompletableTracker.CompletableType.Level).
-                WithResultExtensions(new Dictionary<string, object> { { "https://" + "result", !failed },
-                        { "https://" + "score", score } });
-    }
+    public void EndGame() { }
 
     //Este método es llamado cada vez que se pulsa enter en el inputField y recibe de parámetro la palabra introducida.
     public void OnFieldEnter(string word)
@@ -558,47 +485,7 @@ public class GM : MonoBehaviour {
         incorrectText.SetActive(!incorrectText.activeSelf);
     }
 
-    /// <summary>
-    /// Se llama cuando se selecciona un modo de juego
-    /// </summary> 
-    public void SelectGamemode(int m)
-    {
-        gamemode = m;
-        gamemodePanel.SetActive(false);
-        levelSelectorPanel.SetActive(true);
-    }
 
-    /// <summary>
-    /// Para cambiar al panel de modo de juego
-    /// </summary> 
-    public void GoToSelectGamemode()
-    {
-        gamemodePanel.SetActive(true);
-    }
-
-    /// <summary>
-    /// Inicializa variables
-    /// </summary> 
-    private void Initialize()
-    {
-        this.gameS = GameObject.FindObjectOfType<GameState15O>();
-
-        correctColor = new Color(0, 255, 0);
-        normalColor = new Color(255, 255, 255);
-        levelSelectorPanel = GameObject.FindGameObjectWithTag("LevelSelector");
-        levelSelectorPanel.SetActive(false);
-        gamemodePanel = GameObject.FindGameObjectWithTag("PlaystyleSelector");
-        gamemodePanel.SetActive(true);
-        diccionary = new Dictionary<string, int>();
-        answered = new Dictionary<string, int>();
-        simpleDictionary = new Dictionary<string, int>();
-        reverseDictionary = new Dictionary<int, string>();
-        selectedList = new List<string>();
-        lista.SetActive(false);
-        finalPanel.SetActive(false);
-        textBx.gameObject.SetActive(false);
-        A.SetActive(false); B.SetActive(false);
-    }
     /// <summary>
     /// 
     /// </summary> Randomiza la lista que se pasa como parametro

@@ -70,6 +70,47 @@ MonoBehaviour:
     m_Localized: Ajustes
     m_Metadata:
       m_Items: []
+  - m_Id: 249131318525952
+    m_Localized: Seleccione el modo de juego
+    m_Metadata:
+      m_Items: []
+  - m_Id: 251070064246784
+    m_Localized: "Opci\xF3n 1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 251094139551744
+    m_Localized: "Opci\xF3n 2"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 252315885780992
+    m_Localized: Seleccionar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256406745661440
+    m_Localized: Escribir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 258639583395840
+    m_Localized: Seleccione el nivel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 259663794683904
+    m_Localized: TUTORIAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400785512792064
+    m_Localized: Selecciona otro objeto de la imagen o pulsa salir si crees que has
+      terminado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 414105397559296
+    m_Localized: "PUNTUACI\xD3N"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 415180229902336
+    m_Localized: CONTINUAR
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

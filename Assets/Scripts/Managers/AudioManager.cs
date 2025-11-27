@@ -59,6 +59,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     }
 #endif
 
+
     /// <summary>
     /// Converts the Editor-compatible array into a fast-lookup dictionary map.
     /// Creates a list for each sound type, to support multiple sounds of the same type.
@@ -80,6 +81,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 
 
     }
+
     /// <summary>
     /// Initialization.
     /// </summary>
@@ -100,6 +102,13 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
             Load();
 
     }
+
+
+    private void Start()
+    {
+        Play(GameSound.MenuBGM);
+    }
+
 
     public void Play(int s)
     {

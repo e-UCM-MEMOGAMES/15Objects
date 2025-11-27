@@ -67,6 +67,46 @@ MonoBehaviour:
     m_Key: Settings/Language
     m_Metadata:
       m_Items: []
+  - m_Id: 249131318525952
+    m_Key: Play/GamemodeSelector/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 251070064246784
+    m_Key: Play/GamemodeSelector/Option1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 251094139551744
+    m_Key: Play/GamemodeSelector/Option2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 252315885780992
+    m_Key: Play/GamemodeSelector/Select
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256406745661440
+    m_Key: Play/GamemodeSelector/Write
+    m_Metadata:
+      m_Items: []
+  - m_Id: 258639583395840
+    m_Key: Play/LevelSelector/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 259663794683904
+    m_Key: Play/LevelSelector/Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400785512792064
+    m_Key: Play/Level/Instructions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 414105397559296
+    m_Key: Play/Level/Score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 415180229902336
+    m_Key: Play/Level/Continue
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
