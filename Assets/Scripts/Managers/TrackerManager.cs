@@ -37,21 +37,19 @@ public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
     private void OnApplicationQuit()
     {
         Debug.Log("Quitting");
-        Quit();
-    }
-
-    public void Quit()
-    {
         QuitAsync();
     }
+
 
     /// <summary>
     /// Cierra el tracker cuando se cierra el juego
     /// </summary> 
-    private async Task QuitAsync()
+    public async Task QuitAsync()
     {
         if (XasuTracker.Instance.Status.State == TrackerState.Uninitialized)
+        {
             return;
+        }
 
         var progress = new Progress<float>();
         progress.ProgressChanged += (_, p) =>

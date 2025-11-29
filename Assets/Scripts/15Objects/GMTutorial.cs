@@ -169,19 +169,19 @@ public class GMTutorial : MonoBehaviour
             i--;
             int id;
             
-            List<string> aux = result[i].GetComponent<Objeto>().dameDic(out id);       //El método dameDic devuelve una vector de palabras y un identificador que nos servirá para comprobar si se había respondido ya esa palabra.
+            //List<string> aux = result[i].GetComponent<LevelItem>().dameDic(out id);       //El método dameDic devuelve una vector de palabras y un identificador que nos servirá para comprobar si se había respondido ya esa palabra.
 
-            if(!reverseDictionary.ContainsKey(id))
-                reverseDictionary.Add(id, result[i].name);
+            //if(!reverseDictionary.ContainsKey(id))
+            //    reverseDictionary.Add(id, result[i].name);
 
-            if (!answered.ContainsValue(id) && aux != null)                                        //Si no se había respondido ya añadimos las palabras de cada objeto al diccionario.
-            {
-                for (int w = 0; w < aux.Count; w++)
-                {
-                    if (!dictionary.ContainsKey(aux[w]))
-                        dictionary.Add(aux[w], id);
-                }
-            }
+            //if (!answered.ContainsValue(id) && aux != null)                                        //Si no se había respondido ya añadimos las palabras de cada objeto al diccionario.
+            //{
+            //    for (int w = 0; w < aux.Count; w++)
+            //    {
+            //        if (!dictionary.ContainsKey(aux[w]))
+            //            dictionary.Add(aux[w], id);
+            //    }
+            //}
         }
     }
 
@@ -219,16 +219,16 @@ public class GMTutorial : MonoBehaviour
                     textBx.Select();
                     textBx.ActivateInputField();
 
-                    int id;
-                    List<string> aux = result[i].GetComponent<Objeto>().dameDic(out id);
-                    reverseDictionary.Add(id, result[i].name);
-                    if (!answered.ContainsValue(id))
-                    {
-                        for (int w = 0; w < aux.Count; w++)
-                        {
-                            dictionary.Add(aux[w], id);
-                        }
-                    }
+                    //int id;
+                    //List<string> aux = result[i].GetComponent<LevelItem>().dameDic(out id);
+                    //reverseDictionary.Add(id, result[i].name);
+                    //if (!answered.ContainsValue(id))
+                    //{
+                    //    for (int w = 0; w < aux.Count; w++)
+                    //    {
+                    //        dictionary.Add(aux[w], id);
+                    //    }
+                    //}
 
                 }
                 
