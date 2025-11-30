@@ -15,23 +15,17 @@ MonoBehaviour:
   m_GroupName: Localization-String-Tables-Spanish (Spain) (es-ES)
   m_Data:
     m_SerializedData: []
-  m_GUID: e62ecf3f0c86b0e40a0a98d2243583b0
+  m_GUID: 17c4ae3ee83bdd84f90c4aaddac015af
   m_SerializeEntries:
-  - m_GUID: 3cabf57755e4f784bae27c8464befb73
-    m_Address: EnEsTable_es-ES
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-es-ES
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fdfc8c930dc22474d9096a7e05ab4a91
+  - m_GUID: 2325dc6545846af4e99d5869d5aeab4b
     m_Address: UI_es-ES
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-es-ES
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
-  m_Settings: {fileID: 11400000, guid: 5b19d7b27bf97c747a47329704fe1cdd, type: 2}
+  m_Settings: {fileID: 11400000, guid: d914323c380731641b690a804317dd0d, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 1ad268b1735964d41ad7e06ac6a89fdc, type: 2}
-    - {fileID: 11400000, guid: 1cf86960746d4f241a028954f62cc456, type: 2}
+    - {fileID: 11400000, guid: 0dc5b3a439e9d0044a33b306c67a0d72, type: 2}
+    - {fileID: 11400000, guid: d9e1c6cdb4939474aa22c8c6a5098854, type: 2}

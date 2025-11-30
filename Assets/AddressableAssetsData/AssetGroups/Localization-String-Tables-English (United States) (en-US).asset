@@ -15,23 +15,17 @@ MonoBehaviour:
   m_GroupName: Localization-String-Tables-English (United States) (en-US)
   m_Data:
     m_SerializedData: []
-  m_GUID: 4e4996ff587516c44a1f66124125f86e
+  m_GUID: 7a44d5f64732c204b8fd057e60159286
   m_SerializeEntries:
-  - m_GUID: 31b65a4d96fab194db9d274d70aa5f5a
+  - m_GUID: 87fc4960e00c1bb48bcf4d702688a9ae
     m_Address: UI_en-US
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en-US
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7b53ad1b99679fc4bbd0ef46910fb15a
-    m_Address: EnEsTable_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
-  m_Settings: {fileID: 11400000, guid: 5b19d7b27bf97c747a47329704fe1cdd, type: 2}
+  m_Settings: {fileID: 11400000, guid: d914323c380731641b690a804317dd0d, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: e1cdadce4cc9b1f4c89c8203b4cf2e20, type: 2}
-    - {fileID: 11400000, guid: 72ccd018042c51f4fbd873f7cdfa94bd, type: 2}
+    - {fileID: 11400000, guid: a3cf27dc478049f4f8eb5046c01b5d33, type: 2}
+    - {fileID: 11400000, guid: 0fea2d1d7c5350840bd9649d754342d2, type: 2}

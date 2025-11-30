@@ -15,31 +15,16 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-Shared
   m_Data:
     m_SerializedData: []
-  m_GUID: f25623ee87271fb449cdbb24682dad63
+  m_GUID: 081a9aeb2f8047e4892f5d1e055ca376
   m_SerializeEntries:
-  - m_GUID: 7659a34f23228384bbc421c0a26bc621
-    m_Address: Assets/Resources/Localization/EnEsTable Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7d024a4ab9754a44fbe22f7ddb21008b
-    m_Address: Assets/Resources/Localization/i18n Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ab40ceded3cb6b0448f60b2b93a6aa5d
-    m_Address: Assets/Resources/Localization/assetLocalization Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cc75070e2c4d9a44b99b2b543bd0689d
-    m_Address: Assets/Resources/Localization/New/UI Shared Data.asset
+  - m_GUID: 51338d6f2f297b94fafc24439be70d5f
+    m_Address: Assets/Resources/Localization/Tables/UI Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
-  m_Settings: {fileID: 11400000, guid: 5b19d7b27bf97c747a47329704fe1cdd, type: 2}
+  m_Settings: {fileID: 11400000, guid: d914323c380731641b690a804317dd0d, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 9b09a7b561eec13439412adbabd6fdbb, type: 2}
-    - {fileID: 11400000, guid: 1c958958e6dcd2a4491e883145e37980, type: 2}
+    - {fileID: 11400000, guid: c312b82f7d5d67647ba5eab393c78b2e, type: 2}
+    - {fileID: 11400000, guid: d6c34389262d4b7409f22fee287cad7e, type: 2}

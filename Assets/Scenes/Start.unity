@@ -299,7 +299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2536807682750499351, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
-      value: GUID:cc75070e2c4d9a44b99b2b543bd0689d
+      value: GUID:51338d6f2f297b94fafc24439be70d5f
       objectReference: {fileID: 0}
     - target: {fileID: 2621297009980192214, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_Sprite
@@ -539,7 +539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2536807682750499351, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
-      value: GUID:cc75070e2c4d9a44b99b2b543bd0689d
+      value: GUID:51338d6f2f297b94fafc24439be70d5f
       objectReference: {fileID: 0}
     - target: {fileID: 2621297009980192214, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_Sprite
@@ -839,7 +839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2536807682750499351, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
-      value: GUID:cc75070e2c4d9a44b99b2b543bd0689d
+      value: GUID:51338d6f2f297b94fafc24439be70d5f
       objectReference: {fileID: 0}
     - target: {fileID: 2621297009980192214, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_Sprite
@@ -1096,7 +1096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2536807682750499351, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
-      value: GUID:cc75070e2c4d9a44b99b2b543bd0689d
+      value: GUID:51338d6f2f297b94fafc24439be70d5f
       objectReference: {fileID: 0}
     - target: {fileID: 2621297009980192214, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_Sprite

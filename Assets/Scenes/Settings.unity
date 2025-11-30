@@ -563,7 +563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:cc75070e2c4d9a44b99b2b543bd0689d
+      m_TableCollectionName: GUID:51338d6f2f297b94fafc24439be70d5f
     m_TableEntryReference:
       m_KeyId: 1844697448448
       m_Key: 
@@ -835,7 +835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:cc75070e2c4d9a44b99b2b543bd0689d
+      m_TableCollectionName: GUID:51338d6f2f297b94fafc24439be70d5f
     m_TableEntryReference:
       m_KeyId: 1865044017152
       m_Key: 
@@ -1253,7 +1253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:cc75070e2c4d9a44b99b2b543bd0689d
+      m_TableCollectionName: GUID:51338d6f2f297b94fafc24439be70d5f
     m_TableEntryReference:
       m_KeyId: 1887970082816
       m_Key: 
@@ -2055,7 +2055,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:cc75070e2c4d9a44b99b2b543bd0689d
+      m_TableCollectionName: GUID:51338d6f2f297b94fafc24439be70d5f
     m_TableEntryReference:
       m_KeyId: 1913911853056
       m_Key: 

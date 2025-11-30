@@ -551,7 +551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2536807682750499351, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
-      value: GUID:cc75070e2c4d9a44b99b2b543bd0689d
+      value: GUID:51338d6f2f297b94fafc24439be70d5f
       objectReference: {fileID: 0}
     - target: {fileID: 2621297009980192214, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_Sprite
@@ -1330,7 +1330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2536807682750499351, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
-      value: GUID:cc75070e2c4d9a44b99b2b543bd0689d
+      value: GUID:51338d6f2f297b94fafc24439be70d5f
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_Pivot.x
@@ -1462,7 +1462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2536807682750499351, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
-      value: GUID:cc75070e2c4d9a44b99b2b543bd0689d
+      value: GUID:51338d6f2f297b94fafc24439be70d5f
       objectReference: {fileID: 0}
     - target: {fileID: 2621297009980192214, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_Sprite
@@ -1952,7 +1952,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:cc75070e2c4d9a44b99b2b543bd0689d
+      m_TableCollectionName: GUID:51338d6f2f297b94fafc24439be70d5f
     m_TableEntryReference:
       m_KeyId: 249131318525952
       m_Key: 
@@ -2041,7 +2041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2536807682750499351, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
-      value: GUID:cc75070e2c4d9a44b99b2b543bd0689d
+      value: GUID:51338d6f2f297b94fafc24439be70d5f
       objectReference: {fileID: 0}
     - target: {fileID: 2621297009980192214, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_Sprite
@@ -2513,7 +2513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:cc75070e2c4d9a44b99b2b543bd0689d
+      m_TableCollectionName: GUID:51338d6f2f297b94fafc24439be70d5f
     m_TableEntryReference:
       m_KeyId: 258639583395840
       m_Key: 
@@ -2710,7 +2710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2536807682750499351, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
-      value: GUID:cc75070e2c4d9a44b99b2b543bd0689d
+      value: GUID:51338d6f2f297b94fafc24439be70d5f
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_Pivot.x
