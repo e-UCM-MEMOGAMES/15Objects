@@ -160,7 +160,11 @@ public class LevelManager : MonoBehaviour
         remaining.SetActive(false);
         resultsPanel.SetActive(false);
 
-        defaultAnswerText = answer.GetComponent<LocalizeStringEvent>().StringReference.GetLocalizedString();
+        // Se obtiene el texto por defecto localizado del objeto respondido y se
+        // desactiva la localizacion para que se pueda anadir el nombre del objeto
+        LocalizeStringEvent localizeEvt = answer.GetComponent<LocalizeStringEvent>();
+        defaultAnswerText = localizeEvt.StringReference.GetLocalizedString();
+        localizeEvt.enabled = false;
 
         LoadFileConfig();
     }
