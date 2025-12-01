@@ -98,11 +98,6 @@ MonoBehaviour:
     m_Localized: TUTORIAL
     m_Metadata:
       m_Items: []
-  - m_Id: 400785512792064
-    m_Localized: You may select another item, or exit the level if you believe you
-      have finished
-    m_Metadata:
-      m_Items: []
   - m_Id: 414105397559296
     m_Localized: SCORE
     m_Metadata:
@@ -121,6 +116,43 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3009360625664
     m_Localized: You have to tap on an item from the image
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320520922742784
+    m_Localized: Tap on another item from the image or press the exit button if you
+      believe you're done answering
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320623972597760
+    m_Localized: Tap and identify the items you see in the image
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320663394861056
+    m_Localized: (Tap anywhere to continue)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 323277675184128
+    m_Localized: Tap on the bottle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 324620867485696
+    m_Localized: Type the item's name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 324749208993792
+    m_Localized: Press the item's name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 325376509100032
+    m_Localized: Repeat for each item
+    m_Metadata:
+      m_Items: []
+  - m_Id: 325584835985408
+    m_Localized: You may exit the level anytime you want by tapping on this
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326880469073920
+    m_Localized: That's not a bottle
     m_Metadata:
       m_Items: []
   references:

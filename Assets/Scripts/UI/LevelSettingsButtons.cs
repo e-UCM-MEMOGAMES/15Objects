@@ -1,6 +1,6 @@
 using UnityEngine;
-using Xasu;
-using Xasu.HighLevel;
+//using Xasu;
+//using Xasu.HighLevel;
 
 public class LevelSettingsButtons : MonoBehaviour
 {
@@ -22,7 +22,7 @@ public class LevelSettingsButtons : MonoBehaviour
     {
         if (gameModeSelector.activeSelf)
         {
-            gameManager.ChangeScene(gameManager.MENU_SCENE);
+            gameManager.ChangeScene(gameManager.MENU_SCENE_NAME);
         }
         else if (levelSelector.activeSelf)
         {
@@ -39,18 +39,13 @@ public class LevelSettingsButtons : MonoBehaviour
         gameManager.GamemodeElements = elements;
     }
 
-    public void StartTutorial()
-    {
-        gameManager.ChangeScene(gameManager.TUTORIAL_SCENE);
-    }
-
     public void SelectLevelItems(GameObject items)
     {
         gameManager.LevelItems = items;
     }
     public void StartGame()
     {
-        gameManager.ChangeScene(gameManager.GAME_SCENE);
+        gameManager.ChangeScene(gameManager.GAME_SCENE_NAME);
 
         // TODO
         //if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)

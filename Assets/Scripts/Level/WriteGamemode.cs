@@ -1,25 +1,33 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
+//using System;
+//using System.Collections.Generic;
+//using System.Text;
+//using UnityEditor.Localization.Plugins.XLIFF.V12;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Localization.SmartFormat.Core.Parsing;
+//using UnityEngine.Localization.SmartFormat.Core.Parsing;
 using UnityEngine.UI;
-using Xasu;
-using Xasu.HighLevel;
-using static System.Net.Mime.MediaTypeNames;
+//using Xasu;
+//using Xasu.HighLevel;
+//using static System.Net.Mime.MediaTypeNames;
 
 public class WriteGamemode : BaseGamemode
 {
     [SerializeField]
+    /// <summary>
+    /// Objeto con la caja de input
+    /// </summary> 
     GameObject inputFieldObj;
-    InputField inputField;
+
+    /// <summary>
+    /// Componente InputField de la caja de input
+    /// </summary> 
+    TMP_InputField inputField;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        inputField = inputFieldObj.GetComponent<InputField>();
+        inputField = inputFieldObj.GetComponent<TMP_InputField>();
         inputFieldObj.SetActive(false);
 
         // Anade un listener al onSubmit de la caja de input para que se llame a SendAnswer cuando se pulsa el enter
@@ -27,26 +35,27 @@ public class WriteGamemode : BaseGamemode
         inputField.onSubmit.AddListener(SendAnswer);
     }
 
-    public override void OnItemSelected(Collider2D[] items)
+    public override void ShowElements()
     {
-        base.OnItemSelected(items);
-
-        if (items.Length > 0)
-        {
-            inputFieldObj.SetActive(true);
-            inputField.text = "";
-            inputField.Select();
-        }
+        inputFieldObj.SetActive(true);
+        inputField.text = "";
+        inputField.Select();
+    }
+    public override void HideElements()
+    {
+        // Desactiva la caja de input
+        inputFieldObj.SetActive(false);
+        inputField.text = "";
     }
 
 
     public override void SendAnswer(string text)
     {
-        base.SendAnswer(inputField.text);
-
-        // Desactiva la caja de input
-        inputFieldObj.SetActive(false);
-        inputField.text = "";
+        // Solo envia la respuesta si hay texto introducido
+        if (!string.IsNullOrEmpty(inputField.text))
+        {
+            base.SendAnswer(inputField.text);
+        }
     }
 
     //public void OnFieldEnter(string word)

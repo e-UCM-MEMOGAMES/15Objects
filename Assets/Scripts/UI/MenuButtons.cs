@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-public class Buttons : MonoBehaviour
+public class MenuButtons : MonoBehaviour
 {
     GameManager gameManager;
 
@@ -11,10 +11,6 @@ public class Buttons : MonoBehaviour
         gameManager = GameManager.Instance;
     }
 
-    public void ChangeScene(SceneAsset scene)
-    {
-        ChangeScene(scene.name);
-    }
     public void ChangeScene(string sceneName)
     {
         gameManager.ChangeScene(sceneName);

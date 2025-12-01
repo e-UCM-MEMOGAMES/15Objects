@@ -1,0 +1,7 @@
+[ 
+    { "item": "Bottle", "words": ["botella"], "fillers": ["bote","vaso"] }, 
+    { "item": "Teapot", "words": ["tetera"], "fillers": ["regadera","aspersor"] }, 
+    { "item": "Plate", "words": ["plato"], "fillers": ["cuenco","comida"] }, 
+    { "item": "Fork", "words": ["tenedor"], "fillers": ["cepillo","cuchara"] }, 
+    { "item": "Glass", "words": ["vaso"], "fillers": ["taza","agua"] }
+]

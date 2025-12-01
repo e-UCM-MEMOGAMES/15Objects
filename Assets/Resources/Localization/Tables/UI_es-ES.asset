@@ -98,9 +98,8 @@ MonoBehaviour:
     m_Localized: TUTORIAL
     m_Metadata:
       m_Items: []
-  - m_Id: 400785512792064
-    m_Localized: Selecciona otro objeto de la imagen o pulsa salir si crees que has
-      terminado.
+  - m_Id: 320623972597760
+    m_Localized: Pulsa e identifica los objetos que ves en la imagen
     m_Metadata:
       m_Items: []
   - m_Id: 414105397559296
@@ -121,6 +120,39 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3009360625664
     m_Localized: Tienes que pulsar  un objeto de la imagen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320520922742784
+    m_Localized: Pulsa en otro objeto de la imagen o pulsa el boton de salir si crees
+      que has terminado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320663394861056
+    m_Localized: (Presiona en cualquier lado para continuar)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 323277675184128
+    m_Localized: Pulsa la botella
+    m_Metadata:
+      m_Items: []
+  - m_Id: 324620867485696
+    m_Localized: Escribe el nombre del objeto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 324749208993792
+    m_Localized: Pulsa sobre el nombre del objeto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 325376509100032
+    m_Localized: Repite para cada objeto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 325584835985408
+    m_Localized: Puedes salir del nivel en cualquier momento pulsando aqui
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326880469073920
+    m_Localized: Eso no es una botella
     m_Metadata:
       m_Items: []
   references:

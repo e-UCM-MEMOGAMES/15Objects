@@ -4,6 +4,9 @@ using UnityEngine.Localization.Settings;
 
 public class LevelInfo : MonoBehaviour
 {
+    /// <summary>
+    /// Nombre del nivel
+    /// </summary>
     [SerializeField]
     string levelName;
     public string LevelName
@@ -12,7 +15,11 @@ public class LevelInfo : MonoBehaviour
         private set { }
     }
 
+    /// <summary>
+    /// Ruta de los archivos de localizacion de los niveles
+    /// </summary>
     const string LOCALIZATION_FILES_PATH = "Localization/Levels";
+
 
     // Start is called before the first frame update
     void Start()

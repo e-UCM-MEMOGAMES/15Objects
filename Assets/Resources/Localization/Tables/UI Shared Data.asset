@@ -95,10 +95,6 @@ MonoBehaviour:
     m_Key: Play/LevelSelector/Tutorial
     m_Metadata:
       m_Items: []
-  - m_Id: 400785512792064
-    m_Key: Play/Level/Instructions
-    m_Metadata:
-      m_Items: []
   - m_Id: 414105397559296
     m_Key: Play/Level/Score
     m_Metadata:
@@ -117,6 +113,42 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3009360625664
     m_Key: Play/Level/NoSelection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320520922742784
+    m_Key: Play/Tutorial/Instructions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320623972597760
+    m_Key: Play/Tutorial/Panel1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320663394861056
+    m_Key: Play/Tutorial/Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 323277675184128
+    m_Key: Play/Tutorial/Panel2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 324620867485696
+    m_Key: Play/Tutorial/Panel3Write
+    m_Metadata:
+      m_Items: []
+  - m_Id: 324749208993792
+    m_Key: Play/Tutorial/Panel3Select
+    m_Metadata:
+      m_Items: []
+  - m_Id: 325376509100032
+    m_Key: Play/Tutorial/Panel4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 325584835985408
+    m_Key: Play/Tutorial/Panel5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326880469073920
+    m_Key: Play/Tutorial/Panel2Error
     m_Metadata:
       m_Items: []
   m_Metadata:

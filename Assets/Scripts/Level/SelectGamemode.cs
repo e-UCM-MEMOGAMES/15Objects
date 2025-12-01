@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class SelectGamemode : BaseGamemode
 {
-   /// <summary>
-   /// Numero maximo de columnas de botones de respuesta
-   /// </summary>
+    /// <summary>
+    /// Numero maximo de columnas de botones de respuesta
+    /// </summary>
     const int MAX_COLS = 2,
     /// <summary>
     /// Numero maximo de filas de botones de respuesta
@@ -20,32 +20,27 @@ public class SelectGamemode : BaseGamemode
     /// </summary>
     const int WORDS_PER_PAGE = MAX_COLS * MAX_ROWS;
 
-    [SerializeField]
     /// <summary>
     /// Objeto padre de todos los elementos de la lista de opciones
     /// </summary>
+    [SerializeField]
     GameObject elementsObj,
-
     /// <summary>
     /// Objeto padre de las filas de opciones (es el que define el layout vertical)
     /// </summary>
     optionsRows,
-
     /// <summary>
     /// Prefab de cada fila de opciones (es el que define el layout horizontal)
     /// </summary>
     rowPrefab,
-
     /// <summary>
     /// Prefab de cada boton de opciones
     /// </summary>    
     optionPrefab,
-    
     /// <summary>
     /// Objeto con el boton de la flecha de navegacion izquierda
     /// </summary>
     navigationArrowLeft,
-
     /// <summary>
     /// Objeto con el boton de la flecha de navegacion derecha
     /// </summary>
@@ -55,7 +50,6 @@ public class SelectGamemode : BaseGamemode
     /// RectTransform de elementsObj para forzar su actualizacion
     /// </summary>
     RectTransform elementsObjTr,
-    
     /// <summary>
     /// RectTransform de optionsRows para forzar su actualizacion
     /// </summary>
@@ -82,7 +76,6 @@ public class SelectGamemode : BaseGamemode
     /// </summary>
     totalPages = 0;
     
-
 
     // Start is called before the first frame update
     void Start()
@@ -126,19 +119,32 @@ public class SelectGamemode : BaseGamemode
 
         if (items.Length > 0)
         {
-            // Se activa el objeto con todos los elementos
-            elementsObj.SetActive(true);
-
             // Se reinicia la pagina actual y se calcula el nuevo numero de paginas
             currPage = 0;
             totalPages = possibleWords.Count() / WORDS_PER_PAGE;
-
-            // Se randomiza el orden de las palabras y muestra los botones
-            RandomizeList(possibleWords);
-            ShowOptions();
         }
     }
 
+    public override void ShowElements() 
+    {
+        // Se activa el objeto con todos los elementos
+        elementsObj.SetActive(true);
+
+        // Se randomiza el orden de las palabras y muestra los botones
+        RandomizeList(possibleWords);
+        ShowOptions();
+    }
+
+    public override void HideElements() 
+    {
+        // Desactiva los botones de respuesta y de navegacion
+        foreach (GameObject optionButton in optionsButtons)
+        {
+            optionButton.SetActive(false);
+        }
+        navigationArrowLeft.SetActive(false);
+        navigationArrowRight.SetActive(false);
+    }
 
     /// <summary>
     /// Randomiza la lista que se pasa como parametro usando el algoritmo Fisher-Yates
@@ -202,19 +208,5 @@ public class SelectGamemode : BaseGamemode
         // Fuerza la actualizacion del layout (por si acaso se desplazan los botones)
         LayoutRebuilder.ForceRebuildLayoutImmediate(elementsObjTr);
         LayoutRebuilder.ForceRebuildLayoutImmediate(rowsLayoutTr);
-    }
-
-
-    public override void SendAnswer(string text)
-    {
-        base.SendAnswer(text);
-
-        // Desactiva los botones de respuesta y de navegacion
-        foreach (GameObject optionButton in optionsButtons)
-        {
-            optionButton.SetActive(false);
-        }
-        navigationArrowLeft.SetActive(false);
-        navigationArrowRight.SetActive(false);
     }
 }

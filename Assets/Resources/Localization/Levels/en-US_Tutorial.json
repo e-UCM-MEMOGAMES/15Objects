@@ -1,0 +1,7 @@
+[ 
+    { "item": "Bottle", "words": ["bottle"], "fillers": ["cup","can"] }, 
+    { "item": "Teapot", "words": ["teapot"], "fillers": ["sprinkler","watering can"] }, 
+    { "item": "Plate", "words": ["plate"], "fillers": ["bowl","food"] }, 
+    { "item": "Fork", "words": ["fork"], "fillers": ["broom","spoon"] }, 
+    { "item": "Glass", "words": ["glass","cup"], "fillers": ["mug","water"] }
+]
