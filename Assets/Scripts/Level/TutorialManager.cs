@@ -1,7 +1,5 @@
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
-
 
 public class TutorialManager : LevelManager
 {
@@ -169,7 +167,7 @@ public class TutorialManager : LevelManager
 
     }
 
-    protected override void Answer(string itemName)
+    public override void Answer(string answer)
     {
         // Si se responde en el estado del panel 3, se actualiza
         // el estado y se activa el texto con las instrucciones
@@ -180,7 +178,7 @@ public class TutorialManager : LevelManager
         }
 
         // En cualquier estado, se ejecuta el Answer de la clase padre
-        base.Answer(itemName);
+        base.Answer(answer);
     }
 
 

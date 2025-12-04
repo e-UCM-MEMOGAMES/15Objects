@@ -1,18 +1,28 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Threading;
+using System.Diagnostics;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.UI;
-using Xasu;
 using Xasu.HighLevel;
+
 
 public class LevelManager : MonoBehaviour
 {
+    /// <summary>
+    /// Temporizador para medir el tiempo que se tarda en completar el nivel
+    /// </summary>
+    protected Stopwatch watch = Stopwatch.StartNew();
+
+    /// <summary>
+    /// Instancia del TrackerManager
+    /// </summary>
+    protected TrackerManager trackerManager;
+
+    protected CompletableTracker.CompletableType COMPLETABLE_TYPE = CompletableTracker.CompletableType.Level;
+
     /// <summary>
     /// Objeto con el boton de volver
     /// </summary>
@@ -108,30 +118,38 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     correctColor = new Color(0, 255, 0);
 
+
+    /// <summary>
+    /// Lista de los objetos seleccionados
+    /// </summary> 
+    protected List<Item> selectedItems = new List<Item>();
+
+    /// <summary>
+    /// Lista con los objetos respondidos correctamente
+    /// </summary>
+    protected HashSet<Item> correctItems = new HashSet<Item>();
+
     /// <summary>
     /// Numero de intentos que se pueden hacer antes de terminar el juego
     /// </summary>
-    protected int maxAttempts = 15;
+    protected int maxAttempts = 15,
     /// <summary>
     /// Numero de veces que se ha respondido (ya sea correcta o incorrectamente)
     /// </summary>
-    protected int attempts = 0,
+    attempts = 0,
     /// <summary>
     /// Numero de veces que se ha respondido incorrectamente
     /// </summary>
     mistakes = 0;
 
-    /// <summary>
-    /// ????
-    /// </summary>
-    /// TODO
-    bool fileConfig = false;
-    FileStream fs;
-
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        trackerManager = TrackerManager.Instance;
+
+        watch.Start();
+
         attempts = 0;
         mistakes = 0;
 
@@ -152,6 +170,8 @@ public class LevelManager : MonoBehaviour
         levelInfo = levelItems.GetComponent<LevelInfo>();
         levelName = levelInfo.LevelName;
 
+        trackerManager.TrySendStatement(CompletableTracker.Instance.Initialized(levelName, COMPLETABLE_TYPE));
+
 
         pointerPos.SetActive(false);
         answer.SetActive(false);
@@ -165,8 +185,6 @@ public class LevelManager : MonoBehaviour
         LocalizeStringEvent localizeEvt = answer.GetComponent<LocalizeStringEvent>();
         defaultAnswerText = localizeEvt.StringReference.GetLocalizedString();
         localizeEvt.enabled = false;
-
-        LoadFileConfig();
     }
 
 
@@ -188,19 +206,18 @@ public class LevelManager : MonoBehaviour
                 pointerPos.transform.position = Input.mousePosition;
                 audioManager.Play(GameSound.Point);
 
+                // Se borran los objetos seleccionados que hubiera guardados anteriormente y se guardon los nuevas
+                selectedItems.Clear();
+                foreach (Collider2D item in items)
+                {
+                    Item it = item.gameObject.GetComponent<Item>();
+                    selectedItems.Add(it);
+                    trackerManager.TrySendStatement(GameObjectTracker.Instance.Interacted(item.gameObject.name, GameObjectTracker.TrackedGameObject.Item));
+                }
+                
                 // Se deja al modo de juego gestionar los objetos pulsados
-                gamemode.OnItemSelected(items);
+                gamemode.OnItemSelected(selectedItems);
             }
-
-            // TODO
-            //string log = "Se ha pinchado en: ";
-            //foreach (Collider2D c in items)
-            //{
-            //    log += c.gameObject.name + " ";
-            //}
-            //log += "\n";
-            //Byte[] info = new UTF8Encoding(true).GetBytes(log);
-            //if (items.Length > 0) fs.Write(info, 0, info.Length);
         }
         // Si no, si se ha superado el, no se esta recibiendo feedback, y el panel de resultados no esta activo, se termina el juego 
         else if (attempts >= maxAttempts && !answer.activeSelf && !resultsPanel.activeSelf)
@@ -236,107 +253,78 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Llamado al responder un objeto, ya sea correcta o incorrectamente
     /// </summary>
-    protected virtual void Answer(string itemName)
+    public virtual void Answer(string answer)
     {
-        attempts++;
+        // Busca el primer objeto que tenga la palabra respondida
+        // en su lista de palabras correctas y lo guarda
+        bool found = false;
+        Item answeredItem = null;
+        for (int i = 0; i < selectedItems.Count() && !found; i++)
+        {
+            if (selectedItems[i].CorrectWords.Contains(answer.ToLower()))
+            {
+                answeredItem = selectedItems[i];
+                found = true;
+            }
 
-        answerText.text = defaultAnswerText + " " + itemName;
-        answer.SetActive(true);
-        StartCoroutine(ActivateObj(answer, false, feedbackDuration));
+        }
 
-        // TODO
-        //  Progreso del nivel actual
-        //  float progress = (float)attempts / (float)totalAttempts;
-        //  if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
-        //      CompletableTracker.Instance.Progressed(level, CompletableTracker.CompletableType.Level, progress);
+        bool correct = (found && answeredItem != null);
+        bool repeatedAnswer = correctItems.Contains(answeredItem);
 
-        //Debug.Log($"Intentos: {attempts}, Errores: {mistakes}");
-    }
-    /// <summary>
-    /// Muestra el texto que indica que la respuesta es incorrecta
-    /// </summary> 
-    public void IncorrectAnswer(GameObject item, string itemName)
-    {
-        mistakes++;
-        Answer(itemName);
+        // Si ha encontrado algun objeto, es que la respuesta es correcta
+        if (correct)
+        {
+            // Si el objeto no estaba respondido, se contabiliza la respuesta y se guarda como respondido
+            if (!repeatedAnswer)
+            {
+                attempts++;
+                correctItems.Add(answeredItem);
+            }
+
+            // Cambia el objeto respondido correctamente de color 
+            StartCoroutine(ChangeColor(answeredItem.gameObject, correctColor));
+            StartCoroutine(ChangeColor(answeredItem.gameObject, defaultColor, feedbackDuration));
+            audioManager.Play(GameSound.Success);
+        }
+        // Si no, la respuesta es incorrecta
+        else
+        {
+            attempts++;
+            mistakes++;
+
+            // Se muestra el texto que indica que la respuesta es incorrecta
+            incorrect.SetActive(true);
+            StartCoroutine(ActivateObj(incorrect, false, feedbackDuration));
+
+            audioManager.Play(GameSound.Failed);
+        }
+
+        // Se muestra el texto que muestra que respuesta ha dado el jugador
+        answerText.text = defaultAnswerText + " " + answer;
+        this.answer.SetActive(true);
+        StartCoroutine(ActivateObj(this.answer, false, feedbackDuration));
+
+
+        Dictionary<string, object> extensions = new Dictionary<string, object>();
+
+        extensions.Add("https://repeatedAnswer", repeatedAnswer);
         
-        incorrect.SetActive(true);
-        StartCoroutine(ActivateObj(incorrect, false, feedbackDuration));
-
-        audioManager.Play(GameSound.Failed);
-    }
-    /// <summary>
-    /// Indica que la respuesta es correcta cambiando de color el objeto respondido correctamente
-    /// </summary> 
-    public void CorrectAnswer(GameObject item, string itemName)
-    {
-        Answer(itemName);
-
-        StartCoroutine(ChangeColor(item, correctColor));
-        StartCoroutine(ChangeColor(item, defaultColor, feedbackDuration));
-        audioManager.Play(GameSound.Success);
-
-        // TODO: REVISAR
-        //obj.GetComponent<Item>().enabled = false;
-        item.GetComponent<Item>().CorrectWords.Clear();
-        item.GetComponent<Item>().FillerWords.Clear();
-    }
-
-
-    // TODO: REVISAR
-    void LoadFileConfig()
-    {
-        // Para escribir los resultados en un archivo
-        string path;
-        if (fileConfig)
+        // Se recorre cada objeto seleccionado guardando sus posibles respuestas
+        foreach (Item item in selectedItems)
         {
-            path = @".\configFile15O.txt";
-            if (!File.Exists(path))
-            {
-                // Note that no lock is put on the file and the possibility exists that another
-                // process could do something with it between the calls to Exists and Delete.
-                fs = File.Create(path);
-                Byte[] info = new UTF8Encoding(true).GetBytes("A");
-                fs.Write(info, 0, info.Length);
-                fs.Close();
-            }
-
-            StreamReader file = new StreamReader(path);
-            file.Close();
-            fileConfig = false;
+            extensions.Add($"https://{item.gameObject.name}/answers", item.CorrectWords);
         }
+        trackerManager.TrySendStatement(
+            AlternativeTracker.Instance.Selected(answer, answeredItem == null ? "wrong-item" : answeredItem.name)
+            .WithSuccess(correct)
+            .WithResultExtensions(extensions)
+        );
+        
 
-        path = @".\Resultados.txt";
-
-        bool closed = false;
-        int attempts = 0, maxTries = 10;
-
-        //Mecanismo para que se reintente borrar el archivo si este ya existe
-        while (!closed)
-        {
-            try
-            {
-                if (File.Exists(path))
-                {
-                    // Note that no lock is put on the file and the possibility exists that another
-                    // process could do something with it between the calls to Exists and Delete.
-                    File.Delete(path);
-                }
-                fs = File.Create(path);
-                closed = true;
-            }
-            catch (IOException ex)
-            {
-                //error si se intenta demasiadas veces sin exito
-                if (++attempts > maxTries)
-                {
-                    Debug.Log($"Failed to handle the file after {maxTries} attempts: {ex.Message}");
-                    throw;
-                }
-                //demora antes de reintentarlo
-                Thread.Sleep(100);
-            }
-        }
+        //  Progreso del nivel actual
+        float progress = (float)attempts / (float)maxAttempts;
+        trackerManager.TrySendStatement(CompletableTracker.Instance.Progressed(levelName, COMPLETABLE_TYPE, progress));
     }
 
 
@@ -349,6 +337,9 @@ public class LevelManager : MonoBehaviour
         // Si el panel de resultados no es visible, es que todavia no se ha mostrado la puntuacion
         if (!resultsPanel.activeSelf)
         {
+            watch.Stop();
+            long completionTime = watch.ElapsedMilliseconds;
+
             // Se activa el panel y se desactiva el boton de volver
             resultsPanel.SetActive(true);
             returnButton.SetActive(false);
@@ -357,21 +348,14 @@ public class LevelManager : MonoBehaviour
             totalPointsText.text = $"{attempts - mistakes}/{maxAttempts}";
 
             // Se determina si se ha fallado el nivel y la puntuacion final
-            bool failed = mistakes > (maxAttempts / 2.0f);
             float score = 1.0f - (mistakes / maxAttempts);
+            bool failed = mistakes > (maxAttempts / 2.0f);
 
-            // TODO: REVISAR
-            fileConfig = false;
-            if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
-            {
-                CompletableTracker.Instance.Completed(levelName, CompletableTracker.CompletableType.Level).
-                    WithResultExtensions(new Dictionary<string, object> {
-                        { "https://" + "result", !failed },
-                        { "https://" + "score", score }
-                    }
-                );
-
-            }
+            trackerManager.TrySendStatement(
+                CompletableTracker.Instance.Completed(levelName, COMPLETABLE_TYPE, watch.ElapsedMilliseconds)
+                .WithScore(score)
+                .WithSuccess(!failed)
+            );
         }
         // Si es visible, se vuelve al menu de configuracion del nivel
         else
@@ -394,6 +378,8 @@ public class LevelManager : MonoBehaviour
     public void SetupTutorial(TutorialManager mngr)
     {
         maxAttempts = mngr.maxAttempts;
+
+        mngr.trackerManager = trackerManager;
 
         mngr.returnButton = returnButton;
         mngr.pointerPos = pointerPos;

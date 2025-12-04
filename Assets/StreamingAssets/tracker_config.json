@@ -1,0 +1,10 @@
+{
+    "online": "true",
+    "homepage": "<user-homePage-url-for-actor-in-traces>",
+    "lrs_endpoint": "<your-lrs-endpoint>",
+    "auth_protocol": "basic", 
+    "auth_parameters": {
+        "username": "<your-username>",
+        "password": "<your-password>"
+    }
+}

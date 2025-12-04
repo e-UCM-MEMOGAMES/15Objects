@@ -36,5 +36,7 @@ public class LanguageChanger : MonoBehaviour
     {
         LocalizationSettings.SelectedLocale = lcs[dropDown.value];
         PlayerPrefs.SetInt("language", dropDown.value);
+
+        // TODO: Que tipo de traza usar?
     }
 }

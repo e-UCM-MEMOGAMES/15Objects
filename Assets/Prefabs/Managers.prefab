@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 1329234913438600352}
   - component: {fileID: 5517919886971877089}
   - component: {fileID: 7734507097810503679}
-  - component: {fileID: 4453804981190525934}
+  - component: {fileID: 9155763384545475398}
   - component: {fileID: 2476142195160709630}
   m_Layer: 0
   m_Name: Managers
@@ -434,12 +434,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c95e5a6ce8b4f545ba472d7fca04fe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MENU_SCENE: {fileID: 102900000, guid: 2c4aed08db903ba46ab9f0087f0c5b9e, type: 3}
-  SETTINGS_SCENE: {fileID: 102900000, guid: efb3a48a6e0ff7040a6345bb039576c2, type: 3}
-  CREDITS_SCENE: {fileID: 102900000, guid: d95b3e07d6f691e4ebe74af59d6e7459, type: 3}
-  LEVEL_SETTINGS_SCENE: {fileID: 102900000, guid: 94e045a0e3c59264493ceee147b70946, type: 3}
-  GAME_SCENE: {fileID: 102900000, guid: 92bcbb95b631a724bbbc449d1a5ad8df, type: 3}
-  TUTORIAL_SCENE: {fileID: 102900000, guid: fe1b72f50cea94744893873fca269079, type: 3}
+  MENU_SCENE_NAME: Start
+  SETTINGS_SCENE_NAME: Settings
+  CREDITS_SCENE_NAME: Credits
+  LEVEL_SETTINGS_SCENE_NAME: LevelSettings
+  GAME_SCENE_NAME: Game
   gamemodeElements: {fileID: 22473702452678068, guid: c5122222ed079d44eb61640d4a636e6d, type: 3}
   levelItems: {fileID: 727775500993727672, guid: 5191dbf0eb900a84dae12fe09458cc07, type: 3}
 --- !u!114 &7734507097810503679
@@ -477,7 +476,7 @@ MonoBehaviour:
     channelType: 1
     soundType: 5
     audioClip: {fileID: 8300000, guid: 42c50a3432d18584296ce4ff7d52caf6, type: 3}
---- !u!114 &4453804981190525934
+--- !u!114 &9155763384545475398
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -503,3 +502,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ab13cf605e14ef43a7d794ee26093ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  username: your-username
+  password: your-password

@@ -1,14 +1,5 @@
-//using System;
-//using System.Collections.Generic;
-//using System.Text;
-//using UnityEditor.Localization.Plugins.XLIFF.V12;
 using TMPro;
 using UnityEngine;
-//using UnityEngine.Localization.SmartFormat.Core.Parsing;
-using UnityEngine.UI;
-//using Xasu;
-//using Xasu.HighLevel;
-//using static System.Net.Mime.MediaTypeNames;
 
 public class WriteGamemode : BaseGamemode
 {
@@ -49,7 +40,7 @@ public class WriteGamemode : BaseGamemode
     }
 
 
-    public override void SendAnswer(string text)
+    public override void SendAnswer(string answer)
     {
         // Solo envia la respuesta si hay texto introducido
         if (!string.IsNullOrEmpty(inputField.text))
@@ -57,142 +48,4 @@ public class WriteGamemode : BaseGamemode
             base.SendAnswer(inputField.text);
         }
     }
-
-    //public void OnFieldEnter(string word)
-    //{
-    //    string log;
-    //    if (diccionary.ContainsKey(word.ToLower()))
-    //    //Si la palabra se encuentra en el diccionario la añadimos al diccionario de respondidos
-    //    {
-    //        int value;
-    //        diccionary.TryGetValue(word.ToLower(), out value);
-    //        answered.Add(word, value);
-    //        log = "\t? Ha respondido correctamente con: " + word;
-    //        AudioManager.Instance.Play(GameSound.Success);
-
-    //        
-    //        string name;
-    //        reverseDictionary.TryGetValue(value, out name);
-    //        
-
-    //        // Tracking
-    //        Dictionary<string, bool> simpleVarDictionary = new Dictionary<string, bool>();
-    //        foreach (KeyValuePair<string, int> attachStat in simpleDictionary)
-    //        {
-    //            int simpleValue;
-    //            simpleDictionary.TryGetValue(attachStat.Key, out simpleValue);
-    //            if (simpleValue == value)
-    //            {
-    //                simpleVarDictionary.Add(attachStat.Key, true);
-    //            }
-    //            else
-    //            {
-    //                simpleVarDictionary.Add(attachStat.Key, false);
-    //            }
-    //        }
-    //        Dictionary<string, object> extensions = new Dictionary<string, object>();
-    //        if (simpleVarDictionary != null)
-    //            extensions.Add("https://" + "targets", simpleVarDictionary);
-
-    //        foreach (KeyValuePair<string, int> attachStat in diccionary)
-    //        {
-    //            if (attachStat.Key != null)
-    //                extensions.Add("https://" + attachStat.Key, attachStat.Value);
-    //        }
-    //        // No hubo cambio de objeto
-    //        extensions.Add("https://" + "object-changed", 0);
-    //        // Respuesta correcta
-    //        extensions.Add("https://" + "correct", 1);
-    //        if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
-    //            AlternativeTracker.Instance.Selected(level, word).WithSuccess(true).WithResultExtensions(extensions);
-    //    }
-    //    else if (word != "")
-    //    {
-    //        // Tracking
-    //        Dictionary<string, object> extensions = new Dictionary<string, object>();
-    //        Dictionary<String, bool> simpleVarDictionary = new Dictionary<string, bool>();
-    //        foreach (KeyValuePair<string, int> attachStat in simpleDictionary)
-    //        {
-    //            simpleVarDictionary.Add(attachStat.Key, false);
-
-    //            // Mappings por si hacen falta en el analysis
-    //            String varKey = "mappings_" + attachStat.Key;
-    //            String varValue = " ";
-    //            foreach (KeyValuePair<string, int> dicKeyValues in diccionary)
-    //            {
-    //                if (dicKeyValues.Value == attachStat.Value)
-    //                {
-    //                    varValue += dicKeyValues.Key + ",";
-    //                }
-    //            }
-    //            if (varValue.EndsWith(","))
-    //            {
-    //                varValue = varValue.Substring(0, varValue.Length - 1);
-    //            }
-    //            if (varKey != null && varValue != null)
-    //                extensions.Add("https://" + varKey, varValue);
-    //        }
-    //        if (simpleVarDictionary != null)
-    //            extensions.Add("https://" + "targets", simpleVarDictionary);
-
-    //        foreach (KeyValuePair<string, int> attachStat in diccionary)
-    //        {
-    //            if (attachStat.Key != null)
-    //                extensions.Add("https://" + attachStat.Key, attachStat.Value);
-    //        }
-    //        // No hubo cambio de objeto
-    //        extensions.Add("https://" + "object-changed", 0);
-    //        // Respuesta incorrecta
-    //        extensions.Add("https://" + "correct", 0);
-    //        if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
-    //            AlternativeTracker.Instance.Selected(level, word).WithSuccess(false).WithResultExtensions(extensions);
-    //    }
-    //    else
-    //    {
-    //        log = "\tHa cambiado de objeto";
-
-    //        // Tracking object changed without answer
-    //        Dictionary<string, object> extensions = new Dictionary<string, object>();
-    //        Dictionary<string, bool> simpleVarDictionary = new Dictionary<string, bool>();
-    //        foreach (KeyValuePair<string, int> attachStat in simpleDictionary)
-    //        {
-    //            simpleVarDictionary.Add(attachStat.Key, false);
-
-    //            // Mappings por si hacen falta en el analysis
-    //            String varKey = "mappings_" + attachStat.Key;
-    //            String varValue = " ";
-    //            foreach (KeyValuePair<string, int> dicKeyValues in diccionary)
-    //            {
-    //                if (dicKeyValues.Value == attachStat.Value)
-    //                {
-    //                    varValue += dicKeyValues.Key + ",";
-    //                }
-    //            }
-    //            if (varValue.EndsWith(","))
-    //            {
-    //                varValue = varValue.Substring(0, varValue.Length - 1);
-    //            }
-    //            if (varKey != null && varValue != null)
-    //                extensions.Add("https://" + varKey, varValue);
-    //        }
-    //        if (simpleVarDictionary != null)
-    //            extensions.Add("https://" + "targets", simpleVarDictionary);
-
-    //        foreach (KeyValuePair<string, int> attachStat in diccionary)
-    //        {
-    //            if (attachStat.Key != null)
-    //                extensions.Add("https://" + attachStat.Key, attachStat.Value);
-    //        }
-    //        // Hubo cambio de objeto
-    //        extensions.Add("https://" + "object-changed", 1);
-    //        // Respuesta desconocida
-    //        extensions.Add("https://" + "correct", -1);
-    //        if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
-    //            AlternativeTracker.Instance.Selected(level, "empty").WithSuccess(false).WithResultExtensions(extensions);
-    //    }
-    //    log += "\n";
-
-    //    Byte[] info = new UTF8Encoding(true).GetBytes(log);
-    //    fs.Write(info, 0, info.Length);
-
 }

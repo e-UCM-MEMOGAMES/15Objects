@@ -1,4 +1,5 @@
 using Newtonsoft.Json.Linq;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 
@@ -18,7 +19,7 @@ public class LevelInfo : MonoBehaviour
     /// <summary>
     /// Ruta de los archivos de localizacion de los niveles
     /// </summary>
-    const string LOCALIZATION_FILES_PATH = "Localization/Levels";
+    string localizationFilesPath = Path.Combine("Localization", "Levels");
 
 
     // Start is called before the first frame update
@@ -27,7 +28,7 @@ public class LevelInfo : MonoBehaviour
         LevelName = levelName;
 
         // Se obtiene la ruta del archivo de localizacion correspondiente al nivel
-        string currLoc = $"{LOCALIZATION_FILES_PATH}/{LocalizationSettings.SelectedLocale.Identifier.Code}_{levelName}";
+        string currLoc = Path.Combine(localizationFilesPath, $"{LocalizationSettings.SelectedLocale.Identifier.Code}_{levelName}");
         //Debug.Log(currLoc);
 
         // Carga el archivo como texto plano y se parsea a un array de JSON

@@ -46,9 +46,5 @@ public class LevelSettingsButtons : MonoBehaviour
     public void StartGame()
     {
         gameManager.ChangeScene(gameManager.GAME_SCENE_NAME);
-
-        // TODO
-        //if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
-        //    CompletableTracker.Instance.Initialized(level, CompletableTracker.CompletableType.Level);
     }
 }

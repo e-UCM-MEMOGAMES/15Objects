@@ -113,13 +113,16 @@ public class SelectGamemode : BaseGamemode
     }
 
 
-    public override void OnItemSelected(Collider2D[] items)
+    public override void OnItemSelected(List<Item> items)
     {
+        // Se reinicia la pagina actual 
+        currPage = 0;
+
         base.OnItemSelected(items);
 
-        if (items.Length > 0)
+        if (items.Count > 0)
         {
-            // Se reinicia la pagina actual y se calcula el nuevo numero de paginas
+            // Se calcula el nuevo numero de paginas
             currPage = 0;
             totalPages = possibleWords.Count() / WORDS_PER_PAGE;
         }

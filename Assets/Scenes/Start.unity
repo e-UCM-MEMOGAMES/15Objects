@@ -273,6 +273,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 541395752}
     m_Modifications:
+    - target: {fileID: 207949916383456614, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
+      propertyPath: buttonName
+      value: CreditsButton
+      objectReference: {fileID: 0}
     - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_text
       value: "CR\xC9DITOS"
@@ -387,38 +391,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 993969351}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
       value: ChangeScene
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: MenuButtons, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
       value: Credits
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6588317812201522293, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
@@ -521,6 +521,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 541395752}
     m_Modifications:
+    - target: {fileID: 207949916383456614, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
+      propertyPath: buttonName
+      value: SettingsButton
+      objectReference: {fileID: 0}
     - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_text
       value: AJUSTES
@@ -631,38 +635,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 993969351}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
       value: ChangeScene
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: MenuButtons, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
       value: Settings
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6588317812201522293, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
@@ -825,6 +825,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 541395752}
     m_Modifications:
+    - target: {fileID: 207949916383456614, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
+      propertyPath: buttonName
+      value: ExitButton
+      objectReference: {fileID: 0}
     - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_text
       value: SALIR
@@ -947,30 +951,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 993969351}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
       value: ExitGame
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: MenuButtons, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6588317812201522293, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
@@ -1082,6 +1086,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 541395752}
     m_Modifications:
+    - target: {fileID: 207949916383456614, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
+      propertyPath: buttonName
+      value: PlayButton
+      objectReference: {fileID: 0}
     - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_text
       value: JUGAR
@@ -1204,38 +1212,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 993969351}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
       value: ChangeScene
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: MenuButtons, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
       value: LevelSettings
       objectReference: {fileID: 0}
     - target: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6588317812201522293, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
