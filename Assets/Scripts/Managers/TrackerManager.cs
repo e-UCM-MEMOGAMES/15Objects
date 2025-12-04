@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using UnityEditor;
 using UnityEngine;
 using Xasu;
 using Xasu.Config;
@@ -10,16 +9,6 @@ using Xasu.HighLevel;
 
 public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
 {
-    [SerializeField]
-    bool defaultOnlineMode = true;
-
-    [SerializeField]
-    string defaultLRSEndpoint = "https://my.lrs.endpoint/",
-           defaultAuthProtocol = "basic",
-           defaultUsername = "your-username",
-           defaultPassword = "your-password";
-
-
     private void Start()
     {
         InitTrackerAsync();
@@ -32,7 +21,7 @@ public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
     {
         if (XasuTracker.Instance.Status.State == TrackerState.Uninitialized)
         {
-            if (File.Exists(Path.Combine("StreamingAssets", "tracker_config.json")))
+            if (File.Exists(Path.Combine(Application.streamingAssetsPath, "tracker_config.json")))
             {
                 await XasuTracker.Instance.Init();
             }
@@ -40,13 +29,8 @@ public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
             {
                 await XasuTracker.Instance.Init(new TrackerConfig
                 {
-                    Online = defaultOnlineMode,
-                    LRSEndpoint = defaultLRSEndpoint,
-                    AuthProtocol = defaultAuthProtocol,
-                    AuthParameters = new Dictionary<string, string> {
-                        { "username", defaultUsername },
-                        { "password", defaultPassword }
-                    }
+                    Offline = true,
+                    TraceFormat = TraceFormats.XAPI
                 });
             }
         }

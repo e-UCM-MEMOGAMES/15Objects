@@ -3,16 +3,24 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using Xasu.HighLevel;
 
 public class LanguageChanger : MonoBehaviour
 {
-    List<Locale> lcs;
+    /// <summary>
+    /// Instancia del TrackerManager
+    /// </summary>
+    TrackerManager trackerManager;
 
     [SerializeField]
     TMP_Dropdown dropdown;
 
+    List<Locale> lcs;
+
     void Awake()
     {
+        trackerManager = TrackerManager.Instance;
+
         lcs = LocalizationSettings.AvailableLocales.Locales;
 
         for (int i = 0; i < lcs.Count; ++i)
@@ -37,6 +45,6 @@ public class LanguageChanger : MonoBehaviour
         LocalizationSettings.SelectedLocale = lcs[dropDown.value];
         PlayerPrefs.SetInt("language", dropDown.value);
 
-        // TODO: Que tipo de traza usar?
+        trackerManager.TrySendStatement(AlternativeTracker.Instance.Selected(lcs[dropDown.value].LocaleName, "Language"));
     }
 }
