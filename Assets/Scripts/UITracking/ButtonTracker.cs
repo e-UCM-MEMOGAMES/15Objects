@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Xasu.HighLevel;
 
 public class ButtonTracker : MonoBehaviour

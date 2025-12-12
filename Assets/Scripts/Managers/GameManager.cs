@@ -9,23 +9,23 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     /// <summary>
     /// Nomnbre de la escena del menu principal
     /// </summary>
-    public string MENU_SCENE_NAME = "Start",
+    public string MENU_SCENE_NAME = "",
     /// <summary>
     /// Nomnbre de la escena de configuracion
     /// </summary>
-    SETTINGS_SCENE_NAME = "Settings",
+    SETTINGS_SCENE_NAME = "",
     /// <summary>
     /// Nomnbre de la escena de creditos
     /// </summary>
-    CREDITS_SCENE_NAME = "Credits",
+    CREDITS_SCENE_NAME = "",
     /// <summary>
     /// Nomnbre de la escena de opciones del nivel
     /// </summary>
-    LEVEL_SETTINGS_SCENE_NAME = "LevelSettings",
+    LEVEL_SETTINGS_SCENE_NAME = "",
     /// <summary>
     /// Nomnbre de la escena de juego
     /// </summary>
-    GAME_SCENE_NAME = "Game";
+    GAME_SCENE_NAME = "";
 
 
     /// <summary>

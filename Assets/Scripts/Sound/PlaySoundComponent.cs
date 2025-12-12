@@ -24,6 +24,4 @@ public class PlaySoundComponent : MonoBehaviour
     {
         audioMng.Play(gameSound);
     }
-
-
 }
