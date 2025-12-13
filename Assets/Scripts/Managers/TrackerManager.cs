@@ -8,8 +8,11 @@ using Xasu.HighLevel;
 
 public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
 {
+    XasuTracker tracker;
+
     private void Start()
     {
+        tracker = XasuTracker.Instance;
         InitTrackerAsync();
     }
 
@@ -18,15 +21,15 @@ public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
     /// </summary> 
     private async void InitTrackerAsync()
     {
-        if (XasuTracker.Instance.Status.State == TrackerState.Uninitialized)
+        if (tracker.Status.State == TrackerState.Uninitialized)
         {
             if (File.Exists(Path.Combine(Application.streamingAssetsPath, "tracker_config.json")))
             {
-                await XasuTracker.Instance.Init();
+                await tracker.Init();
             }
             else
             {
-                await XasuTracker.Instance.Init(new TrackerConfig
+                await tracker.Init(new TrackerConfig
                 {
                     Offline = true,
                     TraceFormat = TraceFormats.XAPI
@@ -41,7 +44,7 @@ public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
     /// </summary> 
     public async Task Quit()
     {
-        if (XasuTracker.Instance.Status.State == TrackerState.Uninitialized || XasuTracker.Instance.Status.State ==  TrackerState.Finalized)
+        if (tracker.Status.State == TrackerState.Uninitialized || tracker.Status.State ==  TrackerState.Finalized)
         {
             return;
         }
@@ -52,14 +55,14 @@ public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
         {
             Debug.Log("Finalization progress: " + p);
         };
-        await XasuTracker.Instance.Finalize(progress);
+        await tracker.Finalize(progress);
         Debug.Log("Tracker finalized");
     }
 
 
     public async void TrySendStatement(StatementPromise promise)
     {
-        if (XasuTracker.Instance.Status.State != TrackerState.Uninitialized)
+        if (tracker.Status.State != TrackerState.Uninitialized)
         {
             try
             {

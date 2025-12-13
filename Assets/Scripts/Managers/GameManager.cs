@@ -7,23 +7,23 @@ using Xasu.HighLevel;
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     /// <summary>
-    /// Nomnbre de la escena del menu principal
+    /// Nombre de la escena del menu principal
     /// </summary>
     public string MENU_SCENE_NAME = "",
     /// <summary>
-    /// Nomnbre de la escena de configuracion
+    /// Nombre de la escena de configuracion
     /// </summary>
     SETTINGS_SCENE_NAME = "",
     /// <summary>
-    /// Nomnbre de la escena de creditos
+    /// Nombre de la escena de creditos
     /// </summary>
     CREDITS_SCENE_NAME = "",
     /// <summary>
-    /// Nomnbre de la escena de opciones del nivel
+    /// Nombre de la escena de opciones del nivel
     /// </summary>
     LEVEL_SETTINGS_SCENE_NAME = "",
     /// <summary>
-    /// Nomnbre de la escena de juego
+    /// Nombre de la escena de juego
     /// </summary>
     GAME_SCENE_NAME = "";
 

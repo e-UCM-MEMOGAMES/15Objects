@@ -275,7 +275,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 207949916383456614, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: buttonName
-      value: CreditsButton
+      value: MainMenu_CreditsButton
       objectReference: {fileID: 0}
     - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_text
@@ -523,7 +523,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 207949916383456614, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: buttonName
-      value: SettingsButton
+      value: MainMenu_SettingsButton
       objectReference: {fileID: 0}
     - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_text
@@ -827,7 +827,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 207949916383456614, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: buttonName
-      value: ExitButton
+      value: MainMenu_ExitButton
       objectReference: {fileID: 0}
     - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_text
@@ -1088,7 +1088,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 207949916383456614, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: buttonName
-      value: PlayButton
+      value: MainMenu_PlayButton
       objectReference: {fileID: 0}
     - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_text

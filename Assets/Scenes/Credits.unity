@@ -879,7 +879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3027795264403649939, guid: ff7f1b7897c922f40892ce2b346594f0, type: 3}
       propertyPath: buttonName
-      value: CreditsReturnButton
+      value: Credits_ReturnButton
       objectReference: {fileID: 0}
     - target: {fileID: 4050216172213676390, guid: ff7f1b7897c922f40892ce2b346594f0, type: 3}
       propertyPath: m_Name

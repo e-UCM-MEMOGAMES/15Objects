@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &11968804
 RectTransform:
   m_ObjectHideFlags: 0
@@ -397,7 +397,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 207949916383456614, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: buttonName
-      value: SelectGamemodeButton
+      value: LevelSettings_GamemodeButton_Select
       objectReference: {fileID: 0}
     - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_text
@@ -457,15 +457,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.56
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.56
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.56
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -497,7 +497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 350
+      value: 450.01
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -567,7 +567,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 207949916383456614, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: buttonName
-      value: LevelAButton
+      value: LevelSettings_LevelButton_A
       objectReference: {fileID: 0}
     - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_text
@@ -786,7 +786,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 207949916383456614, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: buttonName
-      value: LevelBButton
+      value: LevelSettings_LevelButton_B
       objectReference: {fileID: 0}
     - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_text
@@ -1114,15 +1114,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.2
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1194,7 +1194,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 207949916383456614, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: buttonName
-      value: WriteGamemodeButton
+      value: LevelSettings_GamemodeButton_Write
       objectReference: {fileID: 0}
     - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_text
@@ -1254,15 +1254,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.56
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.56
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.56
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1294,7 +1294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 350
+      value: 450.01
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1436,16 +1436,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1239272585}
-  m_LocalRotation: {x: -0, y: -0, z: 0.34462607, w: 0.9387401}
+  m_LocalRotation: {x: 0, y: 0, z: 0.22359031, w: 0.9746832}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1756759769}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 40.318}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 25.84}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 211, y: -94}
+  m_AnchoredPosition: {x: 194, y: -92}
   m_SizeDelta: {x: 64.8752, y: 79.142}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1239272587
@@ -1825,7 +1825,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3027795264403649939, guid: ff7f1b7897c922f40892ce2b346594f0, type: 3}
       propertyPath: buttonName
-      value: LevelSettingsReturnButton
+      value: LevelSettings_ReturnButton
       objectReference: {fileID: 0}
     - target: {fileID: 4050216172213676390, guid: ff7f1b7897c922f40892ce2b346594f0, type: 3}
       propertyPath: m_Name
@@ -1879,7 +1879,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 207949916383456614, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: buttonName
-      value: TutorialButton
+      value: LevelSettings_LevelButton_Tutorial
       objectReference: {fileID: 0}
     - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_text
@@ -2534,7 +2534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1900031523
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2628,15 +2628,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.2
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3313152582535334149, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_LocalPosition.x
