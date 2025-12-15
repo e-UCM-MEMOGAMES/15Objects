@@ -15,12 +15,10 @@ public class SliderTracker : MonoBehaviour
     /// </summary>
     [SerializeField]
     string sliderName,
-
     /// <summary>
     /// Nombre del valor del slider que se esta trackeando
     /// </summary>
     valueExtension;
-
 
     /// <summary>
     /// Componente Slider del que obtener los valores

@@ -360,7 +360,7 @@ public class LevelManager : MonoBehaviour
         // Si es visible, se vuelve al menu de configuracion del nivel
         else
         {
-            gameManager.ChangeScene(gameManager.LEVEL_SETTINGS_SCENE_NAME);
+            gameManager.ChangeScene(Defs.LEVEL_SETTINGS_SCENE_NAME);
         }
     }
 

@@ -7,28 +7,6 @@ using Xasu.HighLevel;
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     /// <summary>
-    /// Nombre de la escena del menu principal
-    /// </summary>
-    public string MENU_SCENE_NAME = "",
-    /// <summary>
-    /// Nombre de la escena de configuracion
-    /// </summary>
-    SETTINGS_SCENE_NAME = "",
-    /// <summary>
-    /// Nombre de la escena de creditos
-    /// </summary>
-    CREDITS_SCENE_NAME = "",
-    /// <summary>
-    /// Nombre de la escena de opciones del nivel
-    /// </summary>
-    LEVEL_SETTINGS_SCENE_NAME = "",
-    /// <summary>
-    /// Nombre de la escena de juego
-    /// </summary>
-    GAME_SCENE_NAME = "";
-
-
-    /// <summary>
     /// Temporizador para medir el tiempo que se tarda en completar el nivel
     /// </summary>
     Stopwatch watch = Stopwatch.StartNew();
@@ -70,13 +48,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         trackerManager = TrackerManager.Instance;
         trackerManager.TrySendStatement(CompletableTracker.Instance.Initialized(COMPLETABLE_ID, COMPLETABLE_TYPE));
-        trackerManager.TrySendStatement(AccessibleTracker.Instance.Accessed(MENU_SCENE_NAME));
+        trackerManager.TrySendStatement(AccessibleTracker.Instance.Accessed(Defs.MENU_SCENE_NAME));
 
         watch.Start();
 
-        if (PlayerPrefs.HasKey("language"))
+        if (PlayerPrefs.HasKey(Defs.LANGUAGE_KEY))
         {
-            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("language")];
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt(Defs.LANGUAGE_KEY)];
         }
 
         GamemodeElements = gamemodeElements;

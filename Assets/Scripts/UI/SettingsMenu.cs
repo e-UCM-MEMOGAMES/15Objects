@@ -18,18 +18,15 @@ public class SettingsMenu : MonoBehaviour
     /// </summary>
     AudioManager audioManager;
 
-
     /// <summary>
     /// Slider de volumen de la musica de fondo
     /// </summary>
     [SerializeField]
     Slider bgmSlider,
-
     /// <summary>
     /// Slider de volumen de los efectos de sonido
     /// </summary>
     sfxSlider;
-
 
     /// <summary>
     /// Dropdown con los idiomas disponibles
@@ -57,15 +54,15 @@ public class SettingsMenu : MonoBehaviour
             dropdown.options.Add(new TMP_Dropdown.OptionData() { text = lcs[i].LocaleName });
         }
 
-        if (PlayerPrefs.HasKey("language"))
+        if (PlayerPrefs.HasKey(Defs.LANGUAGE_KEY))
         {
-            dropdown.value = PlayerPrefs.GetInt("language");
+            dropdown.value = PlayerPrefs.GetInt(Defs.LANGUAGE_KEY);
         }
         else
         {
             int lid = lcs.IndexOf(LocalizationSettings.SelectedLocale);
             dropdown.value = lid;
-            PlayerPrefs.SetInt("language", lid);
+            PlayerPrefs.SetInt(Defs.LANGUAGE_KEY, lid);
         }
     }
 
@@ -73,7 +70,7 @@ public class SettingsMenu : MonoBehaviour
     public void ChangeLanguage()
     {
         LocalizationSettings.SelectedLocale = lcs[dropdown.value];
-        PlayerPrefs.SetInt("language", dropdown.value);
+        PlayerPrefs.SetInt(Defs.LANGUAGE_KEY, dropdown.value);
 
         trackerManager.TrySendStatement(AlternativeTracker.Instance.Selected(lcs[dropdown.value].LocaleName, "Language"));
     }

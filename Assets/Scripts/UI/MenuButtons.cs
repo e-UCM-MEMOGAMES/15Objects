@@ -2,7 +2,11 @@ using UnityEngine;
 
 public class MenuButtons : MonoBehaviour
 {
+    /// <summary>
+    /// Instancia del GameManager
+    /// </summary>
     GameManager gameManager;
+
 
     //Staart is called before the first frame update
     void Start()

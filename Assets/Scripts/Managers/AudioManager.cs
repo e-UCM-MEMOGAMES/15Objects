@@ -38,24 +38,22 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     AudioSource bgmSource,
                 sfxSource;
 
-    const string BGM_VOLUME_KEY = "bgmVolume";
     public float BGMVolume
     {
         get { return bgmSource.volume; }
         set {
             bgmSource.volume = value;
-            PlayerPrefs.SetFloat(BGM_VOLUME_KEY, value);
+            PlayerPrefs.SetFloat(Defs.BGM_VOLUME_KEY, value);
         }
     }
 
-    const string SFX_VOLUME_KEY = "sfxVolume";
     public float SFXVolume
     {
         get { return sfxSource.volume; }
         set
         {
             sfxSource.volume = value;
-            PlayerPrefs.SetFloat(SFX_VOLUME_KEY, value);
+            PlayerPrefs.SetFloat(Defs.SFX_VOLUME_KEY, value);
         }
     }
 
@@ -115,13 +113,13 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         bgmSource.loop = true;
 
 
-        if (PlayerPrefs.HasKey(BGM_VOLUME_KEY))
+        if (PlayerPrefs.HasKey(Defs.BGM_VOLUME_KEY))
         {
-            bgmSource.volume = PlayerPrefs.GetFloat(BGM_VOLUME_KEY);
+            bgmSource.volume = PlayerPrefs.GetFloat(Defs.BGM_VOLUME_KEY);
         }
-        if (PlayerPrefs.HasKey(SFX_VOLUME_KEY))
+        if (PlayerPrefs.HasKey(Defs.SFX_VOLUME_KEY))
         {
-            sfxSource.volume = PlayerPrefs.GetFloat(SFX_VOLUME_KEY);
+            sfxSource.volume = PlayerPrefs.GetFloat(Defs.SFX_VOLUME_KEY);
         }
     }
 
@@ -169,5 +167,3 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         bgmSource.Stop();
     }
 }
-
-

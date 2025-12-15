@@ -1,13 +1,23 @@
 using UnityEngine;
-//using Xasu;
-//using Xasu.HighLevel;
+
 
 public class LevelSettingsButtons : MonoBehaviour
 {
-    [SerializeField]
-    GameObject gameModeSelector, levelSelector;
-
+    /// <summary>
+    /// Instancia del GameManager
+    /// </summary>
     GameManager gameManager;
+
+    /// <summary>
+    /// Objeto con todos los elementos de la pantalla de seleccion de modo de juego
+    /// </summary>
+    [SerializeField]
+    GameObject gameModeSelector,
+    /// <summary>
+    /// Objeto con todos los elementos de la pantalla de seleccion de modo de nivel
+    /// </summary>
+    levelSelector;
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +32,7 @@ public class LevelSettingsButtons : MonoBehaviour
     {
         if (gameModeSelector.activeSelf)
         {
-            gameManager.ChangeScene(gameManager.MENU_SCENE_NAME);
+            gameManager.ChangeScene(Defs.MENU_SCENE_NAME);
         }
         else if (levelSelector.activeSelf)
         {
@@ -45,6 +55,6 @@ public class LevelSettingsButtons : MonoBehaviour
     }
     public void StartGame()
     {
-        gameManager.ChangeScene(gameManager.GAME_SCENE_NAME);
+        gameManager.ChangeScene(Defs.GAME_SCENE_NAME);
     }
 }
