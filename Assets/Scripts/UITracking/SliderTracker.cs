@@ -5,10 +5,26 @@ using Xasu.HighLevel;
 
 public class SliderTracker : MonoBehaviour
 {
+    /// <summary>
+    /// Instancia del TrackerManager
+    /// </summary>
     TrackerManager trackerManager;
 
+    /// <summary>
+    /// Nombre del slider trackeado
+    /// </summary>
     [SerializeField]
-    string sliderName;
+    string sliderName,
+
+    /// <summary>
+    /// Nombre del valor del slider que se esta trackeando
+    /// </summary>
+    valueExtension;
+
+
+    /// <summary>
+    /// Componente Slider del que obtener los valores
+    /// </summary>
     Slider slider;
 
 
@@ -18,12 +34,15 @@ public class SliderTracker : MonoBehaviour
         slider = GetComponent<Slider>();
     }
 
-    public void Track()
+    /// <summary>
+    /// Llamado tanto al dejar de arrastrar como al cambiar el valor pulsando directamente
+    /// </summary>
+    public void PointerUp()
     {
         trackerManager.TrySendStatement(
             GameObjectTracker.Instance.Interacted(sliderName)
             .WithResultExtensions(new Dictionary<string, object> {
-                { "https://" + "volume", slider.value }
+                { $"https://{valueExtension}", slider.value }
             })
         );
     }

@@ -382,7 +382,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 3.0343933, y: 0}
+  m_AnchoredPosition: {x: 3.0344238, y: 0}
   m_SizeDelta: {x: 60, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &134385383
@@ -1718,16 +1718,16 @@ MonoBehaviour:
   m_HandleRect: {fileID: 134385382}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 1
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 18143678}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: setSFXVolume
-        m_Mode: 0
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1748,7 +1748,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51fb5d5df35a10443b07a2c7511a7584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderName: SFX
+  sliderName: Settings_SFXSlider
+  valueExtension: volume
 --- !u!114 &993455992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1762,13 +1763,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 14
+  - eventID: 3
     callback:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 993455991}
           m_TargetAssemblyTypeName: SliderTracker, Assembly-CSharp
-          m_MethodName: Track
+          m_MethodName: PointerUp
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2719,16 +2720,16 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1388066719}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 1
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 18143678}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: SetBGMVolume
-        m_Mode: 0
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2749,7 +2750,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51fb5d5df35a10443b07a2c7511a7584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderName: Music
+  sliderName: Settings_BGMSlider
+  valueExtension: volume
 --- !u!114 &1669900514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2763,13 +2765,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 14
+  - eventID: 3
     callback:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1669900513}
           m_TargetAssemblyTypeName: SliderTracker, Assembly-CSharp
-          m_MethodName: Track
+          m_MethodName: PointerUp
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3024,10 +3026,10 @@ MonoBehaviour:
       - m_Target: {fileID: 18143678}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: ChangeLanguage
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1977709438}
-          m_ObjectArgumentAssemblyTypeName: TMPro.TMP_Dropdown, Unity.TextMeshPro
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

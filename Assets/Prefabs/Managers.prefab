@@ -453,8 +453,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea498283c9958dd4db0e2b295fd65cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _musicSource: {fileID: 2413921747549152415}
-  _uiSoundSource: {fileID: 3005395233402566959}
   _soundList:
   - Name: ButtonClicked
     channelType: 1
@@ -476,6 +474,8 @@ MonoBehaviour:
     channelType: 1
     soundType: 5
     audioClip: {fileID: 8300000, guid: 42c50a3432d18584296ce4ff7d52caf6, type: 3}
+  bgmSource: {fileID: 2413921747549152415}
+  sfxSource: {fileID: 3005395233402566959}
 --- !u!114 &9155763384545475398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,5 +502,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ab13cf605e14ef43a7d794ee26093ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  username: your-username
-  password: your-password

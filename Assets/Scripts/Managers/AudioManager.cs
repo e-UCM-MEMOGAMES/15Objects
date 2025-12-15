@@ -6,10 +6,6 @@ using System.Collections.Generic;
 
 public class AudioManager : SingletonMonoBehaviour<AudioManager>
 {
-    [SerializeField]
-    private AudioSource _musicSource,
-                        _uiSoundSource;
-
     /// <summary>
     /// This nested class holds all data related to the playback of a single AudioClip. Instances of this class are exposed to the Inspector through the SoundManager class.
     /// </summary>
@@ -34,15 +30,40 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 
 
     [SerializeField]
-    private SoundEntity[] _soundList = default;
+    SoundEntity[] _soundList = default;
+    
+    Dictionary<GameSound, SoundEntity> _soundMap = new Dictionary<GameSound, SoundEntity>();
 
-    private Dictionary<GameSound, SoundEntity> _soundMap = new Dictionary<GameSound, SoundEntity>();
+    [SerializeField]
+    AudioSource bgmSource,
+                sfxSource;
 
-    private bool _initialized = false;
+    const string BGM_VOLUME_KEY = "bgmVolume";
+    public float BGMVolume
+    {
+        get { return bgmSource.volume; }
+        set {
+            bgmSource.volume = value;
+            PlayerPrefs.SetFloat(BGM_VOLUME_KEY, value);
+        }
+    }
+
+    const string SFX_VOLUME_KEY = "sfxVolume";
+    public float SFXVolume
+    {
+        get { return sfxSource.volume; }
+        set
+        {
+            sfxSource.volume = value;
+            PlayerPrefs.SetFloat(SFX_VOLUME_KEY, value);
+        }
+    }
+
+    bool _initialized = false;
 
 
 #if UNITY_EDITOR
-    private void OnValidate()
+    void OnValidate()
     {
         // We're only interested in changes made in the Inspector
         if (!GUI.changed)
@@ -64,7 +85,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     /// Converts the Editor-compatible array into a fast-lookup dictionary map.
     /// Creates a list for each sound type, to support multiple sounds of the same type.
     /// </summary>
-    private void PopulateSoundMap()
+    void PopulateSoundMap()
     {
         foreach (var s in _soundList)
         {
@@ -78,13 +99,9 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
                 //Debug.Log(s.soundType);
             }
         }
-
-
     }
 
-    /// <summary>
-    /// Initialization.
-    /// </summary>
+
     protected override void Awake()
     {
         base.Awake();
@@ -95,16 +112,21 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         PopulateSoundMap();
         _initialized = true;
 
-        _musicSource.loop = true;
+        bgmSource.loop = true;
 
 
-        if (PlayerPrefs.HasKey("musicVolume"))
-            Load();
-
+        if (PlayerPrefs.HasKey(BGM_VOLUME_KEY))
+        {
+            bgmSource.volume = PlayerPrefs.GetFloat(BGM_VOLUME_KEY);
+        }
+        if (PlayerPrefs.HasKey(SFX_VOLUME_KEY))
+        {
+            sfxSource.volume = PlayerPrefs.GetFloat(SFX_VOLUME_KEY);
+        }
     }
 
 
-    private void Start()
+    void Start()
     {
         Play(GameSound.MenuBGM);
     }
@@ -113,7 +135,6 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     public void Play(int s)
     {
         Play((GameSound)s);
-
     }
     public void Play(GameSound sound)
     {
@@ -128,56 +149,24 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
             {
                 PlayUISound(_soundMap[sound].audioClip);
             }
-            
         }
-
     }
 
     public void PlayBGMSound(AudioClip clip)
     {
-        StopMusic();
-        if (clip != _musicSource.clip)
-            _musicSource.clip = clip;
-        _musicSource.Play();
-
+        StopBGM();
+        if (clip != bgmSource.clip)
+            bgmSource.clip = clip;
+        bgmSource.Play();
     }
 
     public void PlayUISound(AudioClip clip)
     {
-        _uiSoundSource.PlayOneShot(clip);
+        sfxSource.PlayOneShot(clip);
     }
-
-
-    public void BGMVolume(float volume)
+    public void StopBGM()
     {
-        _musicSource.volume = volume;
-        PlayerPrefs.SetFloat("musicVolume", volume);
-
-    }
-    public void SoundEffectVolume(float volume)
-    {
-        _uiSoundSource.volume = volume;
-        PlayerPrefs.SetFloat("soundVolume", volume);
-
-    }
-
-    public float GetBGMVolume()
-    {
-        return _musicSource.volume;
-    }
-    public float GetSoundEffectVolume()
-    {
-        return _uiSoundSource.volume;
-    }
-    public void StopMusic()
-    {
-        _musicSource.Stop();
-    }
-
-    private void Load()
-    {
-        _musicSource.volume = PlayerPrefs.GetFloat("musicVolume");
-        _uiSoundSource.volume = PlayerPrefs.GetFloat("soundVolume");
+        bgmSource.Stop();
     }
 }
 

@@ -43,9 +43,12 @@ public class SettingsMenu : MonoBehaviour
     List<Locale> lcs;
 
    
-
-    void Awake()
+    private void Start()
     {
+        audioManager = AudioManager.Instance;
+        bgmSlider.value = audioManager.BGMVolume;
+        sfxSlider.value = audioManager.SFXVolume;
+
         trackerManager = TrackerManager.Instance;
         lcs = LocalizationSettings.AvailableLocales.Locales;
 
@@ -66,28 +69,22 @@ public class SettingsMenu : MonoBehaviour
         }
     }
 
-    private void Start()
+
+    public void ChangeLanguage()
     {
-        audioManager = AudioManager.Instance;
-        bgmSlider.value = audioManager.GetBGMVolume();
-        sfxSlider.value = audioManager.GetSoundEffectVolume();
+        LocalizationSettings.SelectedLocale = lcs[dropdown.value];
+        PlayerPrefs.SetInt("language", dropdown.value);
+
+        trackerManager.TrySendStatement(AlternativeTracker.Instance.Selected(lcs[dropdown.value].LocaleName, "Language"));
     }
 
-    public void ChangeLanguage(TMP_Dropdown dropDown)
+    public void SetBGMVolume()
     {
-        LocalizationSettings.SelectedLocale = lcs[dropDown.value];
-        PlayerPrefs.SetInt("language", dropDown.value);
-
-        trackerManager.TrySendStatement(AlternativeTracker.Instance.Selected(lcs[dropDown.value].LocaleName, "Language"));
+        audioManager.BGMVolume = bgmSlider.value;
     }
 
-    public void SetBGMVolume(float volume)
+    public void setSFXVolume() 
     {
-        audioManager.BGMVolume(volume);
-    }
-
-    public void setSFXVolume(float volume) 
-    {
-        audioManager.SoundEffectVolume(volume);
+        audioManager.SFXVolume = sfxSlider.value;
     }
 }
