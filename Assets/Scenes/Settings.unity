@@ -232,14 +232,17 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1956458904529831548, guid: be39d49cc68353142a23d2f36368468c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1977709437}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7143922073461342265, guid: be39d49cc68353142a23d2f36368468c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 18143678}
   m_SourcePrefab: {fileID: 100100000, guid: be39d49cc68353142a23d2f36368468c, type: 3}
 --- !u!114 &18143671 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 132943465670619228, guid: be39d49cc68353142a23d2f36368468c, type: 3}
   m_PrefabInstance: {fileID: 18143670}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 18143673}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94ed081b46a5ccb4281c2ec32ffb1c97, type: 3}
@@ -250,6 +253,26 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1956458904529831548, guid: be39d49cc68353142a23d2f36368468c, type: 3}
   m_PrefabInstance: {fileID: 18143670}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &18143673 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7143922073461342265, guid: be39d49cc68353142a23d2f36368468c, type: 3}
+  m_PrefabInstance: {fileID: 18143670}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &18143678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18143673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 259788fe774c25c4598a84e55cb15335, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmSlider: {fileID: 1669900511}
+  sfxSlider: {fileID: 993455989}
+  dropdown: {fileID: 1977709438}
 --- !u!1 &108153797
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,7 +1642,6 @@ GameObject:
   - component: {fileID: 993455988}
   - component: {fileID: 993455989}
   - component: {fileID: 993455992}
-  - component: {fileID: 993455990}
   - component: {fileID: 993455991}
   m_Layer: 5
   m_Name: SFXSlider
@@ -1695,16 +1717,16 @@ MonoBehaviour:
   m_FillRect: {fileID: 1560102743}
   m_HandleRect: {fileID: 134385382}
   m_Direction: 0
-  m_MinValue: 0.0001
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 0.0001
+  m_MinValue: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 993455990}
-        m_TargetAssemblyTypeName: Volume, Assembly-CSharp
-        m_MethodName: SetVolume
+      - m_Target: {fileID: 18143678}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: setSFXVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1714,19 +1736,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &993455990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 993455987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 865a252d7c09f8e469bd8fcbdf4cb964, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  channelType: 1
 --- !u!114 &993455991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2634,7 +2643,6 @@ GameObject:
   - component: {fileID: 1669900510}
   - component: {fileID: 1669900511}
   - component: {fileID: 1669900514}
-  - component: {fileID: 1669900512}
   - component: {fileID: 1669900513}
   m_Layer: 5
   m_Name: MusicSlider
@@ -2710,16 +2718,16 @@ MonoBehaviour:
   m_FillRect: {fileID: 198075290}
   m_HandleRect: {fileID: 1388066719}
   m_Direction: 0
-  m_MinValue: 0.0001
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 0.0001
+  m_MinValue: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1669900512}
-        m_TargetAssemblyTypeName: Volume, Assembly-CSharp
-        m_MethodName: SetVolume
+      - m_Target: {fileID: 18143678}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: SetBGMVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2729,19 +2737,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1669900512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1669900509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 865a252d7c09f8e469bd8fcbdf4cb964, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  channelType: 2
 --- !u!114 &1669900513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2943,7 +2938,6 @@ GameObject:
   - component: {fileID: 1977709440}
   - component: {fileID: 1977709439}
   - component: {fileID: 1977709438}
-  - component: {fileID: 1977709441}
   m_Layer: 5
   m_Name: Dropdown
   m_TagString: Untagged
@@ -3027,9 +3021,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1977709441}
-        m_TargetAssemblyTypeName: LanguageChanger, Assembly-CSharp
-        m_MethodName: OnDropDownChanged
+      - m_Target: {fileID: 18143678}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: ChangeLanguage
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1977709438}
@@ -3078,19 +3072,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1977709436}
   m_CullTransparentMesh: 1
---- !u!114 &1977709441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1977709436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06179e93c64008846b3d8389db707629, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropdown: {fileID: 1977709438}
 --- !u!1001 &1998882851
 PrefabInstance:
   m_ObjectHideFlags: 0
