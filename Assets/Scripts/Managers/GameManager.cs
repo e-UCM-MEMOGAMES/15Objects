@@ -28,7 +28,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public GameObject GamemodeElements
     {
         get { return gamemodeElements; }
-        set { gamemodeElements = value; }
+        set 
+        { 
+            gamemodeElements = value;
+            trackerManager.TrySendStatement(AlternativeTracker.Instance.Selected("Gamemode", value.name));
+        }
     }
 
     /// <summary>
@@ -39,7 +43,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public GameObject LevelItems
     {
         get { return levelItems; }
-        set { levelItems = value; }
+        set 
+        { 
+            levelItems = value;
+            LevelInfo levelInfo = levelItems.GetComponent<LevelInfo>();
+            string levelName = levelInfo.LevelName;
+            trackerManager.TrySendStatement(AlternativeTracker.Instance.Selected("Level", levelName));
+        }
     }
 
 

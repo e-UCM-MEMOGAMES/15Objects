@@ -316,7 +316,7 @@ public class LevelManager : MonoBehaviour
             extensions.Add($"https://{item.gameObject.name}/answers", item.CorrectWords);
         }
         trackerManager.TrySendStatement(
-            AlternativeTracker.Instance.Selected(answer, answeredItem == null ? "wrong-item" : answeredItem.name)
+            AlternativeTracker.Instance.Selected(answeredItem == null ? "wrong-item" : answeredItem.name, answer)
             .WithSuccess(correct)
             .WithResultExtensions(extensions)
         );

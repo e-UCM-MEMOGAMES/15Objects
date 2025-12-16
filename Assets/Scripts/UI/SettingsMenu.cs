@@ -56,14 +56,15 @@ public class SettingsMenu : MonoBehaviour
 
         if (PlayerPrefs.HasKey(Defs.LANGUAGE_KEY))
         {
-            dropdown.value = PlayerPrefs.GetInt(Defs.LANGUAGE_KEY);
+            dropdown.SetValueWithoutNotify(PlayerPrefs.GetInt(Defs.LANGUAGE_KEY));
         }
         else
         {
             int lid = lcs.IndexOf(LocalizationSettings.SelectedLocale);
-            dropdown.value = lid;
+            dropdown.SetValueWithoutNotify(lid);
             PlayerPrefs.SetInt(Defs.LANGUAGE_KEY, lid);
         }
+        dropdown.RefreshShownValue();
     }
 
 
@@ -72,7 +73,7 @@ public class SettingsMenu : MonoBehaviour
         LocalizationSettings.SelectedLocale = lcs[dropdown.value];
         PlayerPrefs.SetInt(Defs.LANGUAGE_KEY, dropdown.value);
 
-        trackerManager.TrySendStatement(AlternativeTracker.Instance.Selected(lcs[dropdown.value].LocaleName, "Language"));
+        trackerManager.TrySendStatement(AlternativeTracker.Instance.Selected("Language", lcs[dropdown.value].LocaleName));
     }
 
     public void SetBGMVolume()
