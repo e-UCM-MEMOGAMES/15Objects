@@ -44,7 +44,7 @@ public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
     /// </summary> 
     public async Task Quit()
     {
-        if (tracker.Status.State == TrackerState.Uninitialized || tracker.Status.State ==  TrackerState.Finalized)
+        if (tracker.Status.State == TrackerState.Uninitialized || tracker.Status.State == TrackerState.Finalized)
         {
             return;
         }

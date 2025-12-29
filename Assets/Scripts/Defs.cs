@@ -3,7 +3,7 @@ public static class Defs
     /// <summary>
     /// Nombre de la escena del menu principal
     /// </summary>
-    public static string 
+    public static string
     MENU_SCENE_NAME = "Start",
     /// <summary>
     /// Nombre de la escena de configuracion

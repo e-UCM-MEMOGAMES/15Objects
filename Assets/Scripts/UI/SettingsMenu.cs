@@ -39,7 +39,7 @@ public class SettingsMenu : MonoBehaviour
     /// </summary>
     List<Locale> lcs;
 
-   
+
     private void Start()
     {
         audioManager = AudioManager.Instance;
@@ -81,7 +81,7 @@ public class SettingsMenu : MonoBehaviour
         audioManager.BGMVolume = bgmSlider.value;
     }
 
-    public void setSFXVolume() 
+    public void setSFXVolume()
     {
         audioManager.SFXVolume = sfxSlider.value;
     }

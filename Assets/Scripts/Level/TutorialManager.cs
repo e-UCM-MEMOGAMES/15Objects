@@ -1,12 +1,14 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Xasu.HighLevel;
 
 public class TutorialManager : LevelManager
 {
     /// <summary>
     /// Estados del tutorial (en que momentos se muestra cada panel)
     /// </summary>
-    enum States { PANEL1, PANEL2, PANEL3, PANEL4, PANEL5 };
+    enum States { PANEL1, PANEL2, PANEL3, PANEL4, PANEL5, LAST };
     States currState = States.PANEL1;
 
     /// <summary>
@@ -37,7 +39,7 @@ public class TutorialManager : LevelManager
     /// Collider del objeto de la botella
     /// </summary>
     [SerializeField]
-    Collider2D bottleCollider; 
+    Collider2D bottleCollider;
 
 
     // Start is called before the first frame update
@@ -95,7 +97,7 @@ public class TutorialManager : LevelManager
                 UpdateState();
             }
             // Si no, se esta en los estados 2 o 3
-            else 
+            else
             {
                 // Se comprueba si en el punto del mouse al hacer click hay colisión con algún objeto. Se devuelven todos los objetos en items
                 Collider2D[] items = Physics2D.OverlapPointAll(Input.mousePosition);
@@ -153,7 +155,7 @@ public class TutorialManager : LevelManager
                 }
 
             }
-            
+
             //if (currState == States.PANEL5)
             //{
             //    returnButton.GetComponent<Button>().enabled = true;
@@ -193,5 +195,7 @@ public class TutorialManager : LevelManager
         {
             statePanels[(int)currState].SetActive(true);
         }
+
+        trackerManager.TrySendStatement(CompletableTracker.Instance.Progressed(levelName, COMPLETABLE_TYPE, (float)currState / (int)States.LAST));
     }
 }

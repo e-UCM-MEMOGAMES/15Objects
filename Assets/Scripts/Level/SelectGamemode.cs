@@ -75,7 +75,7 @@ public class SelectGamemode : BaseGamemode
     /// "Paginas" maximas que tiene la lista de opciones
     /// </summary>
     totalPages = 0;
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -128,7 +128,7 @@ public class SelectGamemode : BaseGamemode
         }
     }
 
-    public override void ShowElements() 
+    public override void ShowElements()
     {
         // Se activa el objeto con todos los elementos
         elementsObj.SetActive(true);
@@ -138,7 +138,7 @@ public class SelectGamemode : BaseGamemode
         ShowOptions();
     }
 
-    public override void HideElements() 
+    public override void HideElements()
     {
         // Desactiva los botones de respuesta y de navegacion
         foreach (GameObject optionButton in optionsButtons)

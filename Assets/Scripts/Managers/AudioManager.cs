@@ -31,7 +31,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 
     [SerializeField]
     SoundEntity[] _soundList = default;
-    
+
     Dictionary<GameSound, SoundEntity> _soundMap = new Dictionary<GameSound, SoundEntity>();
 
     [SerializeField]
@@ -41,7 +41,8 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     public float BGMVolume
     {
         get { return bgmSource.volume; }
-        set {
+        set
+        {
             bgmSource.volume = value;
             PlayerPrefs.SetFloat(Defs.BGM_VOLUME_KEY, value);
         }

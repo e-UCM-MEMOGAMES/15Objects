@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using Xasu.HighLevel;
 
 public class ButtonTracker : MonoBehaviour
@@ -19,6 +20,12 @@ public class ButtonTracker : MonoBehaviour
     void Start()
     {
         trackerManager = TrackerManager.Instance;
+
+        try
+        {
+            GetComponent<Image>().alphaHitTestMinimumThreshold = 0.001f;
+        }
+        catch { }
     }
 
     public void Track()

@@ -28,8 +28,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public GameObject GamemodeElements
     {
         get { return gamemodeElements; }
-        set 
-        { 
+        set
+        {
             gamemodeElements = value;
             trackerManager.TrySendStatement(AlternativeTracker.Instance.Selected("Gamemode", value.name));
         }
@@ -43,8 +43,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public GameObject LevelItems
     {
         get { return levelItems; }
-        set 
-        { 
+        set
+        {
             levelItems = value;
             LevelInfo levelInfo = levelItems.GetComponent<LevelInfo>();
             string levelName = levelInfo.LevelName;

@@ -89,7 +89,7 @@ public class LevelManager : MonoBehaviour
     /// Script del modo de juego seleccionado
     /// </summary>
     protected BaseGamemode gamemode;
-    
+
     /// <summary>
     /// Objetos especificos del modo de juego seleccionado
     /// </summary>
@@ -214,7 +214,7 @@ public class LevelManager : MonoBehaviour
                     selectedItems.Add(it);
                     trackerManager.TrySendStatement(GameObjectTracker.Instance.Interacted(item.gameObject.name, GameObjectTracker.TrackedGameObject.Item));
                 }
-                
+
                 // Se deja al modo de juego gestionar los objetos pulsados
                 gamemode.OnItemSelected(selectedItems);
             }
@@ -309,7 +309,7 @@ public class LevelManager : MonoBehaviour
         Dictionary<string, object> extensions = new Dictionary<string, object>();
 
         extensions.Add("https://repeatedAnswer", repeatedAnswer);
-        
+
         // Se recorre cada objeto seleccionado guardando sus posibles respuestas
         foreach (Item item in selectedItems)
         {
@@ -320,10 +320,10 @@ public class LevelManager : MonoBehaviour
             .WithSuccess(correct)
             .WithResultExtensions(extensions)
         );
-        
 
-        //  Progreso del nivel actual
-        float progress = (float)attempts / (float)maxAttempts;
+
+        // Progreso del nivel actual
+        float progress = (float)attempts / maxAttempts;
         trackerManager.TrySendStatement(CompletableTracker.Instance.Progressed(levelName, COMPLETABLE_TYPE, progress));
     }
 
