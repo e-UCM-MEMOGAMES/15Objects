@@ -12,15 +12,14 @@ using Xasu.HighLevel;
 public class LevelManager : MonoBehaviour
 {
     /// <summary>
-    /// Temporizador para medir el tiempo que se tarda en completar el nivel
-    /// </summary>
-    protected Stopwatch watch = Stopwatch.StartNew();
-
-    /// <summary>
     /// Instancia del TrackerManager
     /// </summary>
     protected TrackerManager trackerManager;
 
+    /// <summary>
+    /// Temporizador para medir el tiempo que se tarda en completar el nivel
+    /// </summary>
+    protected Stopwatch watch = Stopwatch.StartNew();
     protected CompletableTracker.CompletableType COMPLETABLE_TYPE = CompletableTracker.CompletableType.Level;
 
     /// <summary>
@@ -353,7 +352,10 @@ public class LevelManager : MonoBehaviour
 
             trackerManager.TrySendStatement(
                 CompletableTracker.Instance.Completed(levelName, COMPLETABLE_TYPE, watch.ElapsedMilliseconds)
-                .WithScore(score)
+                .WithScore(new Dictionary<string, double>()
+                {
+                    { "levelScore", (double)score }
+                })
                 .WithSuccess(!failed)
             );
         }

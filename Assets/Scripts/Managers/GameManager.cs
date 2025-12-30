@@ -53,7 +53,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
 
 
-    //    Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
         trackerManager = TrackerManager.Instance;
@@ -62,15 +62,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         watch.Start();
 
-        if (PlayerPrefs.HasKey(Defs.LANGUAGE_KEY))
+        if (PlayerPrefs.HasKey(Defs.LANGUAGE_PREFS_KEY))
         {
-            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt(Defs.LANGUAGE_KEY)];
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt(Defs.LANGUAGE_PREFS_KEY)];
         }
 
         GamemodeElements = gamemodeElements;
         LevelItems = levelItems;
-
-        //Application.wantsToQuit += WantsToQuit;
     }
 
     /// <summary>

@@ -45,7 +45,7 @@ public class LevelInfo : MonoBehaviour
             //Debug.Log(itemName);
 
             // Se guardan todas las palabras en su lista correspondiente
-            // (EN MINUSCULAS para facilitar su procesado en los modos de juego)
+            // (EN MINUSCULAS PARA FACILITAR SU PROCESADO EN LOS MODOS DE JUEGO)
             foreach (string word in obj["words"])
             {
                 levelItem.CorrectWords.Add(word.ToLower());

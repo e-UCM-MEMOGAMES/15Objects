@@ -8,6 +8,9 @@ using Xasu.HighLevel;
 
 public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
 {
+    /// <summary>
+    /// Instancia del tracker
+    /// </summary> 
     XasuTracker tracker;
 
     private void Start()
@@ -23,17 +26,19 @@ public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
     {
         if (tracker.Status.State == TrackerState.Uninitialized)
         {
+            // Si hay un archivo de configuracion, se inicializa con esa configuracion
             if (File.Exists(Path.Combine(Application.streamingAssetsPath, "tracker_config.json")))
             {
                 await tracker.Init();
             }
+            // Si no, se inicializa por defecto para que se guarde en local
             else
             {
                 await tracker.Init(new TrackerConfig
                 {
                     Offline = true,
                     TraceFormat = TraceFormats.XAPI
-                });
+                }, null);
             }
         }
     }
@@ -44,7 +49,8 @@ public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
     /// </summary> 
     public async Task Quit()
     {
-        if (tracker.Status.State == TrackerState.Uninitialized || tracker.Status.State == TrackerState.Finalized)
+        // Si el tracker no se ha inicializado o si ha finalizado, no hace nada
+        if (tracker.Status.State != TrackerState.Uninitialized || tracker.Status.State == TrackerState.Finalized)
         {
             return;
         }
@@ -62,7 +68,8 @@ public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
 
     public async void TrySendStatement(StatementPromise promise)
     {
-        if (tracker.Status.State != TrackerState.Uninitialized)
+        // Si el tracker esta en estado normal, se intenta enviar la traza
+        if (tracker.Status.State == TrackerState.Normal)
         {
             try
             {

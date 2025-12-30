@@ -1062,15 +1062,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_text
-      value: "Opci\xF3n 2"
+      value: ________
       objectReference: {fileID: 0}
     - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_fontSize
       value: 45.45
       objectReference: {fileID: 0}
+    - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
+      propertyPath: m_characterSpacing
+      value: -30.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1212427894009016723, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_Name
       value: Option2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2536807682750499351, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2536807682750499351, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
@@ -2576,15 +2584,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_text
-      value: "Opci\xF3n 1"
+      value: ________
       objectReference: {fileID: 0}
     - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_fontSize
       value: 45.45
       objectReference: {fileID: 0}
+    - target: {fileID: 779397887795928912, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
+      propertyPath: m_characterSpacing
+      value: -30.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1212427894009016723, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_Name
       value: Option 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2536807682750499351, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2536807682750499351, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
