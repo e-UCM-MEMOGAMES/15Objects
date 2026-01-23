@@ -34,7 +34,11 @@ public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
             // Si no, se inicializa por defecto para que se guarde en local
             else
             {
-                await tracker.InitOffline("user", "user@example.com");
+                await tracker.Init(new TrackerConfig
+                {
+                    Offline = true,
+                    TraceFormat = TraceFormats.XAPI
+                }, null);
             }
         }
     }
