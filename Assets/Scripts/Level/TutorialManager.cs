@@ -87,7 +87,7 @@ public class TutorialManager : LevelManager
     //Update is called once per frame
     protected override void Update()
     {
-        // Si se ha pulsado la pantalla (con click izquierdo usando raton) y no se ha llegado al ultimo panel
+        // Si se ha pulsado la pantalla y no se ha llegado al ultimo panel
         if (Input.GetMouseButtonDown(0) && (int)currState < statePanels.Length)
         {
             // Si no se esta en los estados 2 o 3 (los que requieren seleccionar la botella y responder),
@@ -99,7 +99,7 @@ public class TutorialManager : LevelManager
             // Si no, se esta en los estados 2 o 3
             else
             {
-                // Se comprueba si en el punto del mouse al hacer click hay colisión con algún objeto. Se devuelven todos los objetos en items
+                // Se comprueba si en el punto del cursor al pulsar hay colision con algun objeto. Se devuelven todos los objetos en items
                 Collider2D[] items = Physics2D.OverlapPointAll(Input.mousePosition);
 
                 // Si hay algun objeto seleccionado
@@ -189,13 +189,27 @@ public class TutorialManager : LevelManager
     /// </summary>
     void UpdateState(int increment = 1)
     {
-        statePanels[(int)currState].SetActive(false);
+        // Oculta el panel del estado actual
+        if (ValidState())
+        {
+            statePanels[(int)currState].SetActive(false);
+        }
+        // Actualiza el estado
         currState += increment;
-        if (currState > 0 && (int)currState < statePanels.Length)
+        // Muestra el panel del nuevo estado actual
+        if (ValidState())
         {
             statePanels[(int)currState].SetActive(true);
         }
 
         trackerManager.TrySendStatement(CompletableTracker.Instance.Progressed(levelName, COMPLETABLE_TYPE, (float)currState / (int)States.LAST));
+    }
+
+    /// <summary>
+    /// Devuelve si el estado actual, es valido
+    /// </summary>
+    bool ValidState()
+    {
+        return currState >= 0 && (int)currState < statePanels.Length;
     }
 }

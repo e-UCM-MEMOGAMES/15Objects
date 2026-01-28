@@ -3395,10 +3395,16 @@ MonoBehaviour:
   incorrect: {fileID: 0}
   remaining: {fileID: 0}
   resultsPanel: {fileID: 0}
-  feedbackDuration: 1
-  totalPointsText: {fileID: 0}
   answerText: {fileID: 0}
+  totalPointsText: {fileID: 0}
+  feedbackDuration: 1
   statePanels:
+  - {fileID: 3498838366070371177}
+  - {fileID: 8434256318825240284}
+  - {fileID: 4003348209774468600}
+  - {fileID: 8237544196249976436}
+  - {fileID: 8703524112843632599}
+  infoPanels:
   - {fileID: 3498838366070371177}
   - {fileID: 8434256318825240284}
   - {fileID: 4003348209774468600}
