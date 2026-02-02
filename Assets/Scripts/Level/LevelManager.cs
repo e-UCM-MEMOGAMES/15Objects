@@ -129,17 +129,25 @@ public class LevelManager : MonoBehaviour
     protected HashSet<Item> correctItems = new HashSet<Item>();
 
     /// <summary>
-    /// Numero de intentos que se pueden hacer antes de terminar el juego
+    /// Numero de objetos que hay en el nivel
     /// </summary>
-    protected int maxAttempts = 15,
+    protected int totalItems = 15,
     /// <summary>
-    /// Numero de veces que se ha respondido (ya sea correcta o incorrectamente)
+    /// Numero de intentos realizados
     /// </summary>
     attempts = 0,
     /// <summary>
     /// Numero de veces que se ha respondido incorrectamente
     /// </summary>
     mistakes = 0;
+    /// <summary>
+    /// Numero de intentos que se pueden hacer (ya sea correcta o incorrectamente, incluyendo 
+    /// objetos respondidos correctamente repetidos) antes de que la partida termine a la fuerza
+    /// </summary>
+    [SerializeField]
+    protected int maxAttempts = 23;     // Por defecto 1.5 veces los objetos totales
+
+    TutorialManager tutorial;
 
 
     // Start is called before the first frame update
@@ -169,8 +177,12 @@ public class LevelManager : MonoBehaviour
         levelInfo = levelItems.GetComponent<LevelInfo>();
         levelName = levelInfo.LevelName;
 
-        trackerManager.TrySendStatement(CompletableTracker.Instance.Initialized(levelName, COMPLETABLE_TYPE));
-
+        tutorial = levelItems.GetComponent<TutorialManager>();
+        if (tutorial != null)
+        {
+            SetupTutorial();
+            gamemode.LevelManager = tutorial;
+        }
 
         pointerPos.SetActive(false);
         answer.SetActive(false);
@@ -184,6 +196,9 @@ public class LevelManager : MonoBehaviour
         LocalizeStringEvent localizeEvt = answer.GetComponent<LocalizeStringEvent>();
         defaultAnswerText = localizeEvt.StringReference.GetLocalizedString();
         localizeEvt.enabled = false;
+
+
+        trackerManager.TrySendStatement(CompletableTracker.Instance.Initialized(levelName, COMPLETABLE_TYPE));
     }
 
 
@@ -268,6 +283,8 @@ public class LevelManager : MonoBehaviour
 
         }
 
+        attempts++;
+
         bool correct = (found && answeredItem != null);
         bool repeatedAnswer = correctItems.Contains(answeredItem);
 
@@ -277,7 +294,6 @@ public class LevelManager : MonoBehaviour
             // Si el objeto no estaba respondido, se contabiliza la respuesta y se guarda como respondido
             if (!repeatedAnswer)
             {
-                attempts++;
                 correctItems.Add(answeredItem);
             }
 
@@ -289,7 +305,6 @@ public class LevelManager : MonoBehaviour
         // Si no, la respuesta es incorrecta
         else
         {
-            attempts++;
             mistakes++;
 
             // Se muestra el texto que indica que la respuesta es incorrecta
@@ -333,6 +348,12 @@ public class LevelManager : MonoBehaviour
     /// </summary> 
     public void EndGame()
     {
+        if (tutorial != null)
+        {
+            tutorial.EndGame();
+            return;
+        }
+
         // Si el panel de resultados no es visible, es que todavia no se ha mostrado la puntuacion
         if (!resultsPanel.activeSelf)
         {
@@ -343,20 +364,18 @@ public class LevelManager : MonoBehaviour
             resultsPanel.SetActive(true);
             returnButton.SetActive(false);
 
+            int correctAnswers = correctItems.Count;
             // Se cambia el texto de la puntuacion total
-            totalPointsText.text = $"{attempts - mistakes}/{maxAttempts}";
-
-            // Se determina si se ha fallado el nivel y la puntuacion final
-            float score = 1.0f - (mistakes / maxAttempts);
-            bool failed = mistakes > (maxAttempts / 2.0f);
+            totalPointsText.text = $"{correctAnswers}/{totalItems}";
 
             trackerManager.TrySendStatement(
                 CompletableTracker.Instance.Completed(levelName, COMPLETABLE_TYPE, watch.ElapsedMilliseconds)
-                .WithScore(new Dictionary<string, double>()
-                {
-                    { "levelScore", (double)score }
+                .WithScoreScaled(1.0 - (correctAnswers / totalItems))
+                .WithSuccess(correctAnswers >= 0.5)
+                .WithResultExtensions(new Dictionary<string, object> {
+                    { $"https://attempts", attempts },
+                    { $"https://mistakes", mistakes },
                 })
-                .WithSuccess(!failed)
             );
         }
         // Si es visible, se vuelve al menu de configuracion del nivel
@@ -368,8 +387,8 @@ public class LevelManager : MonoBehaviour
 
 
     /// <summary>
-    /// Configura el tutorial, "clonando" todos los atributos de la instancia de LevelManager 
-    /// desde la que se llama a la instancia de TutorialManager que se le pasa como parametro
+    /// Configura el tutorial, "clonando" todos los atributos de esta instancia de LevelManager 
+    /// en la instancia de TutorialManager que se le pasa como parametro
     /// 
     /// Se tiene que hacer asi porque el TutorialManager es parte de los objetos del nivel, no
     /// de la escena de juego, por lo que el TutorialManager no puede conocer los elementos de
@@ -377,35 +396,36 @@ public class LevelManager : MonoBehaviour
     /// porque las instancias son distintas. Una vez terminada la "clonacion", la instancia
     /// de este script se desactiva para que el TutorialManager tome el control
     /// </summary> 
-    public void SetupTutorial(TutorialManager mngr)
+    public void SetupTutorial()
     {
-        maxAttempts = mngr.maxAttempts;
-
-        mngr.trackerManager = trackerManager;
-
-        mngr.returnButton = returnButton;
-        mngr.pointerPos = pointerPos;
-        mngr.answer = answer;
-        mngr.noSelection = noSelection;
-        mngr.incorrect = incorrect;
-        mngr.remaining = remaining;
-        mngr.resultsPanel = resultsPanel;
-
-        mngr.feedbackDuration = feedbackDuration;
-
-        mngr.totalPointsText = totalPointsText;
-        mngr.answerText = answerText;
-
-        mngr.defaultAnswerText = defaultAnswerText;
-        mngr.gameManager = gameManager;
-        mngr.audioManager = audioManager;
-
-        mngr.gamemode = gamemode;
-        mngr.gamemodeElements = gamemodeElements;
-        mngr.levelItems = levelItems;
-        mngr.levelInfo = levelInfo;
-        mngr.levelName = levelName;
-
         this.enabled = false;
+        tutorial.enabled = true;
+
+        maxAttempts = tutorial.maxAttempts;
+
+        tutorial.trackerManager = trackerManager;
+
+        tutorial.returnButton = returnButton;
+        tutorial.pointerPos = pointerPos;
+        tutorial.answer = answer;
+        tutorial.noSelection = noSelection;
+        tutorial.incorrect = incorrect;
+        tutorial.remaining = remaining;
+        tutorial.resultsPanel = resultsPanel;
+
+        tutorial.feedbackDuration = feedbackDuration;
+
+        tutorial.totalPointsText = totalPointsText;
+        tutorial.answerText = answerText;
+
+        tutorial.defaultAnswerText = defaultAnswerText;
+        tutorial.gameManager = gameManager;
+        tutorial.audioManager = audioManager;
+
+        tutorial.gamemode = gamemode;
+        tutorial.gamemodeElements = gamemodeElements;
+        tutorial.levelItems = levelItems;
+        tutorial.levelInfo = levelInfo;
+        tutorial.levelName = levelName;
     }
 }

@@ -29,11 +29,7 @@ public class TutorialManager : LevelManager
     /// <summary>
     /// Objeto con el panel 3 en el modo de juego de escribir
     /// </summary>
-    panel3Write,
-    /// <summary>
-    /// Objeto con el texto de las instrucciones
-    /// </summary>
-    instructions;
+    panel3Write;
 
     /// <summary>
     /// Collider del objeto de la botella
@@ -45,18 +41,9 @@ public class TutorialManager : LevelManager
     // Start is called before the first frame update
     protected override void Start()
     {
-        // Se actualiza el numero de intentos (15 en la clase padre)
-        maxAttempts = 5;
-
-        // Se busca el LevelManager en la escena y se configura la instancia de este script
-        LevelManager[] lvlMngr = FindObjectsOfType(typeof(LevelManager)) as LevelManager[];
-        foreach (LevelManager mngr in lvlMngr)
-        {
-            mngr.SetupTutorial(this);
-        }
-        this.enabled = true;
-        gamemode.LevelManager = this;
-
+        // Se actualiza el numero de objetos totales(15 en la clase padre)
+        totalItems = 5;
+        
         // Se elige el panel 3 dependiendo del modo de juego seleccionado y se desactiva el contrario
         if (gamemode is SelectGamemode)
         {
@@ -77,7 +64,6 @@ public class TutorialManager : LevelManager
 
         // Se desactiva el resto de elementos
         panel2Error.SetActive(false);
-        instructions.SetActive(false);
 
         statePanels[(int)States.PANEL1].SetActive(true);
 
@@ -176,7 +162,6 @@ public class TutorialManager : LevelManager
         if (currState == States.PANEL3)
         {
             UpdateState();
-            instructions.SetActive(true);
         }
 
         // En cualquier estado, se ejecuta el Answer de la clase padre
