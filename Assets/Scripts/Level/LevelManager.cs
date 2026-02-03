@@ -163,6 +163,12 @@ public class LevelManager : MonoBehaviour
         gameManager = GameManager.Instance;
         audioManager = AudioManager.Instance;
 
+        // Se obtiene el texto por defecto localizado del objeto respondido y se
+        // desactiva la localizacion para que se pueda anadir el nombre del objeto
+        LocalizeStringEvent localizeEvt = answer.GetComponent<LocalizeStringEvent>();
+        defaultAnswerText = localizeEvt.StringReference.GetLocalizedString();
+        localizeEvt.enabled = false;
+
         // Se instancian los elementos del modo de juego por encima (en el editor
         // el objeto esta debajo) del indicadord el puntero
         gamemodeElements = Instantiate(gameManager.GamemodeElements, transform);
@@ -190,12 +196,6 @@ public class LevelManager : MonoBehaviour
         incorrect.SetActive(false);
         remaining.SetActive(false);
         resultsPanel.SetActive(false);
-
-        // Se obtiene el texto por defecto localizado del objeto respondido y se
-        // desactiva la localizacion para que se pueda anadir el nombre del objeto
-        LocalizeStringEvent localizeEvt = answer.GetComponent<LocalizeStringEvent>();
-        defaultAnswerText = localizeEvt.StringReference.GetLocalizedString();
-        localizeEvt.enabled = false;
 
 
         trackerManager.TrySendStatement(CompletableTracker.Instance.Initialized(levelName, COMPLETABLE_TYPE));
@@ -320,19 +320,37 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(ActivateObj(this.answer, false, feedbackDuration));
 
 
-        Dictionary<string, object> extensions = new Dictionary<string, object>();
-
-        extensions.Add("https://repeatedAnswer", repeatedAnswer);
-
         // Se recorre cada objeto seleccionado guardando sus posibles respuestas
-        foreach (Item item in selectedItems)
+        string possibleAnswers = "";
+        for (int i = 0; i < selectedItems.Count; i++)
         {
-            extensions.Add($"https://{item.gameObject.name}/answers", item.CorrectWords);
+            possibleAnswers += $"{selectedItems[i].name}: [";
+            int j = 0;
+            foreach (string word in selectedItems[i].CorrectWords)
+            {
+                possibleAnswers += $"{word}";
+
+                if (j < selectedItems[i].CorrectWords.Count - 1)
+                {
+                    possibleAnswers += ", ";
+                }
+                j++;
+            }
+            possibleAnswers += "]";
+            if (i < selectedItems.Count - 1)
+            {
+                possibleAnswers += ", ";
+            }
         }
+
         trackerManager.TrySendStatement(
             AlternativeTracker.Instance.Selected(answeredItem == null ? "wrong-item" : answeredItem.name, answer)
             .WithSuccess(correct)
-            .WithResultExtensions(extensions)
+            .WithResultExtensions(new Dictionary<string, object>
+            {
+                { "https://repeatedAnswer", repeatedAnswer },
+                { "https://possibleAnswers", possibleAnswers }
+            })
         );
 
 
