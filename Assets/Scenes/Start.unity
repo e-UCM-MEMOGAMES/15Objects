@@ -1078,6 +1078,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1299129359}
   m_CullTransparentMesh: 1
+--- !u!114 &1328546812 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5133842753140158296, guid: 148f7e1e69177d14f8fac9a46fc12e6a, type: 3}
+  m_PrefabInstance: {fileID: 483257589}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1487870435
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1382,9 +1393,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2476142195160709630, guid: 29989ffacb3443546b1fb7547bf867a8, type: 3}
+      propertyPath: btn
+      value: 
+      objectReference: {fileID: 1328546812}
     - target: {fileID: 7654452115623405852, guid: 29989ffacb3443546b1fb7547bf867a8, type: 3}
       propertyPath: m_Name
       value: Managers
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654452115623405852, guid: 29989ffacb3443546b1fb7547bf867a8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

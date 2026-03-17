@@ -31,7 +31,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         set
         {
             gamemodeElements = value;
-            trackerManager.TrySendStatement(AlternativeTracker.Instance.Selected("Gamemode", value.name));
+
+            try
+            {
+               trackerManager.TrySendStatement(AlternativeTracker.Instance.Selected("Gamemode", value.name));
+            }
+            catch { }
         }
     }
 
@@ -48,17 +53,28 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             levelItems = value;
             LevelInfo levelInfo = levelItems.GetComponent<LevelInfo>();
             string levelName = levelInfo.LevelName;
-            trackerManager.TrySendStatement(AlternativeTracker.Instance.Selected("Level", levelName));
+            
+            try
+            {
+               trackerManager.TrySendStatement(AlternativeTracker.Instance.Selected("Level", levelName));
+            }
+            catch { }
         }
     }
 
 
     // Start is called before the first frame update
-    void Start()
+    async void Start()
     {
         trackerManager = TrackerManager.Instance;
-        trackerManager.TrySendStatement(CompletableTracker.Instance.Initialized(COMPLETABLE_ID, COMPLETABLE_TYPE));
-        trackerManager.TrySendStatement(AccessibleTracker.Instance.Accessed(Defs.MENU_SCENE_NAME));
+        await trackerManager.InitTask;
+
+        try
+        {
+            trackerManager.TrySendStatement(CompletableTracker.Instance.Initialized(COMPLETABLE_ID, COMPLETABLE_TYPE));
+            trackerManager.TrySendStatement(AccessibleTracker.Instance.Accessed(Defs.MENU_SCENE_NAME));
+        }
+        catch { }
 
         watch.Start();
 
@@ -66,9 +82,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt(Defs.LANGUAGE_PREFS_KEY)];
         }
-
-        GamemodeElements = gamemodeElements;
-        LevelItems = levelItems;
     }
 
     /// <summary>
@@ -80,7 +93,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         UnityEngine.Debug.Log("Quitting GameManager");
         watch.Stop();
 
-        trackerManager.TrySendStatement(CompletableTracker.Instance.Completed(COMPLETABLE_ID, COMPLETABLE_TYPE, watch.ElapsedMilliseconds));
+        try
+        {
+            trackerManager.TrySendStatement(CompletableTracker.Instance.Completed(COMPLETABLE_ID, COMPLETABLE_TYPE, watch.ElapsedMilliseconds));
+        }
+        catch { }
+
         await trackerManager.Quit();
     }
 
@@ -102,7 +120,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     /// </summary>
     public void ChangeScene(string sceneName)
     {
-        trackerManager.TrySendStatement(AccessibleTracker.Instance.Accessed(sceneName));
+        try
+        {
+            trackerManager.TrySendStatement(AccessibleTracker.Instance.Accessed(sceneName));
+        }
+        catch { }
         SceneManager.LoadScene(sceneName);
     }
 }

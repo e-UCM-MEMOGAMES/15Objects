@@ -30,6 +30,10 @@ public class ButtonTracker : MonoBehaviour
 
     public void Track()
     {
-        trackerManager.TrySendStatement(GameObjectTracker.Instance.Interacted(buttonName));
+        try
+        {
+            trackerManager.TrySendStatement(GameObjectTracker.Instance.Interacted(buttonName));
+        }
+        catch { }
     }
 }

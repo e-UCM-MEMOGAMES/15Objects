@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Xasu.HighLevel;
@@ -187,7 +186,11 @@ public class TutorialManager : LevelManager
             statePanels[(int)currState].SetActive(true);
         }
 
-        trackerManager.TrySendStatement(CompletableTracker.Instance.Progressed(levelName, COMPLETABLE_TYPE, (float)currState / (int)States.LAST));
+        try
+        {
+            trackerManager.TrySendStatement(CompletableTracker.Instance.Progressed(levelName, COMPLETABLE_TYPE, (float)currState / (int)States.LAST));
+        }
+        catch { }
     }
 
     /// <summary>

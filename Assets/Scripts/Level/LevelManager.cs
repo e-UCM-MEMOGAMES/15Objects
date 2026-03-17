@@ -197,8 +197,11 @@ public class LevelManager : MonoBehaviour
         remaining.SetActive(false);
         resultsPanel.SetActive(false);
 
-
-        trackerManager.TrySendStatement(CompletableTracker.Instance.Initialized(levelName, COMPLETABLE_TYPE));
+        try
+        {
+            trackerManager.TrySendStatement(CompletableTracker.Instance.Initialized(levelName, COMPLETABLE_TYPE));
+        }
+        catch { }
     }
 
 
@@ -226,7 +229,12 @@ public class LevelManager : MonoBehaviour
                 {
                     Item it = item.gameObject.GetComponent<Item>();
                     selectedItems.Add(it);
-                    trackerManager.TrySendStatement(GameObjectTracker.Instance.Interacted(item.gameObject.name, GameObjectTracker.TrackedGameObject.Item));
+
+                    try
+                    {
+                        trackerManager.TrySendStatement(GameObjectTracker.Instance.Interacted(item.gameObject.name, GameObjectTracker.TrackedGameObject.Item));
+                    }
+                    catch { }
                 }
 
                 // Se deja al modo de juego gestionar los objetos pulsados
@@ -343,7 +351,9 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        trackerManager.TrySendStatement(
+        try
+        {
+            trackerManager.TrySendStatement(
             AlternativeTracker.Instance.Selected(answeredItem == null ? "wrong-item" : answeredItem.name, answer)
             .WithSuccess(correct)
             .WithResultExtensions(new Dictionary<string, object>
@@ -352,11 +362,17 @@ public class LevelManager : MonoBehaviour
                 { "https://possibleAnswers", possibleAnswers }
             })
         );
-
+        }
+        catch { }
 
         // Progreso del nivel actual
         float progress = (float)attempts / maxAttempts;
-        trackerManager.TrySendStatement(CompletableTracker.Instance.Progressed(levelName, COMPLETABLE_TYPE, progress));
+
+        try
+        {
+            trackerManager.TrySendStatement(CompletableTracker.Instance.Progressed(levelName, COMPLETABLE_TYPE, progress));
+        }
+        catch { }
     }
 
 
@@ -386,15 +402,19 @@ public class LevelManager : MonoBehaviour
             // Se cambia el texto de la puntuacion total
             totalPointsText.text = $"{correctAnswers}/{totalItems}";
 
-            trackerManager.TrySendStatement(
-                CompletableTracker.Instance.Completed(levelName, COMPLETABLE_TYPE, watch.ElapsedMilliseconds)
-                .WithScoreScaled(1.0 - (correctAnswers / totalItems))
-                .WithSuccess(correctAnswers >= 0.5)
-                .WithResultExtensions(new Dictionary<string, object> {
+            try
+            {
+                trackerManager.TrySendStatement(
+                    CompletableTracker.Instance.Completed(levelName, COMPLETABLE_TYPE, watch.ElapsedMilliseconds)
+                    .WithScoreScaled(1.0 - (correctAnswers / totalItems))
+                    .WithSuccess(correctAnswers >= 0.5)
+                    .WithResultExtensions(new Dictionary<string, object> {
                     { $"https://attempts", attempts },
                     { $"https://mistakes", mistakes },
-                })
-            );
+                    })
+                );
+            }
+            catch { }
         }
         // Si es visible, se vuelve al menu de configuracion del nivel
         else

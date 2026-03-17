@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Networking;
 using Xasu;
 using Xasu.Config;
 using Xasu.HighLevel;
@@ -13,21 +14,38 @@ public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
     /// </summary> 
     XasuTracker tracker;
 
-    private void Start()
+    Task initTask = null;
+    public Task InitTask {  get { return initTask; } }
+
+    void Start()
     {
         tracker = XasuTracker.Instance;
-        InitTrackerAsync();
+        initTask = InitTrackerAsync();
     }
 
     /// <summary>
     /// Inicia el tracker
     /// </summary> 
-    private async void InitTrackerAsync()
+    private async Task InitTrackerAsync()
     {
         if (tracker.Status.State == TrackerState.Uninitialized)
         {
+            string filePath = Path.Combine(Application.streamingAssetsPath, "tracker_config.json");
+            bool configExists = File.Exists(filePath);
+
+            if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.WebGLPlayer)
+            {
+                UnityWebRequest request = UnityWebRequest.Get(filePath);
+                await request.SendWebRequest();
+
+                if (request.result == UnityWebRequest.Result.Success)
+                {
+                    configExists = true;
+                }
+            }
+
             // Si hay un archivo de configuracion, se inicializa con esa configuracion
-            if (File.Exists(Path.Combine(Application.streamingAssetsPath, "tracker_config.json")))
+            if (configExists)
             {
                 await tracker.Init();
             }
@@ -50,7 +68,7 @@ public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
     public async Task Quit()
     {
         // Si el tracker no se ha inicializado o si ha finalizado, no hace nada
-        if (tracker.Status.State != TrackerState.Uninitialized || tracker.Status.State == TrackerState.Finalized)
+        if (tracker.Status.State == TrackerState.Uninitialized || tracker.Status.State == TrackerState.Finalized)
         {
             return;
         }

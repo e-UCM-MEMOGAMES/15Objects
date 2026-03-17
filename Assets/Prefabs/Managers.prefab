@@ -324,19 +324,19 @@ MonoBehaviour:
     channelType: 1
     soundType: 1
     audioClip: {fileID: 8300000, guid: 86927d53c9976204fb5f0479d14ec88c, type: 3}
-  - Name: ButtonClicked
+  - Name: MenuBGM
     channelType: 2
     soundType: 2
     audioClip: {fileID: 8300000, guid: 7183f52236990554784c7b3f5312197e, type: 3}
-  - Name: ButtonClicked
+  - Name: Success
     channelType: 1
     soundType: 3
     audioClip: {fileID: 8300000, guid: 09a3e7aba1a4c014a94891f23ab294f9, type: 3}
-  - Name: ButtonClicked
+  - Name: Failed
     channelType: 1
     soundType: 4
     audioClip: {fileID: 8300000, guid: e22dc7f7ea9a81f468f6fa310ee1eb98, type: 3}
-  - Name: ButtonClicked
+  - Name: Point
     channelType: 1
     soundType: 5
     audioClip: {fileID: 8300000, guid: 42c50a3432d18584296ce4ff7d52caf6, type: 3}
@@ -355,6 +355,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoStart: 0
+  EnableDebugLogging: 1
+  CanLoadConfigFromURL: 1
   processingLoopTime: 1
 --- !u!114 &2476142195160709630
 MonoBehaviour:
