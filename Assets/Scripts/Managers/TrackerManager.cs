@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 using Xasu;
 using Xasu.Config;
 using Xasu.HighLevel;
+using Xasu.Requests;
 
 public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
 {
@@ -17,6 +18,8 @@ public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
     Task initTask = null;
     public Task InitTask {  get { return initTask; } }
 
+    [SerializeField] GameObject loginMsg;
+    
     void Start()
     {
         tracker = XasuTracker.Instance;
@@ -47,16 +50,17 @@ public class TrackerManager : SingletonMonoBehaviour<TrackerManager>
             // Si hay un archivo de configuracion, se inicializa con esa configuracion
             if (configExists)
             {
+                loginMsg?.SetActive(true);
                 await tracker.Init();
+                loginMsg?.SetActive(false);
             }
             // Si no, se inicializa por defecto para que se guarde en local
             else
             {
-                await tracker.Init(new TrackerConfig
-                {
+                await tracker.Init(new TrackerConfig {
                     Offline = true,
                     TraceFormat = TraceFormats.XAPI
-                }, null);
+                }, new UnityRequestHandler());
             }
         }
     }

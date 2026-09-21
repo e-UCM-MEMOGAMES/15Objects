@@ -15,6 +15,10 @@ MonoBehaviour:
   m_TableCollectionName: UI
   m_TableCollectionNameGuidString: 51338d6f2f297b94fafc24439be70d5f
   m_Entries:
+  - m_Id: 104943572016316416
+    m_Key: Tracker/Login
+    m_Metadata:
+      m_Items: []
   - m_Id: 22519824384
     m_Key: Start/Play
     m_Metadata:

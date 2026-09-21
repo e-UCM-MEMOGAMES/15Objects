@@ -155,6 +155,10 @@ MonoBehaviour:
     m_Localized: Eso no es una botella
     m_Metadata:
       m_Items: []
+  - m_Id: 104943572016316416
+    m_Localized: "ESPERANDO AL INICIO DE SESI\xD3N...\n\nCOMPRUEBA TU NAVEGADOR"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
